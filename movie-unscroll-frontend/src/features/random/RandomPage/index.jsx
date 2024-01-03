@@ -38,6 +38,10 @@ const RandomContainer = styled.div`
 const Counter = styled.p`
   font-size: 230px;
   font-weight: 400;
+
+  @media only screen and (max-width: 600px) {
+    font-size: 180px;
+  }
 `;
 
 const light = keyframes`
@@ -71,19 +75,29 @@ const Filter = styled.div`
 
 const move = keyframes`
   0% {
-    transform: translateX(130px) translateY(60px);
+    transform: translateX(${Math.random() * 130}px) translateY(${
+      Math.random() * 60
+    }px);
   }
   25% {
-    transform: translateX(-130px) translateY(120px);
+    transform: translateX(${Math.random() * -30}px) translateY(${
+      Math.random() * 300
+    }px);
   }
   50% {
-    transform: translateX(130px) translateY(180px);
+    transform: translateX(${Math.random() * 100}px) translateY(${
+      Math.random() * 180
+    }px);
   }
   75% {
-    transform: translateX(-130px) translateY(240px);
+    transform: translateX(${Math.random() * -120}px) translateY(${
+      Math.random() * 240
+    }px);
   }
   100% {
-    transform: translateX(130px) translateY(300px);
+    transform: translateX(${Math.random() * 120}px) translateY(${
+      Math.random() * 120
+    }px);
   }
 `;
 
@@ -92,7 +106,7 @@ const Grain = styled.div`
   top: -300px;
   left: -200px;
   height: 150%;
-  width: 150%;
+  width: 200%;
   background-image: url("/grain.avif");
   background-size: cover;
   opacity: 0.15;
