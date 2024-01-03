@@ -1,5 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Layout from "./components/Layout";
+import RandomPage from "./features/random/RandomPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -9,7 +10,7 @@ function App() {
       children: [
         {
           index: true,
-          element: "",
+          element: <RandomPage />,
         },
       ],
     },
