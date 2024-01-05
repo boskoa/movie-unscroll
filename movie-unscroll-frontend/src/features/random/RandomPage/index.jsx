@@ -46,19 +46,19 @@ const Counter = styled.p`
 
 const light = keyframes`
   0% {
-    box-shadow: 0 0 160px black inset;
+    box-shadow: 20px 20px 160px black inset, -20px -20px 160px black inset;
   }
   25% {
-    box-shadow: 0 0 260px black inset;
+    box-shadow: 20px 20px 260px black inset, -20px -20px 260px black inset;
   }
   50% {
-    box-shadow: 0 0 180px black inset;
+    box-shadow: 20px 20px 180px black inset, -20px -20px 180px black inset;
   }
   75% {
-    box-shadow: 0 0 240px black inset;
+    box-shadow: 20px 20px 240px black inset, -20px -20px 240px black inset;
   }
   100% {
-    box-shadow: 0 0 160px black inset;
+    box-shadow: 20px 20px 160px black inset, -20px -20px 160px black inset;
   }
 `;
 
@@ -69,8 +69,10 @@ const Filter = styled.div`
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.3);
-  box-shadow: 0 0 160px black inset;
-  animation: ${() => css`3s ${light} linear infinite`};
+  box-shadow:
+    20px 20px 60px black inset,
+    -20px -20px 60px black inset;
+  animation: ${() => css`2s ${light} linear infinite`};
 `;
 
 const move = keyframes`
@@ -107,9 +109,9 @@ const Grain = styled.div`
   left: -200px;
   height: 150%;
   width: 200%;
-  background-image: url("/grain.avif");
-  background-size: cover;
-  opacity: 0.15;
+  background-image: url("/film-grain-vertical.png");
+  //background-size: cover;
+  opacity: 0.25;
   animation: ${() => css`0.2s ${move} linear infinite`};
 `;
 
