@@ -1,7 +1,8 @@
 import styled, { css, keyframes } from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { getRandomMovie, selectRandom } from "../randomSlice";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import AgainButton from "./AgainButton";
 
 const intro = keyframes`
   from {
@@ -22,6 +23,8 @@ const MovieContainer = styled.div`
   align-items: stretch;
   padding: 30px;
   opacity: 0;
+  overflow: hidden;
+  transition: all 0.5s;
   animation: ${({ $show }) => ($show ? css`2s ${intro} forwards` : "")};
 
   @media only screen and (max-width: 700px) {
@@ -39,6 +42,7 @@ const taglineShow = keyframes`
   }
   100% {
     opacity: 0;
+    z-index: -1;
   }
 `;
 
@@ -48,9 +52,15 @@ const Tagline = styled.h3`
   top: 40%;
   left: 0;
   width: 100%;
+  overflow: hidden;
   text-align: center;
   font-size: 60px;
+  max-height: 50vh;
   animation: ${({ $show }) => ($show ? css`5s ${taglineShow} forwards` : "")};
+
+  @media only screen and (max-width: 500px) {
+    font-size: 40px;
+  }
 `;
 
 const posterIntro = keyframes`
@@ -74,7 +84,7 @@ const descriptionExpand = keyframes`
     padding: 0px;
   }
   to {
-    width: 40%;
+    width: 46%;
     padding: 0 30px;
   }
 `;
@@ -82,13 +92,13 @@ const descriptionExpand = keyframes`
 const Description = styled.div`
   position: relative;
   width: 0%;
+  max-height: 80vh;
   overflow: hidden;
   padding: 0px;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  gap: 30px;
   animation: ${() => css`1s ${descriptionExpand} 9s forwards`};
 
   @media only screen and (max-width: 700px) {
@@ -96,12 +106,15 @@ const Description = styled.div`
     width: 100%;
     padding: 20px;
     min-height: 70vh;
+    max-height: 120vh;
   }
 `;
 
 const Title = styled.h4`
   font-size: 30px;
+  margin-bottom: 30px;
   opacity: 0;
+  text-align: center;
   animation: ${() => css`2s ${posterIntro} 10s forwards`};
 
   @media only screen and (max-width: 700px) {
@@ -110,53 +123,80 @@ const Title = styled.h4`
 `;
 
 const Overview = styled.p`
-  font-size: 20px;
+  flex: 2;
+  font-size: 16px;
   opacity: 0;
+  text-align: justify;
+  overflow-y: auto;
+  padding-right: 5px;
   animation: ${() => css`2s ${posterIntro} 11s forwards`};
+
+  &::-webkit-scrollbar {
+    width: 3px;
+    background-color: #fffac828;
+  }
+
+  &::-webkit-scrollbar-track {
+    width: 3px;
+    background: #fffac828;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #fffac8;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-button:single-button:vertical:decrement {
+    height: 0px;
+    width: 0px;
+  }
+
+  &::-webkit-scrollbar-button:single-button:vertical:increment {
+    height: 0px;
+    width: 0px;
+  }
 
   @media only screen and (max-width: 700px) {
     animation-delay: 7s;
   }
 `;
 
-const Button = styled.button`
-  border: none;
-  background-color: teal;
-  padding: 10px 20px;
-  margin-top: auto;
-  cursor: pointer;
-  opacity: 0;
-  animation: ${() => css`2s ${posterIntro} 12s forwards`};
-
-  @media only screen and (max-width: 700px) {
-    animation-delay: 8s;
-  }
-`;
-
 function RandomMovie({ show }) {
   const movie = useSelector(selectRandom);
   const dispatch = useDispatch();
+  const movieRef = useRef();
+  const [refetched, setRefetched] = useState(false);
+
+  function handleAnother() {
+    setRefetched(true);
+    dispatch(getRandomMovie());
+    console.log("FUNC", movieRef.current.style.opacity);
+    setTimeout(() => setRefetched(false), 500);
+  }
 
   useEffect(() => {
     dispatch(getRandomMovie());
   }, [dispatch]);
 
-  if (!movie || show) {
+  if (!movie || show || refetched) {
     return null;
   }
 
   return (
-    <MovieContainer $show={!show}>
+    <MovieContainer ref={movieRef} $show={!show}>
       <Poster
         alt="poster"
         src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+        onError={(e) => (e.currentTarget.alt = "No poster for this movie...")}
       />
       <Description>
         <Title>{movie.title}</Title>
         <Overview>{movie.overview}</Overview>
-        <Button>Nah...</Button>
+        <AgainButton handleAnother={handleAnother}>Nah...</AgainButton>
       </Description>
-      <Tagline $show={!show}>{movie.tagline}</Tagline>
+      <Tagline $show={!show}>
+        {movie.tagline || "No tagline! Must be great."}
+      </Tagline>
     </MovieContainer>
   );
 }

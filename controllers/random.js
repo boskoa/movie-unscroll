@@ -4,11 +4,20 @@ const { TMDB_KEY } = require("../utils/config");
 
 router.get("/", async (_req, res, next) => {
   try {
-    const result = await axios.get(
-      `https://api.themoviedb.org/3/movie/551?api_key=${TMDB_KEY}`,
+    const lengthResponse = await axios.get(
+      `https://api.themoviedb.org/3/movie/top_rated?api_key=${TMDB_KEY}&include_adult=false`,
     );
-    console.log("RESULT", result.data);
-    return res.status(200).json(result.data);
+    const page = Math.floor(Math.random() * lengthResponse.data.total_pages);
+    const item = Math.floor(Math.random() * 20);
+    console.log("LENGTH", lengthResponse.data.total_pages, page);
+    const result = await axios.get(
+      `https://api.themoviedb.org/3/movie/top_rated?api_key=${TMDB_KEY}&include_adult=false&include_tagline=true&page=${page}`,
+    );
+    console.log("RESULT", result.data.results.length);
+    const movieResult = await axios.get(
+      `https://api.themoviedb.org/3/movie/${result.data.results[item].id}?api_key=${TMDB_KEY}&include_adult=false`,
+    );
+    return res.status(200).json(movieResult.data);
   } catch (error) {
     next(error);
   }

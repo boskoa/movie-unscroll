@@ -13,7 +13,6 @@ const outro = keyframes`
 
 const RandomContainer = styled.div`
   height: calc(100vh - 50px);
-  //width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
