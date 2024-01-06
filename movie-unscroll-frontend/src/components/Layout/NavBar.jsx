@@ -8,6 +8,7 @@ const NavContainer = styled.header`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  z-index: 100;
 `;
 
 function NavBar() {

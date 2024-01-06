@@ -1,15 +1,27 @@
 import { useEffect, useState } from "react";
 import styled, { css, keyframes } from "styled-components";
+import RandomMovie from "./RandomMovie";
+
+const outro = keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`;
 
 const RandomContainer = styled.div`
   height: calc(100vh - 50px);
-  width: 100vw;
+  //width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   color: black;
   overflow: hidden;
+  opacity: 1;
+  animation: ${({ $show }) => ($show ? "" : css`0.8s ${outro} 0.6s forwards`)};
   background: linear-gradient(
       transparent calc(50% - 1px),
       black 2px,
@@ -110,7 +122,6 @@ const Grain = styled.div`
   height: 150%;
   width: 200%;
   background-image: url("/film-grain-vertical.png");
-  //background-size: cover;
   opacity: 0.25;
   animation: ${() => css`0.2s ${move} linear infinite`};
 `;
@@ -146,22 +157,37 @@ const Rotor = styled.div`
 
 function RandomPage() {
   const [count, setCount] = useState(5);
+  const [show, setShow] = useState(true);
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
-    const index = setInterval(() => setCount((p) => (p > 0 ? p - 1 : 5)), 1000);
+    const index = setInterval(() => setCount((p) => (p > 0 ? p - 1 : 0)), 1000);
     setAnimate(true);
 
     return () => clearInterval(index);
   }, []);
 
+  useEffect(() => {
+    if (count === 0) {
+      setTimeout(() => setShow(false), 1500);
+      setAnimate(false);
+    }
+  }, [count]);
+
   return (
-    <RandomContainer>
-      <Counter>{count}</Counter>
-      <Filter />
-      <Grain />
-      <Rotor $animate={animate} />
-    </RandomContainer>
+    <>
+      {show ? (
+        <RandomContainer $show={count !== 0}>
+          <Counter>{count}</Counter>
+          <Filter />
+          <Grain />
+          <Rotor $animate={animate} />
+        </RandomContainer>
+      ) : (
+        ""
+      )}
+      <RandomMovie show={show} />
+    </>
   );
 }
 

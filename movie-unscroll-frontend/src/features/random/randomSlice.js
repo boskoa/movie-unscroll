@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const BASE_URL = "";
+const BASE_URL = "/api/random";
 
 const initialState = {
   loading: false,
@@ -9,10 +9,13 @@ const initialState = {
   movie: null,
 };
 
-const getRandomMovie = createAsyncThunk("random/getRandomMovie", async () => {
-  const response = await axios.get(BASE_URL);
-  return response.data;
-});
+export const getRandomMovie = createAsyncThunk(
+  "random/getRandomMovie",
+  async () => {
+    const response = await axios.get(BASE_URL);
+    return response.data;
+  },
+);
 
 const randomSlice = createSlice({
   name: "random",

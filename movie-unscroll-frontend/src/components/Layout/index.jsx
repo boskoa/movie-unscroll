@@ -4,7 +4,6 @@ import { Outlet } from "react-router-dom";
 
 const MainContainer = styled.div`
   min-height: 100vh;
-  min-width: 100vw;
   color: white;
   background-color: black;
 `;
