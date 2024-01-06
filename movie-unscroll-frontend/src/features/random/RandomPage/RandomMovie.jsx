@@ -49,17 +49,20 @@ const taglineShow = keyframes`
 const Tagline = styled.h3`
   opacity: 1;
   position: absolute;
-  top: 40%;
+  top: 20vh;
   left: 0;
   width: 100%;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  font-size: 60px;
-  max-height: 50vh;
+  font-size: ${({ $font }) => $font}px;
+  height: 60vh;
   animation: ${({ $show }) => ($show ? css`5s ${taglineShow} forwards` : "")};
 
   @media only screen and (max-width: 500px) {
-    font-size: 40px;
+    font-size: ${({ $font }) => $font * 0.6}px;
   }
 `;
 
@@ -111,7 +114,7 @@ const Description = styled.div`
 `;
 
 const Title = styled.h4`
-  font-size: 30px;
+  font-size: 26px;
   margin-bottom: 30px;
   opacity: 0;
   text-align: center;
@@ -123,12 +126,12 @@ const Title = styled.h4`
 `;
 
 const Overview = styled.p`
-  flex: 2;
-  font-size: 16px;
+  font-size: 14px;
   opacity: 0;
   text-align: justify;
   overflow-y: auto;
   padding-right: 5px;
+  margin-bottom: 20px;
   animation: ${() => css`2s ${posterIntro} 11s forwards`};
 
   &::-webkit-scrollbar {
@@ -161,6 +164,20 @@ const Overview = styled.p`
   }
 `;
 
+const Genres = styled.p`
+  flex: 2;
+  font-size: 14px;
+  font-style: italic;
+  opacity: 0;
+  color: grey;
+  align-self: start;
+  animation: ${() => css`2s ${posterIntro} 11.5s forwards`};
+
+  @media only screen and (max-width: 700px) {
+    animation-delay: 7.5s;
+  }
+`;
+
 function RandomMovie({ show }) {
   const movie = useSelector(selectRandom);
   const dispatch = useDispatch();
@@ -170,7 +187,6 @@ function RandomMovie({ show }) {
   function handleAnother() {
     setRefetched(true);
     dispatch(getRandomMovie());
-    console.log("FUNC", movieRef.current.style.opacity);
     setTimeout(() => setRefetched(false), 500);
   }
 
@@ -190,11 +206,21 @@ function RandomMovie({ show }) {
         onError={(e) => (e.currentTarget.alt = "No poster for this movie...")}
       />
       <Description>
-        <Title>{movie.title}</Title>
+        <Title>
+          {movie.title} ({movie.release_date.slice(0, 4)})
+        </Title>
         <Overview>{movie.overview}</Overview>
+        <Genres>Genres: {movie.genres.map((g) => g.name).join(", ")}</Genres>
         <AgainButton handleAnother={handleAnother}>Nah...</AgainButton>
       </Description>
-      <Tagline $show={!show}>
+      <Tagline
+        $show={!show}
+        $font={
+          Math.floor((100 / (movie.tagline.length * 5)) * 100) > 70
+            ? 70
+            : Math.floor((100 / (movie.tagline.length * 5)) * 100)
+        }
+      >
         {movie.tagline || "No tagline! Must be great."}
       </Tagline>
     </MovieContainer>
