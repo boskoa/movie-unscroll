@@ -20,10 +20,14 @@ const MovieContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: stretch;
-  flex-wrap: wrap;
   padding: 30px;
   opacity: 0;
   animation: ${({ $show }) => ($show ? css`2s ${intro} forwards` : "")};
+
+  @media only screen and (max-width: 700px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const taglineShow = keyframes`
@@ -71,7 +75,7 @@ const descriptionExpand = keyframes`
   }
   to {
     width: 40%;
-    padding: 30px;
+    padding: 0 30px;
   }
 `;
 
@@ -86,18 +90,33 @@ const Description = styled.div`
   align-items: center;
   gap: 30px;
   animation: ${() => css`1s ${descriptionExpand} 9s forwards`};
+
+  @media only screen and (max-width: 700px) {
+    animation: none;
+    width: 100%;
+    padding: 20px;
+    min-height: 70vh;
+  }
 `;
 
 const Title = styled.h4`
   font-size: 30px;
   opacity: 0;
   animation: ${() => css`2s ${posterIntro} 10s forwards`};
+
+  @media only screen and (max-width: 700px) {
+    animation-delay: 6s;
+  }
 `;
 
 const Overview = styled.p`
   font-size: 20px;
   opacity: 0;
   animation: ${() => css`2s ${posterIntro} 11s forwards`};
+
+  @media only screen and (max-width: 700px) {
+    animation-delay: 7s;
+  }
 `;
 
 const Button = styled.button`
@@ -108,6 +127,10 @@ const Button = styled.button`
   cursor: pointer;
   opacity: 0;
   animation: ${() => css`2s ${posterIntro} 12s forwards`};
+
+  @media only screen and (max-width: 700px) {
+    animation-delay: 8s;
+  }
 `;
 
 function RandomMovie({ show }) {
