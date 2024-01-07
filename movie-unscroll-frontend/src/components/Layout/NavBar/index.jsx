@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Logo from "./Logo";
 
 const NavContainer = styled.header`
   position: sticky;
@@ -15,6 +16,7 @@ function NavBar() {
   return (
     <NavContainer>
       <p>HAI</p>
+      <Logo />
       <p>MARK</p>
     </NavContainer>
   );

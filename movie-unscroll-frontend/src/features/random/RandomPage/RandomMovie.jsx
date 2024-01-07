@@ -189,7 +189,7 @@ function RandomMovie({ show }) {
   function handleAnother() {
     setRefetched(true);
     dispatch(getRandomMovie());
-    setTimeout(() => setRefetched(false), 500);
+    setTimeout(() => setRefetched(false), 1000);
   }
 
   useEffect(() => {
@@ -205,7 +205,7 @@ function RandomMovie({ show }) {
       <PosterContainer>
         <Rating
           show={!show}
-          rating={Math.round(movie.vote_average * 100) / 100}
+          rating={Math.round(movie.vote_average * 10) / 10}
         />
         <img
           alt="poster"
@@ -230,7 +230,7 @@ function RandomMovie({ show }) {
             : Math.floor((100 / (movie.tagline.length * 5)) * 100)
         }
       >
-        {movie.tagline || "No tagline! Must be great."}
+        {movie.tagline || "No tagline."}
       </Tagline>
     </MovieContainer>
   );

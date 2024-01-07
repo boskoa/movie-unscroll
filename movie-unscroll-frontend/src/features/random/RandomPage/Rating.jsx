@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const OUTER_R = "40px";
-const INNER_R = "36px";
+const INNER_R = "34px";
 
 const RatingContainer = styled.div`
-  --ang: 0deg;
+  --ang: ${({ $ang }) => `${$ang}deg`};
   position: absolute;
   top: 10px;
   right: 10px;
@@ -17,25 +17,25 @@ const RatingContainer = styled.div`
   background: conic-gradient(gold var(--ang), rgb(255, 68, 0) var(--ang));
   border-radius: 50%;
   transition: opacity 0.8s;
-  animation: ${() => "0.5s rotate linear forwards"};
+  animation: 0.5s fort linear;
 
   &:hover {
     opacity: 0;
-    animation: ${() => "0.5s back linear forwards"};
+    animation: 0.5s back linear;
   }
 
-  @keyframes rotate {
+  @keyframes fort {
     0% {
       --ang: 0deg;
     }
     100% {
-      --ang: ${({ $ang }) => $ang};
+      --ang: ${({ $ang }) => `${$ang}deg`};
     }
   }
 
   @keyframes back {
     0% {
-      --ang: ${({ $ang }) => $ang};
+      --ang: ${({ $ang }) => `${$ang}deg`};
     }
     100% {
       --ang: 0deg;
@@ -57,13 +57,15 @@ const RatingCounter = styled.div`
   height: ${INNER_R};
   background-color: black;
   border-radius: 50%;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
+  user-select: none;
   transition: opacity 0.3s;
 `;
 
 function Rating({ show, rating }) {
   const [visible, setVisible] = useState(false);
+  const [ang, setAng] = useState();
 
   useEffect(() => {
     let index;
@@ -75,13 +77,13 @@ function Rating({ show, rating }) {
   }, [show]);
 
   useEffect(() => {
-    console.log("RATING", rating);
-  }, [rating]);
+    setAng(Math.floor(rating * 36));
+  }, [rating, show]);
 
-  if (!visible || !rating) return undefined;
+  if (!visible || !rating) return null;
 
   return (
-    <RatingContainer $ang={`${rating * 36}deg`}>
+    <RatingContainer $ang={ang}>
       <RatingCounter>{rating}</RatingCounter>
     </RatingContainer>
   );
