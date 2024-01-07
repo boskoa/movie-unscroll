@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getRandomMovie, selectRandom } from "../randomSlice";
 import { useEffect, useRef, useState } from "react";
 import AgainButton from "./AgainButton";
+import Rating from "./Rating";
 
 const intro = keyframes`
   from {
@@ -14,7 +15,7 @@ const intro = keyframes`
 `;
 
 const MovieContainer = styled.div`
-  top: 50px;
+  top: 0px;
   left: 0;
   min-height: 90vh;
   width: 100%;
@@ -75,7 +76,8 @@ const posterIntro = keyframes`
   }
 `;
 
-const Poster = styled.img`
+const PosterContainer = styled.div`
+  position: relative;
   height: 80vh;
   opacity: 0;
   animation: ${() => css`2s ${posterIntro} 5s forwards`};
@@ -200,11 +202,18 @@ function RandomMovie({ show }) {
 
   return (
     <MovieContainer ref={movieRef} $show={!show}>
-      <Poster
-        alt="poster"
-        src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-        onError={(e) => (e.currentTarget.alt = "No poster for this movie...")}
-      />
+      <PosterContainer>
+        <Rating
+          show={!show}
+          rating={Math.round(movie.vote_average * 100) / 100}
+        />
+        <img
+          alt="poster"
+          src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+          onError={(e) => (e.currentTarget.alt = "No poster for this movie...")}
+          height="100%"
+        />
+      </PosterContainer>
       <Description>
         <Title>
           {movie.title} ({movie.release_date.slice(0, 4)})
