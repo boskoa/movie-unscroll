@@ -7,6 +7,7 @@ const LogoContainer = styled.div`
   align-items: center;
   position: relative;
   height: 35px;
+  user-select: none;
 `;
 
 const filmRoll = keyframes`
@@ -34,7 +35,6 @@ const filmUnroll = keyframes`
 `;
 
 const Roll = styled.img`
-  //box-shadow: 0 0 5px 0 gold;
   position: absolute;
   top: 0;
   left: 70px;
@@ -46,10 +46,6 @@ const Roll = styled.img`
     !$hover
       ? css`1s ${filmUnroll} linear forwards`
       : css`1s ${filmRoll} linear forwards`};
-
-  /* &:hover {
-    animation: ${() => css`1s ${filmRoll} linear forwards`};
-  } */
 `;
 
 const MovieContainer = styled.div`
@@ -88,6 +84,7 @@ const movieRise = keyframes`
 const Movie = styled.span`
   font-family: "Josefin Sans", sans-serif;
   font-size: 24px;
+  color: gold;
   transform-origin: 50% 0%;
   animation: ${({ $hover }) =>
     $hover
@@ -132,6 +129,7 @@ const unscrollRise = keyframes`
 const Unscroll = styled.span`
   font-family: "Josefin Sans", sans-serif;
   font-size: 24px;
+  color: rgb(255, 68, 0);
   transform-origin: 50% 100%;
   animation: ${({ $hover }) =>
     $hover
