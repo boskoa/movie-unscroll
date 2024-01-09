@@ -1,6 +1,19 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
 const { User } = require("../models");
+const { tokenExtractor } = require("../utils/tokenExtractor");
+
+//For testing. Change later
+router.get("/", tokenExtractor, async (req, res, next) => {
+  const id = req.decodedToken.id;
+
+  try {
+    const user = await User.findByPk(id);
+    return res.status(200).json(user);
+  } catch (error) {
+    next(error);
+  }
+});
 
 router.post("/", async (req, res, next) => {
   if (

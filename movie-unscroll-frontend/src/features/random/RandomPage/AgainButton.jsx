@@ -30,6 +30,7 @@ const ButtonContainer = styled.button`
   cursor: pointer;
   opacity: 0;
   overflow: hidden;
+  user-select: none;
   animation: ${() => css`2s ${buttonIntro} 12s forwards`};
 
   @media only screen and (max-width: 700px) {

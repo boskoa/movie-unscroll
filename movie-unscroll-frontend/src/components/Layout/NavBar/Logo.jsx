@@ -100,7 +100,7 @@ const UnscrollContainer = styled.div`
   display: flex;
   justify-content: end;
   align-items: end;
-  width: 112px;
+  width: 108px;
 `;
 
 const unscrollFall = keyframes`

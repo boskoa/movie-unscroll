@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import NavBar from "./NavBar";
 import { Outlet } from "react-router-dom";
+import { useState } from "react";
+import LoginModal from "../../features/login/LoginModal";
 
 const MainContainer = styled.div`
   min-height: 100vh;
@@ -9,10 +11,13 @@ const MainContainer = styled.div`
 `;
 
 function Layout() {
+  const [login, setLogin] = useState(false);
+
   return (
     <MainContainer>
-      <NavBar />
+      <NavBar login={login} setLogin={setLogin} />
       <Outlet />
+      {login && <LoginModal login={login} setLogin={setLogin} />}
     </MainContainer>
   );
 }
