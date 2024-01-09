@@ -1,6 +1,6 @@
-import { Sequelize } from "sequelize";
-import { DATABASE_URL, PRODUCTION_DATABASE_URL } from "./config";
-import { SequelizeStorage } from "umzug";
+const { Sequelize } = require("sequelize");
+const { DATABASE_URL, PRODUCTION_DATABASE_URL } = require("./config");
+const { SequelizeStorage, Umzug } = require("umzug");
 
 const dataBase =
   process.env.NODE_ENV === "development"
