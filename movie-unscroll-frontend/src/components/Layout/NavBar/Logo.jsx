@@ -84,6 +84,7 @@ const movieRise = keyframes`
 const Movie = styled.span`
   font-family: "Josefin Sans", sans-serif;
   font-size: 24px;
+  font-weight: 700;
   color: gold;
   transform-origin: 50% 0%;
   animation: ${({ $hover }) =>
@@ -99,7 +100,7 @@ const UnscrollContainer = styled.div`
   display: flex;
   justify-content: end;
   align-items: end;
-  width: 107px;
+  width: 112px;
 `;
 
 const unscrollFall = keyframes`
@@ -129,6 +130,7 @@ const unscrollRise = keyframes`
 const Unscroll = styled.span`
   font-family: "Josefin Sans", sans-serif;
   font-size: 24px;
+  font-weight: 700;
   color: rgb(255, 68, 0);
   transform-origin: 50% 100%;
   animation: ${({ $hover }) =>
