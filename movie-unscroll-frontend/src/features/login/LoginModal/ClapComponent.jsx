@@ -2,6 +2,7 @@ import styled, { css, keyframes } from "styled-components";
 import clapper from "../../../assets/clapper.png";
 import clap from "../../../assets/clap-up.png";
 import LoginForm from "./LoginForm";
+import { useState } from "react";
 
 const LoginContainer = styled.div`
   display: flex;
@@ -9,7 +10,6 @@ const LoginContainer = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  //border: 3px solid gold;
 `;
 
 const Clapper = styled.img`
@@ -26,19 +26,30 @@ const clapDown = keyframes`
   }
 `;
 
+const clapUp = keyframes`
+  to {
+    transform: translateY(44px) translateX(2px) rotateZ(0deg);
+  }
+`;
+
 const Clap = styled.img`
   width: 302px;
   transform-origin: 5% 50%;
   transform: translateY(44px) translateX(2px) rotateZ(0deg);
-  animation: ${() => css`0.2s ${clapDown} ease-in infinite`};
+  animation: ${({ $clapDown }) =>
+    $clapDown
+      ? css`0.1s ${clapDown} ease-in forwards`
+      : css`0.1s ${clapUp} ease-in forwards`};
 `;
 
 function ClapComponent({ setLogin }) {
+  const [clapDown, setClapDown] = useState(false);
+
   return (
     <LoginContainer>
-      <Clap src={clap} />
+      <Clap src={clap} $clapDown={clapDown} />
       <Clapper src={clapper} />
-      <LoginForm setLogin={setLogin} />
+      <LoginForm setLogin={setLogin} setClapDown={setClapDown} />
     </LoginContainer>
   );
 }

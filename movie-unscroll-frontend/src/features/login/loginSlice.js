@@ -31,6 +31,25 @@ const loginSlice = createSlice({
     logout: (state) => {
       state.user = null;
     },
+    clearError: (state) => {
+      state.error = null;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(loginUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(loginUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.user = action.payload;
+      })
+      .addCase(loginUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
   },
 });
 
@@ -38,6 +57,10 @@ export function selectLoggedUser(state) {
   return state.login.user;
 }
 
-export const { alreadyLogged, logout } = loginSlice.actions;
+export function selectLoggedError(state) {
+  return state.login.error;
+}
+
+export const { alreadyLogged, logout, clearError } = loginSlice.actions;
 
 export default loginSlice.reducer;
