@@ -1,4 +1,5 @@
-import { DataTypes, Model } from "sequelize";
+const { DataTypes, Model } = require("sequelize");
+const { sequelize } = require("../utils/db");
 
 class Movie extends Model {}
 

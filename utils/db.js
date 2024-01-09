@@ -13,7 +13,7 @@ const sequelize = new Sequelize(dataBase, {
 
 const migrationsConf = {
   migrations: {
-    glob: "migration/*.js",
+    glob: "migrations/*.js",
   },
   storage: new SequelizeStorage({
     sequelize,
