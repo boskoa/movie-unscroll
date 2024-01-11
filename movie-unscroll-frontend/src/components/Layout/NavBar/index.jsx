@@ -5,6 +5,9 @@ import {
   faRightToBracket,
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
+import { selectLoggedUser } from "../../../features/login/loginSlice";
+import UserMenu from "./UserMenu";
 
 const NavContainer = styled.header`
   position: sticky;
@@ -86,23 +89,33 @@ const SignUpIcon = styled(Icon)`
 `;
 
 function NavBar({ setLogin, setRegister }) {
+  const loggedUser = useSelector(selectLoggedUser);
+
   return (
     <NavContainer>
-      <LogInIcon
-        onClick={() => setLogin(true)}
-        $title="Log in"
-        $color="rgb(255, 68, 0)"
-      >
-        <FontAwesomeIcon icon={faRightToBracket} />
-      </LogInIcon>
+      {loggedUser ? (
+        <p>menu</p>
+      ) : (
+        <LogInIcon
+          onClick={() => setLogin(true)}
+          $title="Log in"
+          $color="rgb(255, 68, 0)"
+        >
+          <FontAwesomeIcon icon={faRightToBracket} />
+        </LogInIcon>
+      )}
       <Logo />
-      <SignUpIcon
-        onClick={() => setRegister(true)}
-        $title="Sign up"
-        $color="gold"
-      >
-        <FontAwesomeIcon icon={faUserPlus} />
-      </SignUpIcon>
+      {loggedUser ? (
+        <UserMenu />
+      ) : (
+        <SignUpIcon
+          onClick={() => setRegister(true)}
+          $title="Sign up"
+          $color="gold"
+        >
+          <FontAwesomeIcon icon={faUserPlus} />
+        </SignUpIcon>
+      )}
     </NavContainer>
   );
 }

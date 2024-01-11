@@ -2,8 +2,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { selectLoggedUser } from "../../login/loginSlice";
-import { useEffect } from "react";
-import { clearUsersError, createUser, selectUsersError } from "../usersSlice";
+import { useEffect, useState } from "react";
+import {
+  clearUsersError,
+  createUser,
+  selectUsersError,
+  selectUsersLoading,
+} from "../usersSlice";
 
 const FormContainer = styled.form`
   position: absolute;
@@ -70,8 +75,10 @@ const RegisterError = styled.p`
 `;
 
 function RegisterForm({ setRegister, setClapDown }) {
+  const [submitted, setSubmitted] = useState(false);
   const loggedUser = useSelector(selectLoggedUser);
   const registerError = useSelector(selectUsersError);
+  const registerLoading = useSelector(selectUsersLoading);
   const dispatch = useDispatch();
   const {
     register,
@@ -79,8 +86,10 @@ function RegisterForm({ setRegister, setClapDown }) {
     formState: { errors },
   } = useForm({ mode: "onBlur" });
 
-  function handleLogin(data) {
+  function handleRegister(data) {
     dispatch(createUser(data));
+    setSubmitted(true);
+    setTimeout(() => setSubmitted(false), 600);
   }
 
   function handleCancel() {
@@ -90,6 +99,13 @@ function RegisterForm({ setRegister, setClapDown }) {
   }
 
   useEffect(() => {
+    if (submitted && !registerError && !registerLoading) {
+      setTimeout(() => setRegister(false), 400);
+      setClapDown(true);
+    }
+  }, [submitted, setClapDown, setRegister, registerError, registerLoading]);
+
+  useEffect(() => {
     if (loggedUser?.username) {
       setTimeout(() => setRegister(false), 400);
       setClapDown(true);
@@ -97,10 +113,11 @@ function RegisterForm({ setRegister, setClapDown }) {
   }, [loggedUser, setClapDown, setRegister]);
 
   return (
-    <FormContainer onSubmit={handleSubmit(handleLogin)}>
+    <FormContainer onSubmit={handleSubmit(handleRegister)}>
       <InputContainer>
         <ClapInput
           $color={errors.username ? "red" : "white"}
+          autoFocus
           placeholder="name"
           name="name"
           type="text"

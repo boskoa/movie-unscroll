@@ -105,6 +105,7 @@ function LoginForm({ setLogin, setClapDown }) {
       <InputContainer>
         <ClapInput
           $color={errors.username ? "red" : "white"}
+          autoFocus
           placeholder="username"
           name="username"
           type="text"
