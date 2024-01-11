@@ -85,7 +85,7 @@ const SignUpIcon = styled(Icon)`
   }
 `;
 
-function NavBar({ login, setLogin }) {
+function NavBar({ setLogin, setRegister }) {
   return (
     <NavContainer>
       <LogInIcon
@@ -96,7 +96,11 @@ function NavBar({ login, setLogin }) {
         <FontAwesomeIcon icon={faRightToBracket} />
       </LogInIcon>
       <Logo />
-      <SignUpIcon $title="Sign up" $color="gold">
+      <SignUpIcon
+        onClick={() => setRegister(true)}
+        $title="Sign up"
+        $color="gold"
+      >
         <FontAwesomeIcon icon={faUserPlus} />
       </SignUpIcon>
     </NavContainer>

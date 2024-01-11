@@ -1,7 +1,7 @@
 import styled, { css, keyframes } from "styled-components";
 import clapper from "../../../assets/clapper.png";
 import clap from "../../../assets/clap-up.png";
-import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
 import { useState } from "react";
 
 const slideIn = keyframes`
@@ -13,7 +13,7 @@ const slideIn = keyframes`
   }
 `;
 
-const LoginContainer = styled.div`
+const RegisterContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -53,15 +53,15 @@ const Clap = styled.img`
       : css`0.1s ${clapUp} ease-in forwards`};
 `;
 
-function ClapComponent({ setLogin }) {
+function ClapComponent({ setRegister }) {
   const [clapDown, setClapDown] = useState(false);
 
   return (
-    <LoginContainer>
+    <RegisterContainer>
       <Clap src={clap} $clapDown={clapDown} />
       <Clapper src={clapper} />
-      <LoginForm setLogin={setLogin} setClapDown={setClapDown} />
-    </LoginContainer>
+      <RegisterForm setRegister={setRegister} setClapDown={setClapDown} />
+    </RegisterContainer>
   );
 }
 

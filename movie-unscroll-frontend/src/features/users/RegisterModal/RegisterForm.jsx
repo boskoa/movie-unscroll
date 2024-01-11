@@ -1,13 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import {
-  clearError,
-  loginUser,
-  selectLoggedError,
-  selectLoggedUser,
-} from "../loginSlice";
+import { selectLoggedUser } from "../../login/loginSlice";
 import { useEffect } from "react";
+import { clearUsersError, createUser, selectUsersError } from "../usersSlice";
 
 const FormContainer = styled.form`
   position: absolute;
@@ -66,16 +62,16 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const LoginError = styled.p`
+const RegisterError = styled.p`
   font-size: 10px;
   height: 12px;
   color: red;
   background-color: black;
 `;
 
-function LoginForm({ setLogin, setClapDown }) {
+function RegisterForm({ setRegister, setClapDown }) {
   const loggedUser = useSelector(selectLoggedUser);
-  const loggedError = useSelector(selectLoggedError);
+  const registerError = useSelector(selectUsersError);
   const dispatch = useDispatch();
   const {
     register,
@@ -84,24 +80,40 @@ function LoginForm({ setLogin, setClapDown }) {
   } = useForm({ mode: "onBlur" });
 
   function handleLogin(data) {
-    dispatch(loginUser(data));
+    dispatch(createUser(data));
   }
 
   function handleCancel() {
-    setTimeout(() => setLogin(false), 400);
+    setTimeout(() => setRegister(false), 400);
     setClapDown(true);
-    dispatch(clearError());
+    dispatch(clearUsersError());
   }
 
   useEffect(() => {
     if (loggedUser?.username) {
-      setTimeout(() => setLogin(false), 400);
+      setTimeout(() => setRegister(false), 400);
       setClapDown(true);
     }
-  }, [loggedUser, setClapDown, setLogin]);
+  }, [loggedUser, setClapDown, setRegister]);
 
   return (
     <FormContainer onSubmit={handleSubmit(handleLogin)}>
+      <InputContainer>
+        <ClapInput
+          $color={errors.username ? "red" : "white"}
+          placeholder="name"
+          name="name"
+          type="text"
+          {...register("name", {
+            required: true,
+            minLength: {
+              value: 2,
+              message: "More than 1 character.",
+            },
+          })}
+        />
+        <Error>{errors.name?.message}</Error>
+      </InputContainer>
       <InputContainer>
         <ClapInput
           $color={errors.username ? "red" : "white"}
@@ -117,6 +129,22 @@ function LoginForm({ setLogin, setClapDown }) {
           })}
         />
         <Error>{errors.username?.message}</Error>
+      </InputContainer>
+      <InputContainer>
+        <ClapInput
+          $color={errors.email ? "red" : "white"}
+          placeholder="email"
+          name="email"
+          type="email"
+          {...register("email", {
+            required: true,
+            pattern: {
+              value: /\S+@\S+\.\S+/,
+              message: "Wrong email format",
+            },
+          })}
+        />
+        <Error>{errors.email?.message}</Error>
       </InputContainer>
       <InputContainer>
         <ClapInput
@@ -138,11 +166,11 @@ function LoginForm({ setLogin, setClapDown }) {
         <Button type="button" onClick={handleCancel}>
           Cancel
         </Button>
-        <Button type="submit">Log in</Button>
+        <Button type="submit">Sign up</Button>
       </ButtonContainer>
-      <LoginError>{loggedError}</LoginError>
+      <RegisterError>{registerError}</RegisterError>
     </FormContainer>
   );
 }
 
-export default LoginForm;
+export default RegisterForm;

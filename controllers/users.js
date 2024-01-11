@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
-const { User } = require("../models");
+const { User, Movie, Genre, Director, Actor } = require("../models");
 const { tokenExtractor } = require("../utils/tokenExtractor");
 
 //For testing. Change later
@@ -40,6 +40,24 @@ router.post("/", async (req, res, next) => {
       attributes: { exclude: ["passwordHash"] },
     });
     return res.status(200).json(newUser);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.delete("/:id", tokenExtractor, async (req, res, next) => {
+  const changer = User.findByP(req.decodedToken.id);
+
+  if (!changer?.admin || changer.id !== req.params.id) {
+    return res.status(401).json({ error: "Not authorized" });
+  }
+
+  try {
+    await Movie.destroy({ where: { userId: req.params.id } });
+    await Genre.destroy({ where: { userId: req.params.id } });
+    await Director.destroy({ where: { userId: req.params.id } });
+    await Actor.destroy({ where: { userId: req.params.id } });
+    return res.status(200).send("User deleted");
   } catch (error) {
     next(error);
   }
