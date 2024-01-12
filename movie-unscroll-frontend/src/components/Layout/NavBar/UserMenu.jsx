@@ -14,12 +14,14 @@ const Icon = styled.div`
   height: 40px;
   margin-right: 10px;
   font-size: 20px;
+  background-color: #002f2f;
   border: 2px solid ${({ $color }) => $color};
   border-radius: 50%;
   color: ${({ $color }) => $color};
   cursor: pointer;
   box-shadow: ${({ $color, $selected }) =>
     $selected ? `0 0 5px 0 ${$color}` : "none"};
+  box-sizing: content-box;
   transition: 0.1s all;
 
   &:active {
@@ -55,6 +57,40 @@ const MenuContainer = styled.div`
   animation: ${() => css`1s ${menuEnter} infinite both`};
 `;
 
+const slideOption = keyframes`
+  from {
+    transform: translateX(0);
+    width: 40px;
+    border-radius: 50%;
+  }
+  to {
+    transform: translateX(-70px);
+    width: 70px;
+    border-radius: 35px;
+  }
+`;
+
+const MenuIcon = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  background-color: #002f2f;
+  border: 2px solid ${({ $color }) => $color};
+  border-radius: 50%;
+  color: ${({ $color }) => $color};
+  z-index: -100;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: ${({ $selected }) =>
+    $selected ? css`1s ${slideOption} both` : ""};
+`;
+
 function UserMenu() {
   const [selected, setSelected] = useState(false);
   const menuRef = useRef();
@@ -80,12 +116,19 @@ function UserMenu() {
       onClick={() => setSelected((p) => !p)}
     >
       <FontAwesomeIcon icon={faUser} />
-      {selected && (
+      {/* {selected && (
         <MenuContainer $color="gold">
           <button onClick={() => dispatch(logout())}>log out</button>
           <button onClick={() => dispatch(logout())}>log out</button>
         </MenuContainer>
-      )}
+      )} */}
+      <MenuIcon
+        $selected={selected}
+        $color="gold"
+        onClick={() => dispatch(logout())}
+      >
+        Log out
+      </MenuIcon>
     </Icon>
   );
 }

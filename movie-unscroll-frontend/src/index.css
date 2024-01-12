@@ -33,3 +33,7 @@ html {
     width: 0px;
   }
 }
+
+.blobs {
+  filter: url('#goo');
+}
