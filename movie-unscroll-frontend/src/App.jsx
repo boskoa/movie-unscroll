@@ -1,4 +1,8 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
 import Layout from "./components/Layout";
 import RandomPage from "./features/random/RandomPage";
 import { useEffect } from "react";
@@ -18,6 +22,10 @@ function App() {
           element: <RandomPage />,
         },
       ],
+    },
+    {
+      path: "*",
+      element: <Navigate to="/" />,
     },
   ]);
 

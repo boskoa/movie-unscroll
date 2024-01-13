@@ -8,6 +8,7 @@ import {
 import { useSelector } from "react-redux";
 import { selectLoggedUser } from "../../../features/login/loginSlice";
 import UserMenu from "./UserMenu";
+import MainMenu from "./MainMenu";
 
 const NavContainer = styled.header`
   position: sticky;
@@ -19,6 +20,10 @@ const NavContainer = styled.header`
   align-items: center;
   gap: 20px;
   z-index: 100;
+
+  @media only screen and (max-width: 400px) {
+    gap: 0px;
+  }
 `;
 
 const Icon = styled.div`
@@ -94,7 +99,7 @@ function NavBar({ setLogin, setRegister }) {
   return (
     <NavContainer>
       {loggedUser ? (
-        <p>menu</p>
+        <MainMenu />
       ) : (
         <LogInIcon
           onClick={() => setLogin(true)}

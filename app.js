@@ -8,14 +8,23 @@ const { errorHandler } = require("./utils/errorHandler");
 
 const app = express();
 
+process.on("uncaughtException", function (err) {
+  console.log(err);
+});
+
 app.use(express.json());
 app.use(cors());
+app.use(express.static("dist"));
 
 //routers
 app.use("/api/test", testRouter);
 app.use("/api/random", randomRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/login", loginRouter);
+
+app.all("/*", (_req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
 
 app.use(errorHandler);
 

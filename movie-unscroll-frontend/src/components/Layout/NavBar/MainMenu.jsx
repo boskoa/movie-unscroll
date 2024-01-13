@@ -1,12 +1,11 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../features/login/loginSlice";
 import { Icon, MainIcon, MenuIcon } from "./navbarStyles";
+import MainMenuIcon from "./MainMenuIcon";
 import { Link } from "react-router-dom";
 
-function UserMenu() {
+function MainMenu() {
   const [selected, setSelected] = useState(false);
   const menuRef = useRef();
   const dispatch = useDispatch();
@@ -27,58 +26,38 @@ function UserMenu() {
   return (
     <Icon
       ref={menuRef}
-      $mr="10px"
-      $color="gold"
-      $color2="#002f2f"
+      $ml="10px"
+      $color2="gold"
+      $color="rgb(255, 68, 0)"
       $selected={selected}
       onClick={() => setSelected((p) => !p)}
     >
       <Link to="profile">
         <MenuIcon
-          $right="0px"
+          $left="0px"
           $delay="0"
           $selected={selected}
-          $color="gold"
           $color2="#002f2f"
-          onClick={() => dispatch(logout())}
+          $color="rgb(255, 68, 0)"
         >
           Profile
         </MenuIcon>
       </Link>
       <MenuIcon
-        $right="0px"
+        $left="0px"
         $delay="0.3"
         $selected={selected}
-        $color="gold"
         $color2="#002f2f"
+        $color="rgb(255, 68, 0)"
         onClick={() => dispatch(logout())}
       >
         Log out
       </MenuIcon>
       <MainIcon>
-        <FontAwesomeIcon icon={faUser} />
+        <MainMenuIcon selected={selected} color="#002f2f" />
       </MainIcon>
     </Icon>
   );
 }
 
-export default UserMenu;
-
-/* <svg
-  style={{ display: "none" }}
-  xmlns="http://www.w3.org/2000/svg"
-  version="1.1"
->
-  <defs>
-    <filter id="goo">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-      <feColorMatrix
-        in="blur"
-        mode="matrix"
-        values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
-        result="goo"
-      />
-      <feBlend in="SourceGraphic" in2="goo" />
-    </filter>
-  </defs>
-</svg>; */
+export default MainMenu;

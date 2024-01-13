@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import styled, { css, keyframes } from "styled-components";
 
 const LogoContainer = styled.div`
@@ -42,10 +43,15 @@ const Roll = styled.img`
   height: 35px;
   width: 35px;
   z-index: 30;
+  cursor: pointer;
   animation: ${({ $hover }) =>
     !$hover
       ? css`1s ${filmUnroll} linear forwards`
       : css`1s ${filmRoll} linear forwards`};
+
+  @media only screen and (max-width: 400px) {
+    left: 50px;
+  }
 `;
 
 const MovieContainer = styled.div`
@@ -55,6 +61,10 @@ const MovieContainer = styled.div`
   justify-content: start;
   align-items: center;
   width: 90px;
+
+  @media only screen and (max-width: 400px) {
+    width: 70px;
+  }
 `;
 
 const movieFall = keyframes`
@@ -91,6 +101,10 @@ const Movie = styled.span`
     $hover
       ? css`1s ${movieFall} linear forwards`
       : css`1s ${movieRise} linear forwards`};
+
+  @media only screen and (max-width: 400px) {
+    font-size: 18px;
+  }
 `;
 
 const UnscrollContainer = styled.div`
@@ -101,6 +115,10 @@ const UnscrollContainer = styled.div`
   justify-content: end;
   align-items: end;
   width: 108px;
+
+  @media only screen and (max-width: 400px) {
+    width: 83px;
+  }
 `;
 
 const unscrollFall = keyframes`
@@ -137,6 +155,10 @@ const Unscroll = styled.span`
     $hover
       ? css`1s ${unscrollFall} linear forwards`
       : css`1s ${unscrollRise} linear forwards`};
+
+  @media only screen and (max-width: 400px) {
+    font-size: 18px;
+  }
 `;
 
 function Logo() {
@@ -147,12 +169,14 @@ function Logo() {
       <MovieContainer>
         <Movie $hover={hover}>Movie</Movie>
       </MovieContainer>
-      <Roll
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
-        $hover={hover}
-        src="/roll.png"
-      />
+      <Link to="/">
+        <Roll
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
+          $hover={hover}
+          src="/roll.png"
+        />
+      </Link>
       <UnscrollContainer>
         <Unscroll $hover={hover}>Unscroll</Unscroll>
       </UnscrollContainer>
