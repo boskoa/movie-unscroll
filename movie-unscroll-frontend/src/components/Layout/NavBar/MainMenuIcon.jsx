@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Path1 = styled.path`
-  transform-origin: 17% 32%;
+  transform-origin: 12% 37%;
   transform: ${({ $selected }) =>
     $selected ? "rotateZ(45deg)" : "rotateZ(0deg)"};
   transition: all 0.5s;
@@ -13,7 +13,7 @@ const Path2 = styled.path`
 `;
 
 const Path3 = styled.path`
-  transform-origin: 10% 65%;
+  transform-origin: 16% 68%;
   transform: ${({ $selected }) =>
     $selected ? "rotateZ(-45deg)" : "rotateZ(0deg)"};
   transition: all 0.5s;

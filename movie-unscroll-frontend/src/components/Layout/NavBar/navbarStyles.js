@@ -12,20 +12,15 @@ const Icon = styled.div`
   flex-shrink: 0;
   font-size: 20px;
   background-color: ${({ $color }) => $color};
-  //border: 2px solid rgb(255, 68, 0);
   border-radius: 50%;
   color: ${({ $color2 }) => $color2};
   cursor: pointer;
-  box-shadow: ${({ $color, $selected }) =>
-    $selected ? `0 0 5px 0 ${$color}` : "none"};
+  box-shadow: ${({ $selected }) =>
+    $selected ? `0 0 7px 0 rgba(255, 255, 255, 0.9)` : "none"};
   box-sizing: content-box;
   z-index: 100;
   overflow: hidden;
   transition: 0.1s all;
-
-  &:active {
-    box-shadow: 0 0 5px 0 ${({ $color }) => $color};
-  }
 `;
 
 const slideOption = ($delay) => keyframes`
@@ -100,10 +95,10 @@ const MenuIcon = styled.div`
   align-items: center;
   font-size: 12px;
   background-color: ${({ $color }) => $color};
-  //transform: translateY(0);
+  border: 2px solid ${({ $color3 }) => $color3};
   opacity: 0.3;
   border-radius: 50%;
-  box-sizing: content-box;
+  box-sizing: border-box;
   color: ${({ $color2 }) => $color2};
   font-weight: 600;
   z-index: -100;
@@ -141,6 +136,9 @@ const MainIcon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 2px solid ${({ $color }) => $color};
+  border-radius: 50%;
+  background-color: ${({ $color2 }) => $color2};
 `;
 
 export { Icon, slideOption, blurOut, MenuIcon, MainIcon };

@@ -13,13 +13,15 @@ import MainMenu from "./MainMenu";
 const NavContainer = styled.header`
   position: sticky;
   top: 0;
-  background-color: #002f2f;
+  background-color: rgba(0, 67, 67, 0.9);
   height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 20px;
   z-index: 100;
+  //opacity: 1;
+  backdrop-filter: blur(10px);
 
   @media only screen and (max-width: 400px) {
     gap: 0px;

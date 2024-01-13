@@ -37,8 +37,9 @@ function MainMenu() {
           $left="0px"
           $delay="0"
           $selected={selected}
-          $color2="#002f2f"
           $color="rgb(255, 68, 0)"
+          $color2="#002f2f"
+          $color3="gold"
         >
           Profile
         </MenuIcon>
@@ -47,13 +48,14 @@ function MainMenu() {
         $left="0px"
         $delay="0.3"
         $selected={selected}
-        $color2="#002f2f"
         $color="rgb(255, 68, 0)"
+        $color2="#002f2f"
+        $color3="gold"
         onClick={() => dispatch(logout())}
       >
         Log out
       </MenuIcon>
-      <MainIcon>
+      <MainIcon $color="gold" $color2="rgb(255, 68, 0)">
         <MainMenuIcon selected={selected} color="#002f2f" />
       </MainIcon>
     </Icon>

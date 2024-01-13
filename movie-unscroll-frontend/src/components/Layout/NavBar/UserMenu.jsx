@@ -40,6 +40,7 @@ function UserMenu() {
           $selected={selected}
           $color="gold"
           $color2="#002f2f"
+          $color3="rgb(255, 68, 0)"
           onClick={() => dispatch(logout())}
         >
           Profile
@@ -51,11 +52,12 @@ function UserMenu() {
         $selected={selected}
         $color="gold"
         $color2="#002f2f"
+        $color3="rgb(255, 68, 0)"
         onClick={() => dispatch(logout())}
       >
         Log out
       </MenuIcon>
-      <MainIcon>
+      <MainIcon $color="rgb(255, 68, 0)" $color2="gold">
         <FontAwesomeIcon icon={faUser} />
       </MainIcon>
     </Icon>
