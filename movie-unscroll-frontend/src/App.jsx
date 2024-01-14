@@ -8,6 +8,7 @@ import RandomPage from "./features/random/RandomPage";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { alreadyLogged } from "./features/login/loginSlice";
+import UpdateUser from "./features/users/UpdateUser";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,6 +21,10 @@ function App() {
         {
           index: true,
           element: <RandomPage />,
+        },
+        {
+          path: "user-settings",
+          element: <UpdateUser />,
         },
       ],
     },

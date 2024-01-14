@@ -19,7 +19,7 @@ html {
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: gold;
+    background-color: rgb(255, 215, 0);
     border-radius: 3px;
   }
 

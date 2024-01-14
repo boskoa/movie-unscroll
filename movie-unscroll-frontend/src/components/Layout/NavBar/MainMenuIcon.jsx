@@ -5,11 +5,13 @@ const Path1 = styled.path`
   transform: ${({ $selected }) =>
     $selected ? "rotateZ(45deg)" : "rotateZ(0deg)"};
   transition: all 0.5s;
+  stroke-linecap: round;
 `;
 
 const Path2 = styled.path`
   opacity: ${({ $selected }) => ($selected ? "0" : "1")};
   transition: all 0.5s;
+  stroke-linecap: round;
 `;
 
 const Path3 = styled.path`
@@ -17,6 +19,7 @@ const Path3 = styled.path`
   transform: ${({ $selected }) =>
     $selected ? "rotateZ(-45deg)" : "rotateZ(0deg)"};
   transition: all 0.5s;
+  stroke-linecap: round;
 `;
 
 function MainMenuIcon({ color, selected }) {
@@ -27,16 +30,16 @@ function MainMenuIcon({ color, selected }) {
       width="20px"
       viewBox="0 0 20 20"
     >
-      <Path1 $selected={selected} d="M0 4 H20" stroke={color} strokeWidth="2" />
+      <Path1 $selected={selected} d="M1 4 H19" stroke={color} strokeWidth="2" />
       <Path2
         $selected={selected}
-        d="M0 10 H20"
+        d="M1 10 H19"
         stroke={color}
         strokeWidth="2"
       />
       <Path3
         $selected={selected}
-        d="M0 16 H20"
+        d="M1 16 H19"
         stroke={color}
         strokeWidth="2"
       />

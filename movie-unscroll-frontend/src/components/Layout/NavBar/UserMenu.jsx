@@ -33,7 +33,7 @@ function UserMenu() {
       $selected={selected}
       onClick={() => setSelected((p) => !p)}
     >
-      <Link to="profile">
+      <Link to="user-settings">
         <MenuIcon
           $right="0px"
           $delay="0"
@@ -41,7 +41,6 @@ function UserMenu() {
           $color="gold"
           $color2="#002f2f"
           $color3="rgb(255, 68, 0)"
-          onClick={() => dispatch(logout())}
         >
           Profile
         </MenuIcon>
@@ -57,8 +56,8 @@ function UserMenu() {
       >
         Log out
       </MenuIcon>
-      <MainIcon $color="rgb(255, 68, 0)" $color2="gold">
-        <FontAwesomeIcon icon={faUser} />
+      <MainIcon $color="gold">
+        <FontAwesomeIcon style={{ color: "rgb(255, 68, 0)" }} icon={faUser} />
       </MainIcon>
     </Icon>
   );

@@ -15,12 +15,15 @@ const Icon = styled.div`
   border-radius: 50%;
   color: ${({ $color2 }) => $color2};
   cursor: pointer;
-  box-shadow: ${({ $selected }) =>
-    $selected ? `0 0 7px 0 rgba(255, 255, 255, 0.9)` : "none"};
+  box-shadow: 0 0 10px 0 gold;
   box-sizing: content-box;
   z-index: 100;
   overflow: hidden;
   transition: 0.1s all;
+
+  &:active {
+    box-shadow: 0 0 0px 0 #65f4f4;
+  }
 `;
 
 const slideOption = ($delay) => keyframes`
@@ -39,7 +42,7 @@ const slideOption = ($delay) => keyframes`
   100% {
     transform: translateY(calc(${$delay * 3 * 50}px + 50px));
     width: 70px;
-    border-radius: 30px;
+    border-radius: 20px;
     opacity: 1;
   }
 `;
@@ -48,7 +51,7 @@ const backOption = ($delay) => keyframes`
   0% {
     transform: translateY(calc(${$delay * 3 * 50}px + 50px));
     width: 70px;
-    border-radius: 30px;
+    border-radius: 20px;
     opacity: 1;
   }
   50% {
@@ -93,7 +96,7 @@ const MenuIcon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 12px;
+  font-size: 13px;
   background-color: ${({ $color }) => $color};
   border: 2px solid ${({ $color3 }) => $color3};
   opacity: 0.3;
@@ -136,9 +139,9 @@ const MainIcon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid ${({ $color }) => $color};
   border-radius: 50%;
-  background-color: ${({ $color2 }) => $color2};
+  background-color: ${({ $color }) => $color};
+  //filter: brightness(0.9);
 `;
 
 export { Icon, slideOption, blurOut, MenuIcon, MainIcon };
