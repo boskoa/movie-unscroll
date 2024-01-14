@@ -56,7 +56,7 @@ function MainMenu() {
         Log out
       </MenuIcon>
       <MainIcon $color="rgb(255, 68, 0)">
-        <MainMenuIcon selected={selected} color="gold" />
+        <MainMenuIcon selected={selected} color="#002f2f" />
       </MainIcon>
     </Icon>
   );

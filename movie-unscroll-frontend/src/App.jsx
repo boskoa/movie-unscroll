@@ -5,10 +5,11 @@ import {
 } from "react-router-dom";
 import Layout from "./components/Layout";
 import RandomPage from "./features/random/RandomPage";
-import { useEffect } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { alreadyLogged } from "./features/login/loginSlice";
-import UpdateUser from "./features/users/UpdateUser";
+
+const UpdateUser = lazy(() => import("./features/users/UpdateUser"));
 
 function App() {
   const dispatch = useDispatch();
@@ -24,7 +25,11 @@ function App() {
         },
         {
           path: "user-settings",
-          element: <UpdateUser />,
+          element: (
+            <Suspense>
+              <UpdateUser />
+            </Suspense>
+          ),
         },
       ],
     },

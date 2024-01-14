@@ -6,9 +6,9 @@ const Container = styled.div`
   padding-top: 40px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: start;
   align-items: start;
-  gap: 5px;
+  gap: 30px;
 `;
 
 const Form = styled.form`

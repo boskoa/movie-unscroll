@@ -57,7 +57,7 @@ function UserMenu() {
         Log out
       </MenuIcon>
       <MainIcon $color="gold">
-        <FontAwesomeIcon style={{ color: "rgb(255, 68, 0)" }} icon={faUser} />
+        <FontAwesomeIcon style={{ color: "#002f2f" }} icon={faUser} />
       </MainIcon>
     </Icon>
   );

@@ -22,7 +22,6 @@ const FormContainer = styled.form`
   align-items: center;
   gap: 10px;
   padding: 20px;
-  //border: 1px solid lime;
   z-index: 3;
 `;
 
@@ -116,7 +115,7 @@ function RegisterForm({ setRegister, setClapDown }) {
     <FormContainer onSubmit={handleSubmit(handleRegister)}>
       <InputContainer>
         <ClapInput
-          $color={errors.username ? "red" : "white"}
+          $color={errors.name ? "red" : "white"}
           autoFocus
           placeholder="name"
           name="name"

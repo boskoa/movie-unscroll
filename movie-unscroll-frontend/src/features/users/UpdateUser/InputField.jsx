@@ -55,6 +55,11 @@ const Front = styled.div`
   }
 `;
 
+const Option = styled.div`
+  font-size: 14px;
+  font-weight: 600;
+`;
+
 const Back = styled.input`
   position: relative;
   height: 42px;
@@ -76,24 +81,22 @@ const Back = styled.input`
   }
 `;
 
-function InputField() {
+const Error = styled.p`
+  font-size: 12px;
+  font-weight: 600;
+  color: #8b10c8;
+`;
+
+function InputField({ params, error }) {
   const [clicked, setClicked] = useState(false);
 
   return (
     <InputContainer>
-      <Back $clicked={clicked} />
+      <Back $clicked={clicked} {...params} />
       <Front $clicked={clicked} onClick={() => setClicked((p) => !p)}>
-        <p
-          style={{
-            position: "relative",
-            zIndex: 100,
-            //filter: clicked ? "invert(100%)" : "",
-            fontSize: "14px",
-            fontWeight: 600,
-          }}
-        >
-          Change username
-        </p>
+        <Option>
+          {error ? <Error>{error}</Error> : `Change ${params.placeholder}`}
+        </Option>
       </Front>
     </InputContainer>
   );

@@ -14,8 +14,34 @@ const initialState = usersAdapter.getInitialState({
   error: null,
 });
 
+export const getUser = createAsyncThunk("users/getUser", async (data) => {
+  const { id, token } = data;
+  const config = {
+    headers: {
+      Authorization: `bearer ${token}`,
+    },
+  };
+  const response = await axios.get(`${BASE_URL}/${id}`, config);
+  return response.data;
+});
+
 export const createUser = createAsyncThunk("users/createUser", async (data) => {
   const response = await axios.post(BASE_URL, data);
+  return response.data;
+});
+
+export const updateUser = createAsyncThunk("users/updateUser", async (data) => {
+  const { id, token, newData } = data;
+  const config = {
+    headers: {
+      Authorization: `bearer ${token}`,
+    },
+  };
+  const response = await axios.patch(
+    `${BASE_URL}/${id}`,
+    { ...newData },
+    config,
+  );
   return response.data;
 });
 
@@ -39,6 +65,32 @@ const usersSlice = createSlice({
         usersAdapter.upsertOne(state, action.payload);
       })
       .addCase(createUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(updateUser.pending, (state) => {
+        state.error = null;
+        state.loading = true;
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.error = null;
+        state.loading = false;
+        usersAdapter.upsertOne(state, action.payload);
+      })
+      .addCase(updateUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(getUser.pending, (state) => {
+        state.error = null;
+        state.loading = true;
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.error = null;
+        state.loading = false;
+        usersAdapter.upsertOne(state, action.payload);
+      })
+      .addCase(getUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });

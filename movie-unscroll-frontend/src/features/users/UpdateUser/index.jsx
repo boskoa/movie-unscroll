@@ -1,42 +1,54 @@
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import Title from "../../../components/Title";
-import InputField from "./InputField";
 import { useSelector } from "react-redux";
 import { selectLoggedUser } from "../../login/loginSlice";
 import Avatar from "./Avatar";
+import UpdateForm from "./UpdateForm";
+
+const appear = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const UpdateContainer = styled.div`
+  opacity: 0;
+  max-width: 100%;
+  overflow: hidden;
+  animation: ${() => css`1s ${appear} 1s forwards`};
+`;
 
 const MainContainer = styled.div`
   display: flex;
   justify-content: center;
   gap: 50px;
   padding: 20px 150px;
-`;
 
-const InputsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  @media only screen and (max-width: 450px) {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
 `;
 
 function UpdateUser() {
   const loggedUser = useSelector(selectLoggedUser);
 
-  if (!loggedUser) {
-    return "Not authorized";
+  if (!loggedUser?.id) {
+    return <h2>Not authorized</h2>;
   }
 
   return (
-    <>
+    <UpdateContainer>
       <Title text="User settings" />
       <MainContainer>
         <Avatar loggedUser={loggedUser} />
-        <InputsContainer>
-          <InputField />
-          <InputField />
-          <InputField />
-        </InputsContainer>
+        <UpdateForm />
       </MainContainer>
-    </>
+    </UpdateContainer>
   );
 }
 

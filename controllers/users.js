@@ -3,12 +3,17 @@ const bcrypt = require("bcrypt");
 const { User, Movie, Genre, Director, Actor } = require("../models");
 const { tokenExtractor } = require("../utils/tokenExtractor");
 
-//For testing. Change later
-router.get("/", tokenExtractor, async (req, res, next) => {
-  const id = req.decodedToken.id;
+router.get("/:id", tokenExtractor, async (req, res, next) => {
+  const sender = await User.findByPk(req.decodedToken.id);
+
+  if (Number(req.params.id) !== req.decodedToken.id && !sender?.admin) {
+    return res.status(401).json({ error: "Not authorized" });
+  }
 
   try {
-    const user = await User.findByPk(id);
+    const user = await User.findByPk(req.params.id, {
+      attributes: { exclude: ["passwordHash"] },
+    });
     return res.status(200).json(user);
   } catch (error) {
     next(error);
@@ -40,6 +45,36 @@ router.post("/", async (req, res, next) => {
       attributes: { exclude: ["passwordHash"] },
     });
     return res.status(200).json(newUser);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.patch("/:id", tokenExtractor, async (req, res, next) => {
+  const changer = await User.findByPk(req.decodedToken.id);
+
+  if (Number(req.params.id) !== req.decodedToken.id && !changer?.admin) {
+    return res.status(401).json({ error: "Not authorized" });
+  }
+
+  if (!req.body) {
+    return res.status(200).send("Nothing to change");
+  }
+
+  try {
+    const userToChange = await User.findByPk(req.params.id);
+    let newData = { ...req.body };
+    if (newData.password) {
+      const passwordHash = await bcrypt.hash(newData.password, 10);
+      newData.passwordHash = passwordHash;
+      delete newData.password;
+    }
+    userToChange.set(newData);
+    await userToChange.save();
+    const changedUser = await User.findByPk(req.params.id, {
+      attributes: { exclude: ["passwordHash"] },
+    });
+    return res.status(200).json(changedUser);
   } catch (error) {
     next(error);
   }
