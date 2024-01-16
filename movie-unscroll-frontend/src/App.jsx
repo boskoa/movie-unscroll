@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { alreadyLogged } from "./features/login/loginSlice";
 
 const UpdateUser = lazy(() => import("./features/users/UpdateUser"));
+const DetailedMovie = lazy(() => import("./components/DetailedMovie"));
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +29,14 @@ function App() {
           element: (
             <Suspense>
               <UpdateUser />
+            </Suspense>
+          ),
+        },
+        {
+          path: "detailed-movie/:id",
+          element: (
+            <Suspense>
+              <DetailedMovie />
             </Suspense>
           ),
         },

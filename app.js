@@ -6,6 +6,7 @@ const randomRouter = require("./controllers/random");
 const usersRouter = require("./controllers/users");
 const loginRouter = require("./controllers/login");
 const avatarsRouter = require("./controllers/avatars");
+const moviesRouter = require("./controllers/movies");
 const { errorHandler } = require("./utils/errorHandler");
 
 const app = express();
@@ -25,6 +26,7 @@ app.use("/api/random", randomRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/login", loginRouter);
 app.use("/api/avatars", avatarsRouter);
+app.use("/api/movies", moviesRouter);
 
 app.all("/*", (_req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));

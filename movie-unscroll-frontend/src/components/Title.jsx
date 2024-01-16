@@ -72,6 +72,7 @@ const TitleContainer = styled.div`
 
 const TitleComponent = styled.h1`
   position: relative;
+  text-align: center;
   text-transform: uppercase;
   text-shadow: 0 0 8px gold;
   font-size: 22px;
@@ -98,6 +99,10 @@ const TitleComponent = styled.h1`
     transform: perspective(200px) translateY(130%) rotateX(95deg);
     background: gold;
     pointer-events: none;
+  }
+
+  @media only screen and (max-width: 600px) {
+    font-size: 16px;
   }
 `;
 

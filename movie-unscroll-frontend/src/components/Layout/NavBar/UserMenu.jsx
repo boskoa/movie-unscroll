@@ -1,5 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../features/login/loginSlice";
