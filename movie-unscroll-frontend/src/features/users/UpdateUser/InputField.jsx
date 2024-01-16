@@ -1,9 +1,33 @@
 import { useState } from "react";
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 const InputContainer = styled.div`
   position: relative;
   transition: all 0.5s;
+`;
+
+const open = keyframes`
+  0% {
+    transform: perspective(200px) translateZ(0px) translateY(0px);
+  }
+  50% {
+    transform: perspective(200px) translateZ(3px) translateY(0px);
+  }
+  100% {
+    transform: perspective(200px) translateZ(3px) translateY(-29px);
+  }
+`;
+
+const close = keyframes`
+  0% {
+    transform: perspective(200px) translateZ(3px) translateY(-29px);
+  }
+  50% {
+    transform: perspective(200px) translateZ(3px) translateY(0px);
+  }
+  100% {
+    transform: perspective(200px) translateZ(0px) translateY(0px);
+  }
 `;
 
 const Front = styled.div`
@@ -19,8 +43,12 @@ const Front = styled.div`
   z-index: 1;
   border-radius: 10px;
   filter: ${({ $clicked }) => ($clicked ? "brightness(1)" : "brightness(0.8)")};
-  transform: ${({ $clicked }) =>
-    $clicked ? "translateY(-25px)" : "translateY(0px)"};
+  animation: ${({ $clicked }) =>
+    $clicked ? css`0.5s ${open} forwards` : css`0.5s ${close} forwards`};
+  /* transform: ${({ $clicked }) =>
+    $clicked
+      ? "perspective(200px) translateZ(5px) translateY(-25px)"
+      : "translateY(0px)"}; */
   box-shadow: ${({ $clicked }) =>
     $clicked
       ? `inset 5px 5px 20px rgba(255, 255, 255, 0.9),
@@ -64,7 +92,8 @@ const Back = styled.input`
   position: relative;
   height: 42px;
   width: 200px;
-  transition: all 0.5s;
+  transition: all 0.25s;
+  transition-delay: ${({ $clicked }) => ($clicked ? "0.25s" : "")};
   color: gold;
   background-color: black;
   padding: 0 5px;
@@ -75,7 +104,6 @@ const Back = styled.input`
     $clicked ? "translateY(58px)" : "translateY(50px)"};
 
   &:focus {
-    border: 2px solid gold;
     outline: none;
     box-shadow: 0 0 5px 0 gold;
   }

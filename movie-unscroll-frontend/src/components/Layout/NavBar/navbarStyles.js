@@ -141,7 +141,16 @@ const MainIcon = styled.div`
   align-items: center;
   border-radius: 50%;
   background-color: ${({ $color }) => $color};
+  overflow: hidden;
   //filter: brightness(0.9);
 `;
 
-export { Icon, slideOption, blurOut, MenuIcon, MainIcon };
+const UserIcon = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+  //padding: 2px;
+`;
+
+export { Icon, slideOption, blurOut, MenuIcon, MainIcon, UserIcon };

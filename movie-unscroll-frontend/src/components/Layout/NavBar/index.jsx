@@ -113,7 +113,7 @@ function NavBar({ setLogin, setRegister }) {
       )}
       <Logo />
       {loggedUser ? (
-        <UserMenu />
+        <UserMenu id={loggedUser.id} />
       ) : (
         <SignUpIcon
           onClick={() => setRegister(true)}

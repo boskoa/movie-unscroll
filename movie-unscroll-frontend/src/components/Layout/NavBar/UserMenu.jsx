@@ -3,10 +3,11 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../features/login/loginSlice";
-import { Icon, MainIcon, MenuIcon } from "./navbarStyles";
+import { Icon, MainIcon, MenuIcon, UserIcon } from "./navbarStyles";
 import { Link } from "react-router-dom";
+import user from "../../../assets/user.svg";
 
-function UserMenu() {
+function UserMenu({ id }) {
   const [selected, setSelected] = useState(false);
   const menuRef = useRef();
   const dispatch = useDispatch();
@@ -57,7 +58,16 @@ function UserMenu() {
         Log out
       </MenuIcon>
       <MainIcon $color="gold">
-        <FontAwesomeIcon style={{ color: "#002f2f" }} icon={faUser} />
+        <UserIcon
+          src={`/public/uploads/avatars/${id}.webp`}
+          alt="user avatar"
+          onError={(e) => {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = user;
+          }}
+          height="100%"
+          width="100%"
+        />
       </MainIcon>
     </Icon>
   );
