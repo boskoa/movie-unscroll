@@ -18,12 +18,14 @@ const ActorContainer = styled.div`
 const ActorImage = styled.img`
   width: 100%;
   height: auto;
+  user-select: none;
 `;
 
 function Actor({ actor, elementWidth }) {
   return (
     <ActorContainer $width={elementWidth}>
       <ActorImage
+        draggable="false"
         alt={actor.name}
         src={`https://image.tmdb.org/t/p/original/${actor.profile_path}`}
       />

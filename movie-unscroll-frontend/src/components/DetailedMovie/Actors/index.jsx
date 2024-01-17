@@ -33,14 +33,6 @@ function Actors({ actors }) {
   const [start, setStart] = useState();
   const [end, setEnd] = useState();
 
-  function handleSlide(e) {
-    if (e.type === "touchstart") {
-      setStart();
-      console.log("TYPE", e.targetTouches[0].clientX);
-    }
-    //console.log("TYPE", e.targetTouches[0].clientX);
-  }
-
   useEffect(() => {
     if (flexRef.current) {
       if (width > 600) {
@@ -79,8 +71,56 @@ function Actors({ actors }) {
   return (
     <ActorsContainer
       ref={containerRef}
-      onTouchStart={handleSlide}
-      onMouseDown={handleSlide}
+      onTouchStart={(e) => {
+        setStart(e.targetTouches[0].clientX);
+      }}
+      onTouchEnd={() => {
+        if (start - end > 30) {
+          if (width > 600) {
+            setPosition((p) => (p < 5 ? p + 1 : 0));
+          } else if (width > 400) {
+            setPosition((p) => (p < 7 ? p + 1 : 0));
+          } else {
+            setPosition((p) => (p < 8 ? p + 1 : 0));
+          }
+        } else if (start - end < -30) {
+          if (width > 600) {
+            setPosition((p) => (p > 0 ? p - 1 : 5));
+          } else if (width > 400) {
+            setPosition((p) => (p > 0 ? p - 1 : 7));
+          } else {
+            setPosition((p) => (p > 0 ? p - 1 : 8));
+          }
+        }
+      }}
+      onTouchMove={(e) => {
+        setEnd(e.targetTouches[0].clientX);
+      }}
+      onMouseDown={(e) => {
+        setStart(e.pageX);
+      }}
+      onMouseUp={() => {
+        if (start - end > 30) {
+          if (width > 600) {
+            setPosition((p) => (p < 5 ? p + 1 : 0));
+          } else if (width > 400) {
+            setPosition((p) => (p < 7 ? p + 1 : 0));
+          } else {
+            setPosition((p) => (p < 8 ? p + 1 : 0));
+          }
+        } else if (start - end < -30) {
+          if (width > 600) {
+            setPosition((p) => (p > 0 ? p - 1 : 5));
+          } else if (width > 400) {
+            setPosition((p) => (p > 0 ? p - 1 : 7));
+          } else {
+            setPosition((p) => (p > 0 ? p - 1 : 8));
+          }
+        }
+      }}
+      onMouseMove={(e) => {
+        setEnd(e.pageX);
+      }}
     >
       <ActorsFlex ref={flexRef}>
         {actors.map((a) => (
