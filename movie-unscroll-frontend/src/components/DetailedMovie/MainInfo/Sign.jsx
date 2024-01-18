@@ -53,7 +53,7 @@ function Sign({ rating, votes }) {
   return (
     <SignContainer ref={signRef}>
       <SignBox $width={signRef.current?.offsetWidth * (rating / 10)}>
-        <p>{rating}</p>
+        <p>{Math.floor(rating * 100) / 100}</p>
         <p>
           {votes > 1000
             ? `${Math.round(votes / 1000)}k`

@@ -51,7 +51,10 @@ function UserMenu({ id }) {
         $color="gold"
         $color2="#002f2f"
         $color3="rgb(255, 68, 0)"
-        onClick={() => dispatch(logout())}
+        onClick={() => {
+          dispatch(logout());
+          window.localStorage.removeItem("loggedMovieUnscroll");
+        }}
       >
         Log out
       </MenuIcon>

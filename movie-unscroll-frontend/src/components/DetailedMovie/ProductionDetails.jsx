@@ -69,14 +69,30 @@ const CrewName = styled.div`
   line-height: 14px;
   background-color: rgba(255, 0, 0, 0.3);
   color: black;
-  text-shadow: 0 0 3px white;
+  text-shadow: 0 0 5px white;
   backdrop-filter: blur(5px);
 `;
 
 const Money = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
+`;
+
+const LogoContainer = styled.span`
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  padding: 5px;
+  background-color: #fff7c6;
+  border-radius: 10px;
+`;
+
+const LogoImage = styled.img`
+  width: 100px;
+  height: auto;
+  user-select: none;
 `;
 
 function ProductionDetails({ movie }) {
@@ -87,7 +103,7 @@ function ProductionDetails({ movie }) {
           <p>Screenplay:</p>
           <ImagesContainer>
             {movie.credits.crew
-              .filter((c) => c.job === "Screenplay")
+              .filter((c) => ["Screenplay", "Writer"].includes(c.job))
               .map((c) => (
                 <ImageContainer key={c.id}>
                   <CrewName>
@@ -136,38 +152,53 @@ function ProductionDetails({ movie }) {
       <Money>
         <p>
           Budget:{" "}
-          {new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD",
-          }).format(movie.budget) || "not known"}
+          {movie.budget
+            ? new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+              }).format(movie.budget)
+            : "not known"}
         </p>
-        <p style={{ color: movie.budget > movie.revenue ? "red" : "lime" }}>
+        <p
+          style={{
+            color:
+              !movie.budget || !movie.revenue
+                ? ""
+                : movie.budget > movie.revenue
+                  ? "red"
+                  : "lime",
+          }}
+        >
           Revenue:{" "}
-          {new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD",
-          }).format(movie.revenue) || "not known"}
+          {movie.revenue
+            ? new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+              }).format(movie.revenue)
+            : "not known"}
         </p>
       </Money>
       <CrewContainer>
         <p>Production:</p>
-        <ImagesContainer>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
           {movie.production_companies.map(
             (c) =>
               c.logo_path && (
-                <CrewImage
-                  key={c.id}
-                  draggable="false"
-                  alt={c.name}
-                  src={`https://image.tmdb.org/t/p/original/${c.logo_path}`}
-                  onError={(e) => {
-                    e.currentTarget.onerror = null;
-                    e.currentTarget.src = actorLogo;
-                  }}
-                />
+                <LogoContainer key={c.id}>
+                  <LogoImage
+                    title={c.name}
+                    draggable="false"
+                    alt={c.name}
+                    src={`https://image.tmdb.org/t/p/original/${c.logo_path}`}
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = actorLogo;
+                    }}
+                  />
+                </LogoContainer>
               ),
           )}
-        </ImagesContainer>
+        </div>
       </CrewContainer>
     </MainContainer>
   );
