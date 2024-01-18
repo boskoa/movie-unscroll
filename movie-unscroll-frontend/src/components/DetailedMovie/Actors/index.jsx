@@ -8,7 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const ActorsContainer = styled.div`
-  margin: 40px;
+  margin: 30px 0;
   position: relative;
   width: 100%;
   overflow: hidden;
@@ -27,6 +27,7 @@ const Left = styled.button`
   background-color: rgba(255, 0, 0, 0.1);
   color: gold;
   border-radius: 50%;
+  padding: 3px;
   height: 30px;
   width: 30px;
   line-height: 100%;
@@ -43,6 +44,7 @@ const Right = styled.button`
   background-color: rgba(255, 0, 0, 0.1);
   color: gold;
   border-radius: 50%;
+  padding: 3px;
   height: 30px;
   width: 30px;
   line-height: 100%;

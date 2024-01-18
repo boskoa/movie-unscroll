@@ -4,6 +4,7 @@ import { getRandomMovie, selectRandom } from "../randomSlice";
 import { useEffect, useRef, useState } from "react";
 import AgainButton from "./AgainButton";
 import Rating from "./Rating";
+import { Link } from "react-router-dom";
 
 const intro = keyframes`
   from {
@@ -216,7 +217,12 @@ function RandomMovie({ show }) {
       </PosterContainer>
       <Description>
         <Title>
-          {movie.title} ({movie.release_date.slice(0, 4)})
+          <Link
+            style={{ color: "inherit", textDecoration: "none" }}
+            to={`/detailed-movie/${movie.id}`}
+          >
+            {movie.title} ({movie.release_date.slice(0, 4)})
+          </Link>
         </Title>
         <Overview>{movie.overview}</Overview>
         <Genres>Genres: {movie.genres.map((g) => g.name).join(", ")}</Genres>

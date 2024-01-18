@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Title from "../Title";
 import MainInfo from "./MainInfo";
 import Actors from "./Actors";
+import ProductionDetails from "./ProductionDetails";
 
 const DetailedContainer = styled.div`
   display: flex;
@@ -13,7 +14,7 @@ const DetailedContainer = styled.div`
   min-height: 90vh;
   max-width: 800px;
   margin: 0 auto;
-  gap: 30px;
+  gap: 40px;
   padding-bottom: 20px;
   opacity: ${({ $loaded }) => ($loaded ? "1" : "0")};
   transition: all 0.5s;
@@ -46,6 +47,7 @@ function DetailedMovie() {
       <Title text={movie.title} />
       <MainInfo movie={movie} setImageLoaded={setImageLoaded} />
       <Actors actors={movie.credits.cast.slice(0, 10)} />
+      <ProductionDetails movie={movie} />
     </DetailedContainer>
   );
 }

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import actorLogo from "../../../assets/actor.jpg";
 
 const ActorContainer = styled.div`
   position: relative;
@@ -41,9 +42,14 @@ const ActorData = styled.div`
   left: 0;
   height: 30%;
   width: 100%;
-  padding: 5px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 2px;
   font-size: 12px;
   font-weight: 600;
+  line-height: 14px;
   background-color: rgba(255, 215, 0, 0.3);
   color: black;
   transform: translateY(101%);
@@ -62,11 +68,15 @@ function Actor({ actor, elementWidth }) {
         draggable="false"
         alt={actor.name}
         src={`https://image.tmdb.org/t/p/original/${actor.profile_path}`}
+        onError={(e) => {
+          e.currentTarget.onerror = null;
+          e.currentTarget.src = actorLogo;
+        }}
       />
       <ActorDataContainer>
         <ActorData>
           <p>{actor.name}</p>
-          <p>
+          <p style={{ fontWeight: 400 }}>
             <i>as {actor.character}</i>
           </p>
         </ActorData>

@@ -35,6 +35,12 @@ function Info({ movie }) {
         }).format(new Date(movie.release_date))}
       </Text>
       <Text>Genres: {movie.genres.map((g) => g.name).join(", ")}</Text>
+      <Text>
+        Runtime: {Math.floor(movie.runtime / 60)}:
+        {Math.floor(movie.runtime % 60)
+          .toString()
+          .padStart(2, "0")}
+      </Text>
     </InfoContainer>
   );
 }
