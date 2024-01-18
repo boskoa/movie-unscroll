@@ -17,7 +17,7 @@ const Bar = styled.div`
   width: 100%;
   height: 100%;
   transition: all 1s ease-out;
-  transition-delay: 1s;
+  transition-delay: 2s;
   background: linear-gradient(90deg, transparent 1%, #ff2a00 3%);
   transform: translateX(${({ $width }) => $width}px);
 `;

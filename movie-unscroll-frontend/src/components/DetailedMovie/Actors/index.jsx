@@ -1,8 +1,14 @@
 import styled from "styled-components";
 import Actor from "./Actor";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 const ActorsContainer = styled.div`
+  margin: 40px;
   position: relative;
   width: 100%;
   overflow: hidden;
@@ -15,14 +21,34 @@ const ActorsFlex = styled.div`
 
 const Left = styled.button`
   position: absolute;
-  top: 50%;
+  top: calc(50% - 13px);
   left: 5px;
+  border: none;
+  background-color: rgba(255, 0, 0, 0.1);
+  color: gold;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  line-height: 100%;
+  font-size: 24px;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
 `;
 
 const Right = styled.button`
   position: absolute;
-  top: 50%;
+  top: calc(50% - 13px);
   right: 5px;
+  border: none;
+  background-color: rgba(255, 0, 0, 0.1);
+  color: gold;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  line-height: 100%;
+  font-size: 24px;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
 `;
 
 function Actors({ actors }) {
@@ -130,20 +156,6 @@ function Actors({ actors }) {
       <Left
         onClick={() => {
           if (width > 600) {
-            setPosition((p) => (p < 5 ? p + 1 : 0));
-          } else if (width > 400) {
-            setPosition((p) => (p < 7 ? p + 1 : 0));
-          } else {
-            setPosition((p) => (p < 8 ? p + 1 : 0));
-          }
-        }}
-      >
-        left
-      </Left>
-
-      <Right
-        onClick={() => {
-          if (width > 600) {
             setPosition((p) => (p > 0 ? p - 1 : 5));
           } else if (width > 400) {
             setPosition((p) => (p > 0 ? p - 1 : 7));
@@ -152,7 +164,21 @@ function Actors({ actors }) {
           }
         }}
       >
-        right
+        <FontAwesomeIcon icon={faChevronLeft} />
+      </Left>
+
+      <Right
+        onClick={() => {
+          if (width > 600) {
+            setPosition((p) => (p < 5 ? p + 1 : 0));
+          } else if (width > 400) {
+            setPosition((p) => (p < 7 ? p + 1 : 0));
+          } else {
+            setPosition((p) => (p < 8 ? p + 1 : 0));
+          }
+        }}
+      >
+        <FontAwesomeIcon icon={faChevronRight} />
       </Right>
     </ActorsContainer>
   );

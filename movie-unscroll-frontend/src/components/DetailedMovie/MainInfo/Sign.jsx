@@ -11,6 +11,7 @@ const SignContainer = styled.div`
 const SignBox = styled.div`
   position: absolute;
   top: -7px;
+  left: -65px;
   width: 80px;
   display: flex;
   flex-direction: column;
@@ -25,8 +26,8 @@ const SignBox = styled.div`
     0 0 5px 0 gold,
     inset 0 0 5px 0 gold;
   transition: all 1s ease-out;
-  transition-delay: 1s;
-  transform: translateX(${({ $width }) => $width - 60}px);
+  transition-delay: 2s;
+  transform: translateX(${({ $width }) => $width + 5}px);
   background-color: gold;
   color: black;
 `;
