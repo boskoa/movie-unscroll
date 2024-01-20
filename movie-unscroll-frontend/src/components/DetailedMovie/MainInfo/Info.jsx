@@ -28,11 +28,13 @@ function Info({ movie }) {
       <Sign rating={movie.vote_average} votes={movie.vote_count} />
       <Text>
         Release date:{" "}
-        {new Intl.DateTimeFormat("en-US", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        }).format(new Date(movie.release_date))}
+        {movie.release_date
+          ? new Intl.DateTimeFormat("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            }).format(new Date(movie.release_date))
+          : "No data"}
       </Text>
       <Text>Genres: {movie.genres.map((g) => g.name).join(", ")}</Text>
       <Text>

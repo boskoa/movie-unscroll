@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import actorLogo from "../../assets/actor.jpg";
+import actressLogo from "../../assets/actress.jpg";
 
 const MainContainer = styled.div`
   position: relative;
@@ -19,6 +20,24 @@ const MainContainer = styled.div`
   align-items: start;
   gap: 40px;
   width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    border-radius: 9px;
+    background: ${({ $backdrop }) =>
+      `url(https://image.tmdb.org/t/p/original/${$backdrop})`};
+    background-size: cover;
+    opacity: 0.2;
+    z-index: -1;
+    box-shadow: inset 0px 0px 50px 0 black;
+  }
 `;
 
 const Crews = styled.div`
@@ -57,7 +76,7 @@ const CrewName = styled.div`
   position: absolute;
   width: 100%;
   height: 30%;
-  bottom: 0;
+  bottom: 6px;
   left: 0;
   text-align: center;
   display: flex;
@@ -75,8 +94,12 @@ const CrewName = styled.div`
 
 const Money = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  gap: 50px;
+
+  @media only screen and (max-width: 500px) {
+    flex-direction: column;
+    gap: 10px;
+  }
 `;
 
 const LogoContainer = styled.span`
@@ -97,7 +120,7 @@ const LogoImage = styled.img`
 
 function ProductionDetails({ movie }) {
   return (
-    <MainContainer>
+    <MainContainer $backdrop={movie.backdrop_path}>
       <Crews>
         <CrewContainer>
           <p>Screenplay:</p>
@@ -115,7 +138,8 @@ function ProductionDetails({ movie }) {
                     src={`https://image.tmdb.org/t/p/original/${c.profile_path}`}
                     onError={(e) => {
                       e.currentTarget.onerror = null;
-                      e.currentTarget.src = actorLogo;
+                      e.currentTarget.src =
+                        c.gender === 1 ? actressLogo : actorLogo;
                     }}
                   />
                 </ImageContainer>
@@ -138,7 +162,8 @@ function ProductionDetails({ movie }) {
                     src={`https://image.tmdb.org/t/p/original/${c.profile_path}`}
                     onError={(e) => {
                       e.currentTarget.onerror = null;
-                      e.currentTarget.src = actorLogo;
+                      e.currentTarget.src =
+                        c.gender === 1 ? actressLogo : actorLogo;
                     }}
                   />
                 </ImageContainer>
@@ -157,7 +182,7 @@ function ProductionDetails({ movie }) {
                 style: "currency",
                 currency: "USD",
               }).format(movie.budget)
-            : "not known"}
+            : "No data"}
         </p>
         <p
           style={{
@@ -175,7 +200,7 @@ function ProductionDetails({ movie }) {
                 style: "currency",
                 currency: "USD",
               }).format(movie.revenue)
-            : "not known"}
+            : "No data"}
         </p>
       </Money>
       <CrewContainer>

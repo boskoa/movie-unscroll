@@ -31,7 +31,10 @@ function Poster({ path, setImageLoaded }) {
       <Image
         alt="poster"
         src={`https://image.tmdb.org/t/p/original/${path}`}
-        onError={(e) => (e.currentTarget.alt = "No poster for this movie...")}
+        onError={(e) => {
+          e.currentTarget.alt = "No poster for this movie...";
+          setImageLoaded(true);
+        }}
         onLoad={() => setImageLoaded(true)}
       />
     </PosterContainer>

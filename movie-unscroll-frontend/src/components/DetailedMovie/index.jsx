@@ -28,17 +28,26 @@ const DetailedContainer = styled.div`
 function DetailedMovie() {
   const { id } = useParams();
   const [movie, setMovie] = useState();
+  const [error, setError] = useState();
   const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
     async function getMovie(movieId) {
-      const response = await axios.get(`/api/movies/detailed-movie/${movieId}`);
-      setMovie(response.data);
+      try {
+        const response = await axios.get(
+          `/api/movies/detailed-movie/${movieId}`,
+        );
+        setMovie(response.data);
+      } catch (error) {
+        setError(error.response.status);
+      }
     }
     if (id) {
       getMovie(id);
     }
   }, [id]);
+
+  if (error === 400) return "No entry with that ID.";
 
   if (!movie) return null;
 

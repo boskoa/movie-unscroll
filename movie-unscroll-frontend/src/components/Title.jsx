@@ -96,7 +96,7 @@ const TitleComponent = styled.h1`
     opacity: 1;
     filter: blur(1em);
     transform-origin: 50% 0%;
-    transform: perspective(200px) translateY(130%) rotateX(95deg);
+    transform: perspective(400px) translateY(130%) rotateX(85deg);
     background: gold;
     pointer-events: none;
   }

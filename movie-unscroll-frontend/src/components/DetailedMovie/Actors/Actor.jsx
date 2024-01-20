@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import actorLogo from "../../../assets/actor.jpg";
+import actressLogo from "../../../assets/actress.jpg";
 
 const ActorContainer = styled.div`
   position: relative;
@@ -70,7 +71,7 @@ function Actor({ actor, elementWidth }) {
         src={`https://image.tmdb.org/t/p/original/${actor.profile_path}`}
         onError={(e) => {
           e.currentTarget.onerror = null;
-          e.currentTarget.src = actorLogo;
+          e.currentTarget.src = actor.gender === 1 ? actressLogo : actorLogo;
         }}
       />
       <ActorDataContainer>

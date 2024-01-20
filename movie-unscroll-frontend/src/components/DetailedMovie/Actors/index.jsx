@@ -60,6 +60,19 @@ function Actors({ actors }) {
   const [width, setWidth] = useState();
   const [start, setStart] = useState();
   const [end, setEnd] = useState();
+  const [disabled, setDisabled] = useState(false);
+
+  useEffect(() => {
+    if (width < 400 && actors.length <= 2) {
+      setDisabled(true);
+    } else if (width < 600 && actors.length <= 3) {
+      setDisabled(true);
+    } else if (width > 600 && actors.length <= 5) {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
+  }, [width, actors.length]);
 
   useEffect(() => {
     if (flexRef.current) {
@@ -156,6 +169,7 @@ function Actors({ actors }) {
         ))}
       </ActorsFlex>
       <Left
+        disabled={disabled}
         onClick={() => {
           if (width > 600) {
             setPosition((p) => (p > 0 ? p - 1 : 5));
@@ -168,8 +182,8 @@ function Actors({ actors }) {
       >
         <FontAwesomeIcon icon={faChevronLeft} />
       </Left>
-
       <Right
+        disabled={disabled}
         onClick={() => {
           if (width > 600) {
             setPosition((p) => (p < 5 ? p + 1 : 0));
