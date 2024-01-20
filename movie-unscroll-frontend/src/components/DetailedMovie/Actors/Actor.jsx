@@ -41,7 +41,7 @@ const ActorData = styled.div`
   position: absolute;
   top: 70%;
   left: 0;
-  height: 30%;
+  height: 31%;
   width: 100%;
   text-align: center;
   display: flex;

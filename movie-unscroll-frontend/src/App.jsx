@@ -11,6 +11,7 @@ import { alreadyLogged } from "./features/login/loginSlice";
 
 const UpdateUser = lazy(() => import("./features/users/UpdateUser"));
 const DetailedMovie = lazy(() => import("./components/DetailedMovie"));
+const Home = lazy(() => import("./components/Home"));
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +24,14 @@ function App() {
         {
           index: true,
           element: <RandomPage />,
+        },
+        {
+          path: "home",
+          element: (
+            <Suspense>
+              <Home />
+            </Suspense>
+          ),
         },
         {
           path: "user-settings",

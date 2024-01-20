@@ -118,19 +118,19 @@ function Actors({ actors }) {
       onTouchEnd={() => {
         if (start - end > 30) {
           if (width > 600) {
-            setPosition((p) => (p < 5 ? p + 1 : 0));
+            setPosition((p) => (p < actors.length - 5 ? p + 1 : 0));
           } else if (width > 400) {
-            setPosition((p) => (p < 7 ? p + 1 : 0));
+            setPosition((p) => (p < actors.length - 3 ? p + 1 : 0));
           } else {
-            setPosition((p) => (p < 8 ? p + 1 : 0));
+            setPosition((p) => (p < actors.length - 2 ? p + 1 : 0));
           }
         } else if (start - end < -30) {
           if (width > 600) {
-            setPosition((p) => (p > 0 ? p - 1 : 5));
+            setPosition((p) => (p > 0 ? p - 1 : actors.length - 5));
           } else if (width > 400) {
-            setPosition((p) => (p > 0 ? p - 1 : 7));
+            setPosition((p) => (p > 0 ? p - 1 : actors.length - 3));
           } else {
-            setPosition((p) => (p > 0 ? p - 1 : 8));
+            setPosition((p) => (p > 0 ? p - 1 : actors.length - 2));
           }
         }
       }}
@@ -143,19 +143,19 @@ function Actors({ actors }) {
       onMouseUp={() => {
         if (start - end > 30) {
           if (width > 600) {
-            setPosition((p) => (p < 5 ? p + 1 : 0));
+            setPosition((p) => (p < actors.length - 5 ? p + 1 : 0));
           } else if (width > 400) {
-            setPosition((p) => (p < 7 ? p + 1 : 0));
+            setPosition((p) => (p < actors.length - 3 ? p + 1 : 0));
           } else {
-            setPosition((p) => (p < 8 ? p + 1 : 0));
+            setPosition((p) => (p < actors.length - 2 ? p + 1 : 0));
           }
         } else if (start - end < -30) {
           if (width > 600) {
-            setPosition((p) => (p > 0 ? p - 1 : 5));
+            setPosition((p) => (p > 0 ? p - 1 : actors.length - 5));
           } else if (width > 400) {
-            setPosition((p) => (p > 0 ? p - 1 : 7));
+            setPosition((p) => (p > 0 ? p - 1 : actors.length - 3));
           } else {
-            setPosition((p) => (p > 0 ? p - 1 : 8));
+            setPosition((p) => (p > 0 ? p - 1 : actors.length - 2));
           }
         }
       }}
@@ -172,11 +172,11 @@ function Actors({ actors }) {
         disabled={disabled}
         onClick={() => {
           if (width > 600) {
-            setPosition((p) => (p > 0 ? p - 1 : 5));
+            setPosition((p) => (p > 0 ? p - 1 : actors.length - 5));
           } else if (width > 400) {
-            setPosition((p) => (p > 0 ? p - 1 : 7));
+            setPosition((p) => (p > 0 ? p - 1 : actors.length - 3));
           } else {
-            setPosition((p) => (p > 0 ? p - 1 : 8));
+            setPosition((p) => (p > 0 ? p - 1 : actors.length - 2));
           }
         }}
       >
@@ -186,11 +186,11 @@ function Actors({ actors }) {
         disabled={disabled}
         onClick={() => {
           if (width > 600) {
-            setPosition((p) => (p < 5 ? p + 1 : 0));
+            setPosition((p) => (p < actors.length - 5 ? p + 1 : 0));
           } else if (width > 400) {
-            setPosition((p) => (p < 7 ? p + 1 : 0));
+            setPosition((p) => (p < actors.length - 3 ? p + 1 : 0));
           } else {
-            setPosition((p) => (p < 8 ? p + 1 : 0));
+            setPosition((p) => (p < actors.length - 2 ? p + 1 : 0));
           }
         }}
       >

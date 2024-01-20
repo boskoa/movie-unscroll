@@ -7,6 +7,7 @@ const TitleContainer = styled.div`
   align-items: center;
   padding: 20px;
   filter: brightness(var(--light));
+  max-width: 80%;
   animation: 3s flicker linear infinite;
 
   @keyframes flicker {
@@ -89,14 +90,14 @@ const TitleComponent = styled.h1`
   &::before {
     content: "";
     position: absolute;
-    top: 0;
+    top: 0px;
     bottom: 0;
     left: 0;
     right: 0;
     opacity: 1;
     filter: blur(1em);
     transform-origin: 50% 0%;
-    transform: perspective(400px) translateY(130%) rotateX(85deg);
+    transform: perspective(400px) translateY(130%) rotateX(88deg);
     background: gold;
     pointer-events: none;
   }
