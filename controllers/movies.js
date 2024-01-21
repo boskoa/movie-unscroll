@@ -40,9 +40,9 @@ router.get("/:id", tokenExtractor, async (req, res, next) => {
   }
 });
 
-router.post("/:id", tokenExtractor, async (req, res, next) => {
+router.post("/", tokenExtractor, async (req, res, next) => {
   const user = await User.findByPk(req.decodedToken.id);
-  const existing = await Movie.findOne({ where: { tmdbId: req.params.id } });
+  const existing = await Movie.findOne({ where: { tmdbId: req.body.tmdbId } });
 
   if (existing) {
     return res.status(400).json({ error: "Already existing entry" });
@@ -74,6 +74,7 @@ router.patch("/:id", tokenExtractor, async (req, res, next) => {
   try {
     const rating = await Movie.findOne({ where: { tmdbId: req.params.id } });
     rating.set({ ...req.body });
+    await rating.save();
     return res.status(200).json(rating);
   } catch (error) {
     next(error);

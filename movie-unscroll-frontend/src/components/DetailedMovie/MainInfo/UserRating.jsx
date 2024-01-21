@@ -41,6 +41,7 @@ const starReturn = (id) => keyframes`
 const StarsContainer = styled.div`
   display: flex;
   align-items: center;
+  margin-left: 5px;
 
   & div:first-child {
     transform: scale(1.4) translateX(-9%);
@@ -69,7 +70,7 @@ const StarContainer = styled.div`
   padding: 3px;
   font-size: 22px;
   color: ${({ $rated }) => ($rated ? "#c7a900" : "grey")};
-  background-color: black;
+  cursor: pointer;
   transform: translateX(${({ $id }) => $id * -100}%) scale(1);
   z-index: ${({ $id }) => 10 - $id};
   opacity: ${({ $id }) => ($id !== 0 ? 0 : 1)};
@@ -84,9 +85,38 @@ const StarContainer = styled.div`
     filter: brightness(2.7);
   }
 
+  & > span {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 5px;
+    width: 75%;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: black;
+    transition: 0.2s;
+  }
+
+  &:hover > span {
+    opacity: 1;
+  }
+
   @media only screen and (max-width: 500px) {
     font-size: 18px;
     padding: 2px;
+
+    & > span {
+      font-size: 8px;
+      padding: 6px;
+    }
+  }
+
+  @media (hover: none) {
+    animation: none;
+    transform: translateX(0%);
+    opacity: 1;
   }
 `;
 
@@ -113,6 +143,7 @@ function UserRating({ user, movie }) {
   const [rating, setRating] = useState({ rating: 0 });
   const [hover, setHover] = useState(false);
   const [newRating, setNewRating] = useState();
+  const [existing, setExisting] = useState(false);
 
   useEffect(() => {
     async function getRating() {
@@ -122,15 +153,16 @@ function UserRating({ user, movie }) {
         },
       };
       const response = await axios.get(`/api/movies/${movie.id}`, config);
-      setRating(response.data);
+      if (response.data) {
+        setRating(response.data);
+        setExisting(true);
+      } else {
+        setExisting(false);
+      }
     }
 
     getRating();
   }, [movie.id, user.token]);
-
-  useEffect(() => {
-    setNewRating(rating?.rating);
-  }, [rating?.rating]);
 
   useEffect(() => {
     async function addRating() {
@@ -167,22 +199,21 @@ function UserRating({ user, movie }) {
       setRating(response.data);
     }
 
-    if (movie && !newRating) {
-      addRating();
-    }
-
-    if (newRating !== rating.rating) {
-      updateRating();
+    if (newRating) {
+      if (!existing) {
+        addRating();
+      } else {
+        updateRating();
+      }
     }
   }, [
-    rating?.rating,
     newRating,
     movie.id,
     user.token,
     user.id,
     movie.tmdbId,
     movie.title,
-    movie,
+    existing,
   ]);
 
   if (!user) return null;
@@ -210,6 +241,7 @@ function UserRating({ user, movie }) {
           $rated={rating?.rating > 1}
         >
           <FontAwesomeIcon icon={faVideo} />
+          <span>2</span>
         </StarContainer>
         <StarContainer
           onClick={() => setNewRating(3)}
@@ -218,6 +250,7 @@ function UserRating({ user, movie }) {
           $rated={rating?.rating > 2}
         >
           <FontAwesomeIcon icon={faVideo} />
+          <span>3</span>
         </StarContainer>
         <StarContainer
           onClick={() => setNewRating(4)}
@@ -226,6 +259,7 @@ function UserRating({ user, movie }) {
           $rated={rating?.rating > 3}
         >
           <FontAwesomeIcon icon={faVideo} />
+          <span>4</span>
         </StarContainer>
         <StarContainer
           onClick={() => setNewRating(5)}
@@ -234,6 +268,7 @@ function UserRating({ user, movie }) {
           $rated={rating?.rating > 4}
         >
           <FontAwesomeIcon icon={faVideo} />
+          <span>5</span>
         </StarContainer>
         <StarContainer
           onClick={() => setNewRating(6)}
@@ -242,6 +277,7 @@ function UserRating({ user, movie }) {
           $rated={rating?.rating > 5}
         >
           <FontAwesomeIcon icon={faVideo} />
+          <span>6</span>
         </StarContainer>
         <StarContainer
           onClick={() => setNewRating(7)}
@@ -250,6 +286,7 @@ function UserRating({ user, movie }) {
           $rated={rating?.rating > 6}
         >
           <FontAwesomeIcon icon={faVideo} />
+          <span>7</span>
         </StarContainer>
         <StarContainer
           onClick={() => setNewRating(8)}
@@ -258,6 +295,7 @@ function UserRating({ user, movie }) {
           $rated={rating?.rating > 7}
         >
           <FontAwesomeIcon icon={faVideo} />
+          <span>8</span>
         </StarContainer>
         <StarContainer
           onClick={() => setNewRating(9)}
@@ -266,6 +304,7 @@ function UserRating({ user, movie }) {
           $rated={rating?.rating > 8}
         >
           <FontAwesomeIcon icon={faVideo} />
+          <span>9</span>
         </StarContainer>
         <StarContainer
           onClick={() => setNewRating(10)}
@@ -274,6 +313,7 @@ function UserRating({ user, movie }) {
           $rated={rating?.rating > 9}
         >
           <FontAwesomeIcon icon={faVideo} />
+          <span>10</span>
         </StarContainer>
       </StarsContainer>
     </MainContainer>

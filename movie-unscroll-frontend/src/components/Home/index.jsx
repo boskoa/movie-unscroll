@@ -16,7 +16,14 @@ function Home() {
 
   if (!loggedUser) return null;
 
-  return <Moto />;
+  return (
+    <div>
+      <Moto />
+      <p>
+        sdjkkjsgkjfgkjfdgk kjfdsgfjdkghkdjfgkjdfgh jdkfghfkjdhgkfjdhkjhgkjfdgk
+      </p>
+    </div>
+  );
 }
 
 export default Home;

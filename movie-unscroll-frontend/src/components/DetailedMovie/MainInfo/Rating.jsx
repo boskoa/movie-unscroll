@@ -7,7 +7,7 @@ const RatingContainer = styled.div`
   height: 5px;
   border-radius: 3px;
   overflow: hidden;
-  background: linear-gradient(90deg, #ffff00, #80ff00);
+  background: linear-gradient(90deg, #ffff00, #008055);
 `;
 
 const Bar = styled.div`
@@ -18,7 +18,7 @@ const Bar = styled.div`
   height: 100%;
   transition: all 1s ease-out;
   transition-delay: 2s;
-  background: linear-gradient(90deg, transparent 1%, #ff2a00 3%);
+  background: linear-gradient(90deg, transparent 1%, rgb(255, 68, 0) 3%);
   transform: translateX(${({ $width }) => $width}px);
 `;
 

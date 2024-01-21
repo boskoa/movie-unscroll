@@ -1,5 +1,11 @@
 import styled, { css, keyframes } from "styled-components";
 
+const moveUp = keyframes`
+  to {
+    height: 0;
+  }
+`;
+
 const MotoContainer = styled.div`
   position: relative;
   padding: 30px 10px;
@@ -7,6 +13,7 @@ const MotoContainer = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 20px;
+  animation: ${() => css`2s ${moveUp} 34s forwards`};
 `;
 
 const lightUp = keyframes`
