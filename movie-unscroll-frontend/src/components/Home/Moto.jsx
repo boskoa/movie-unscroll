@@ -1,19 +1,14 @@
 import styled, { css, keyframes } from "styled-components";
-
-const moveUp = keyframes`
-  to {
-    height: 0;
-  }
-`;
+import Title from "../Title";
+import { useEffect, useState } from "react";
 
 const MotoContainer = styled.div`
   position: relative;
-  padding: 30px 10px;
   display: flex;
   align-items: center;
   flex-direction: column;
   gap: 20px;
-  animation: ${() => css`2s ${moveUp} 34s forwards`};
+  margin-bottom: 10vh;
 `;
 
 const lightUp = keyframes`
@@ -51,7 +46,7 @@ const lightUp = keyframes`
 
 const Text = styled.p`
   position: absolute;
-  top: 30px;
+  top: 20px;
   font-size: 30px;
   font-weight: 800;
   text-shadow: 0 0 10px gold;
@@ -65,7 +60,22 @@ const Text = styled.p`
   }
 `;
 
+const HomeTitle = styled(Title)`
+  position: absolute;
+  top: 20px;
+  visibility: ${({ $show }) => ($show ? "visible" : "hidden")};
+  transition: opacity 1s;
+`;
+
 function Moto() {
+  const [showTitle, setShowTitile] = useState(false);
+
+  useEffect(() => {
+    const index = setTimeout(() => setShowTitile(true), 34000);
+
+    return () => clearTimeout(index);
+  }, []);
+
   return (
     <MotoContainer>
       <Text $delay="2s">Tired of endless scrolling</Text>
@@ -73,6 +83,7 @@ function Moto() {
       <Text $delay="14s">And stil ending up watching crap?</Text>
       <Text $delay="20s">Remove the scrolling part</Text>
       <Text $delay="28s">and watch crap straight away!</Text>
+      <HomeTitle text="HOME" $show={showTitle} />
     </MotoContainer>
   );
 }

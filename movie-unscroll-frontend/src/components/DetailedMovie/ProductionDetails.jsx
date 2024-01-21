@@ -110,6 +110,7 @@ const LogoContainer = styled.span`
   padding: 5px;
   background-color: #fff7c6;
   border-radius: 10px;
+  overflow: hidden;
 `;
 
 const LogoImage = styled.img`

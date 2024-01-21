@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const TitleContainer = styled.div`
+export const TitleContainer = styled.div`
   --light: 1;
   display: flex;
   justify-content: center;

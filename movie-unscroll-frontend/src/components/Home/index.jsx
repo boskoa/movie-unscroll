@@ -3,6 +3,7 @@ import { selectLoggedUser } from "../../features/login/loginSlice";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Moto from "./Moto";
+import Carousel from "./Carousel";
 
 function Home() {
   const loggedUser = useSelector(selectLoggedUser);
@@ -19,9 +20,7 @@ function Home() {
   return (
     <div>
       <Moto />
-      <p>
-        sdjkkjsgkjfgkjfdgk kjfdsgfjdkghkdjfgkjdfgh jdkfghfkjdhgkfjdhkjhgkjfdgk
-      </p>
+      <Carousel />
     </div>
   );
 }
