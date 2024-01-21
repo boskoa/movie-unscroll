@@ -90,7 +90,6 @@ function Actors({ actors }) {
         }px)`;
       }
     }
-    console.log(window.innerWidth, width);
   }, [position, width]);
 
   useLayoutEffect(() => {

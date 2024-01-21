@@ -32,7 +32,7 @@ function MainMenu() {
       $selected={selected}
       onClick={() => setSelected((p) => !p)}
     >
-      <Link to="profile">
+      <Link to="home">
         <MenuIcon
           $left="0px"
           $delay="0"
@@ -41,7 +41,7 @@ function MainMenu() {
           $color2="#002f2f"
           $color3="gold"
         >
-          Profile
+          Home
         </MenuIcon>
       </Link>
       <MenuIcon

@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import Rating from "./Rating";
 import Sign from "./Sign";
+import { useSelector } from "react-redux";
+import { selectLoggedUser } from "../../../features/login/loginSlice";
+import UserRating from "./UserRating";
 
 const InfoContainer = styled.div`
   display: flex;
@@ -21,6 +24,8 @@ const Text = styled.p`
 `;
 
 function Info({ movie }) {
+  const loggedUser = useSelector(selectLoggedUser);
+
   return (
     <InfoContainer>
       <Description>{movie.overview}</Description>
@@ -43,6 +48,7 @@ function Info({ movie }) {
           .toString()
           .padStart(2, "0")}
       </Text>
+      {loggedUser && <UserRating user={loggedUser} movie={movie} />}
     </InfoContainer>
   );
 }

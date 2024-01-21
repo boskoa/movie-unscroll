@@ -16,25 +16,25 @@ const lightUp = keyframes`
   40% {
     opacity: 1;
   }
-  42% {
+  41% {
     opacity: 0.8;
   }
-  44% {
+  42% {
     opacity: 1;
   }
   50% {
     opacity: 1;
   }
-  52% {
+  51% {
     opacity: 0.8;
   }
-  54% {
+  52% {
     opacity: 1;
   }
-  56% {
+  54% {
     opacity: 0.9;
   }
-  58% {
+  55% {
     opacity: 1;
   }
   100% {

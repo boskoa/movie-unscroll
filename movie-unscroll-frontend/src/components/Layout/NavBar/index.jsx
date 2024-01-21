@@ -20,7 +20,6 @@ const NavContainer = styled.header`
   align-items: center;
   gap: 20px;
   z-index: 100;
-  //opacity: 1;
   backdrop-filter: blur(10px);
 
   @media only screen and (max-width: 400px) {
