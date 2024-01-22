@@ -5,6 +5,14 @@ import { selectLoggedUser } from "../../features/login/loginSlice";
 import NotLogged from "../NotLogged";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import RatedMovie from "./RatedMovie";
+
+const SuperMainContainer = styled.div`
+  max-width: 700px;
+  margin: 0 auto;
+  opacity: ${({ $loaded }) => ($loaded ? 1 : 0)};
+  transition: opacity 0.5s;
+`;
 
 const MainContainer = styled.div`
   display: flex;
@@ -20,28 +28,10 @@ const RatedContainer = styled.div`
   max-width: 800px;
 `;
 
-const RatedMovie = styled.div`
-  box-shadow:
-    0 0 10px 0 gold,
-    inset 0 0 10px 0 gold;
-  border-radius: 10px;
-  border: 3px solid gold;
-  min-height: 120px;
-  color: #fff7c6;
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const MovieTitle = styled.p`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-left: 30px;
-`;
-
 function RatedMovies() {
   const loggedUser = useSelector(selectLoggedUser);
   const [ratings, setRatings] = useState();
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     async function getRatings() {
@@ -63,23 +53,25 @@ function RatedMovies() {
     }
   }, [loggedUser, setRatings]);
 
+  useEffect(() => {
+    setTimeout(() => setLoaded(true), 500);
+  }, []);
+
   if (!loggedUser) return <NotLogged />;
 
   if (!ratings) return null;
 
   return (
-    <div style={{ maxWidth: 700, margin: "0 auto" }}>
+    <SuperMainContainer $loaded={loaded}>
       <MainContainer>
         <Title style={{ width: "100%" }} text="Your ratings" />
         <RatedContainer>
           {ratings.map((r) => (
-            <RatedMovie key={r.id}>
-              <MovieTitle>{r.title}</MovieTitle>
-            </RatedMovie>
+            <RatedMovie key={r.id} movie={r} user={loggedUser} />
           ))}
         </RatedContainer>
       </MainContainer>
-    </div>
+    </SuperMainContainer>
   );
 }
 
