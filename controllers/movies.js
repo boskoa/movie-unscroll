@@ -15,10 +15,15 @@ router.get("/detailed-movie/:id", async (req, res, next) => {
   }
 });
 
-// Modify later (for logged user)
-router.get("/", async (req, res, next) => {
+router.get("/user-ratings", tokenExtractor, async (req, res, next) => {
+  const user = await User.findByPk(req.decodedToken.id);
+
+  if (!user) {
+    return res.status(404).send("Not logged in");
+  }
+
   try {
-    const ratings = await Movie.findAll();
+    const ratings = await Movie.findAll({ where: { userId: user.id } });
     return res.status(200).json(ratings);
   } catch (error) {
     next(error);

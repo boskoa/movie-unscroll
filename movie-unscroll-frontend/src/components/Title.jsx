@@ -7,7 +7,7 @@ export const TitleContainer = styled.div`
   align-items: center;
   padding: 20px;
   filter: brightness(var(--light));
-  max-width: 80%;
+  //max-width: 80%;
   animation: 3s flicker linear infinite;
 
   @keyframes flicker {

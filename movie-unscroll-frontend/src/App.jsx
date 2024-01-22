@@ -11,6 +11,7 @@ import { alreadyLogged } from "./features/login/loginSlice";
 
 const UpdateUser = lazy(() => import("./features/users/UpdateUser"));
 const DetailedMovie = lazy(() => import("./components/DetailedMovie"));
+const RatedMovies = lazy(() => import("./components/RatedMovies"));
 const Home = lazy(() => import("./components/Home"));
 
 function App() {
@@ -46,6 +47,14 @@ function App() {
           element: (
             <Suspense>
               <DetailedMovie />
+            </Suspense>
+          ),
+        },
+        {
+          path: "rated-movies",
+          element: (
+            <Suspense>
+              <RatedMovies />
             </Suspense>
           ),
         },
