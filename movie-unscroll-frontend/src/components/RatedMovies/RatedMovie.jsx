@@ -3,20 +3,30 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import Delete from "./Delete";
+import RatingBox from "./RatingBox";
 
 const RatedMovieContainer = styled.div`
-  box-shadow:
+  /* box-shadow:
     0 0 10px 0 gold,
     inset 0 0 10px 0 gold;
   border-radius: 10px;
-  border: 3px solid gold;
+  border: 3px solid gold; */
   min-height: 120px;
-  color: #fff7c6;
+  color: black;
+  background-color: gold;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-items: center;
   padding: 20px;
-  overflow: hidden;
+  //overflow: hidden;
+  position: relative;
+  margin: 0 15px;
+
+  @media only screen and (max-width: 400px) {
+    padding: 5px;
+  }
 `;
 
 const MovieTitle = styled.p`
@@ -28,6 +38,10 @@ const MovieTitle = styled.p`
 const StarsContainer = styled.div`
   display: flex;
   align-items: center;
+  background-color: black;
+  //height: 40px;
+  padding: 5px;
+  overflow: hidden;
 `;
 
 const StarContainer = styled.div`
@@ -64,12 +78,12 @@ const StarContainer = styled.div`
   }
 
   @media only screen and (max-width: 500px) {
-    font-size: 18px;
+    font-size: 16px;
     padding: 2px;
 
     & > span {
-      font-size: 8px;
-      padding: 6px;
+      font-size: 7px;
+      padding: 5px;
     }
   }
 
@@ -111,6 +125,8 @@ function RatedMovie({ movie, user }) {
 
   return (
     <RatedMovieContainer>
+      <Delete />
+      <RatingBox rating={rating.rating} />
       <MovieTitle>{movie.title}</MovieTitle>
       <StarsContainer
         onMouseEnter={() => setHover(true)}
