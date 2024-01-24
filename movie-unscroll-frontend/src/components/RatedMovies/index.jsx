@@ -3,9 +3,10 @@ import Title from "../Title";
 import { useSelector } from "react-redux";
 import { selectLoggedUser } from "../../features/login/loginSlice";
 import NotLogged from "../NotLogged";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import RatedMovie from "./RatedMovie";
+import useIntersectionObserver from "../../customHooks/useIntersectionObserver";
 
 const SuperMainContainer = styled.div`
   max-width: 700px;
@@ -26,32 +27,71 @@ const RatedContainer = styled.div`
   flex-direction: column;
   gap: 30px;
   max-width: 800px;
+  min-height: 90vh;
 `;
+
+const Loader = styled.div`
+  height: 30px;
+  width: 100%;
+  margin: 20px 0;
+  border: 1px solid gold;
+`;
+
+const LIMIT = 5;
 
 function RatedMovies() {
   const loggedUser = useSelector(selectLoggedUser);
-  const [ratings, setRatings] = useState();
+  const [ratings, setRatings] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  const [offset, setOffset] = useState(0);
+  const [stopLoading, setStopLoading] = useState(false);
+  const loaderRef = useRef();
+  const intersecting = useIntersectionObserver(loaderRef);
+  const getRatings = useCallback(async (o, token) => {
+    const config = {
+      headers: {
+        Authorization: `bearer ${token}`,
+      },
+    };
+    try {
+      const response = await axios.get(
+        `/api/movies/user-ratings?pagination=${o},${LIMIT}`,
+        config,
+      );
+      if (response.data.length === 0) {
+        setStopLoading(true);
+      } else {
+        setRatings((p) => [
+          ...p,
+          ...response.data.filter(
+            (r) => !p.map((entry) => entry.id).includes(r.id),
+          ),
+        ]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   useEffect(() => {
-    async function getRatings() {
-      const config = {
-        headers: {
-          Authorization: `bearer ${loggedUser.token}`,
-        },
-      };
-      try {
-        const response = await axios.get("/api/movies/user-ratings", config);
-        setRatings(response.data);
-      } catch (error) {
-        console.log(error);
-      }
+    if (intersecting && !stopLoading) {
+      setOffset((prev) => prev + LIMIT);
     }
+  }, [intersecting, stopLoading]);
 
-    if (loggedUser) {
-      getRatings();
+  useEffect(() => {
+    if (offset - LIMIT > ratings.length) {
+      setStopLoading(true);
+    } else {
+      setStopLoading(false);
     }
-  }, [loggedUser, setRatings]);
+  }, [offset, ratings]);
+
+  useEffect(() => {
+    if (loggedUser) {
+      getRatings(offset, loggedUser.token);
+    }
+  }, [loggedUser, offset, getRatings]);
 
   useEffect(() => {
     setTimeout(() => setLoaded(true), 500);
@@ -71,6 +111,7 @@ function RatedMovies() {
           ))}
         </RatedContainer>
       </MainContainer>
+      <Loader ref={loaderRef} />
     </SuperMainContainer>
   );
 }

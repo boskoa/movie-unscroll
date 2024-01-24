@@ -207,22 +207,22 @@ function ProductionDetails({ movie }) {
       <CrewContainer>
         <p>Production:</p>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
-          {movie.production_companies.map(
-            (c) =>
-              c.logo_path && (
-                <LogoContainer key={c.id}>
-                  <LogoImage
-                    title={c.name}
-                    draggable="false"
-                    alt={c.name}
-                    src={`https://image.tmdb.org/t/p/original/${c.logo_path}`}
-                    onError={(e) => {
-                      e.currentTarget.onerror = null;
-                      e.currentTarget.src = actorLogo;
-                    }}
-                  />
-                </LogoContainer>
-              ),
+          {movie.production_companies.map((c) =>
+            c.logo_path ? (
+              <LogoContainer key={c.id}>
+                <LogoImage
+                  title={c.name}
+                  draggable="false"
+                  alt={c.name}
+                  src={`https://image.tmdb.org/t/p/original/${c.logo_path}`}
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                  }}
+                />
+              </LogoContainer>
+            ) : (
+              c.name
+            ),
           )}
         </div>
       </CrewContainer>

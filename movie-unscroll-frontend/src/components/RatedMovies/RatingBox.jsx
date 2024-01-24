@@ -24,7 +24,7 @@ const RatingContainer = styled.div`
   justify-content: center;
   align-items: center;
   transform: rotateZ(10deg);
-  transition: transform 0.5s;
+  transition: transform 0.3s;
   font-weight: 600;
 
   &:active {

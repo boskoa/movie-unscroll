@@ -1,6 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
-import { logout } from "../../../features/login/loginSlice";
 import { Icon, MainIcon, MenuIcon } from "./navbarStyles";
 import MainMenuIcon from "./MainMenuIcon";
 import { Link } from "react-router-dom";
@@ -8,7 +6,6 @@ import { Link } from "react-router-dom";
 function MainMenu() {
   const [selected, setSelected] = useState(false);
   const menuRef = useRef();
-  const dispatch = useDispatch();
 
   useEffect(() => {
     function handleClick(e) {
@@ -44,17 +41,18 @@ function MainMenu() {
           Home
         </MenuIcon>
       </Link>
-      <MenuIcon
-        $left="0px"
-        $delay="0.3"
-        $selected={selected}
-        $color="rgb(255, 68, 0)"
-        $color2="#002f2f"
-        $color3="gold"
-        onClick={() => dispatch(logout())}
-      >
-        Log out
-      </MenuIcon>
+      <Link to="rated-movies">
+        <MenuIcon
+          $left="0px"
+          $delay="0.3"
+          $selected={selected}
+          $color="rgb(255, 68, 0)"
+          $color2="#002f2f"
+          $color3="gold"
+        >
+          Ratings
+        </MenuIcon>
+      </Link>
       <MainIcon $color="rgb(255, 68, 0)">
         <MainMenuIcon selected={selected} color="#002f2f" />
       </MainIcon>

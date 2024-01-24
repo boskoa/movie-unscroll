@@ -17,13 +17,21 @@ router.get("/detailed-movie/:id", async (req, res, next) => {
 
 router.get("/user-ratings", tokenExtractor, async (req, res, next) => {
   const user = await User.findByPk(req.decodedToken.id);
-
   if (!user) {
     return res.status(404).send("Not logged in");
   }
 
+  let pagination = {};
+  if (req.query.pagination) {
+    const [offset, limit] = req.query.pagination.split(",");
+    pagination = { offset, limit };
+  }
+
   try {
-    const ratings = await Movie.findAll({ where: { userId: user.id } });
+    const ratings = await Movie.findAll({
+      where: { userId: user.id },
+      ...pagination,
+    });
     return res.status(200).json(ratings);
   } catch (error) {
     next(error);
