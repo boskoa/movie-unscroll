@@ -26,6 +26,7 @@ const RatingContainer = styled.div`
   transform: rotateZ(10deg);
   transition: transform 0.3s;
   font-weight: 600;
+  user-select: none;
 
   &:active {
     transform: rotateZ(-360deg);

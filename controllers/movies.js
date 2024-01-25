@@ -2,7 +2,7 @@ const router = require("express").Router();
 const axios = require("axios");
 const { TMDB_KEY } = require("../utils/config");
 const { tokenExtractor } = require("../utils/tokenExtractor");
-const { User, Movie } = require("../models");
+const { User, Movie, Director, Genre, Actor } = require("../models");
 
 router.get("/detailed-movie/:id", async (req, res, next) => {
   try {
@@ -89,6 +89,32 @@ router.patch("/:id", tokenExtractor, async (req, res, next) => {
     rating.set({ ...req.body });
     await rating.save();
     return res.status(200).json(rating);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.delete("/:id", tokenExtractor, async (req, res, next) => {
+  const user = await User.findByPk(req.decodedToken.id);
+
+  if (!user) {
+    return res.status(400).json({ error: "Not authorized" });
+  }
+
+  try {
+    const [movie, tmdb] = await Promise.all([
+      Movie.findByPk(req.params.id),
+      axios.get(
+        `https://api.themoviedb.org/3/movie/${req.params.id}?api_key=${TMDB_KEY}&include_adult=false&append_to_response=credits`,
+      ),
+    ]);
+    console.log("FOOOOOOOOOOOOOOOOO", movie.rating, tmdb.data);
+    /* await Director.destroy({ where: { tmdbId: rating.tmdbId } });
+    await Genre.destroy({ where: { tmdbId: rating.tmdbId } });
+    await Actor.destroy({ where: { tmdbId: rating.tmdbId } });
+    await movie.destroy();
+    return res.status(200).send(req.params.id);
+    */
   } catch (error) {
     next(error);
   }
