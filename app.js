@@ -7,6 +7,7 @@ const usersRouter = require("./controllers/users");
 const loginRouter = require("./controllers/login");
 const avatarsRouter = require("./controllers/avatars");
 const moviesRouter = require("./controllers/movies");
+const actorsRouter = require("./controllers/actors");
 const { errorHandler } = require("./utils/errorHandler");
 
 const app = express();
@@ -27,6 +28,7 @@ app.use("/api/users", usersRouter);
 app.use("/api/login", loginRouter);
 app.use("/api/avatars", avatarsRouter);
 app.use("/api/movies", moviesRouter);
+app.use("/api/actors", actorsRouter);
 
 app.all("/*", (_req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));

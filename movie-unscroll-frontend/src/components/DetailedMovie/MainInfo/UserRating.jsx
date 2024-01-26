@@ -183,6 +183,7 @@ function UserRating({ user, movie }) {
         config,
       );
       setRating(response.data);
+      setExisting(true);
     }
 
     async function updateRating() {
