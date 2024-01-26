@@ -94,7 +94,7 @@ const StarContainer = styled.div`
   }
 `;
 
-function RatedMovie({ movie, user }) {
+function RatedMovie({ movie, user, deleteRating }) {
   const [rating, setRating] = useState({ rating: 0 });
   const [hover, setHover] = useState(false);
   const [newRating, setNewRating] = useState();
@@ -125,7 +125,7 @@ function RatedMovie({ movie, user }) {
 
   return (
     <RatedMovieContainer>
-      <Delete />
+      <Delete id={movie.id} deleteRating={deleteRating} />
       <RatingBox rating={rating.rating} />
       <MovieTitle>{movie.title}</MovieTitle>
       <StarsContainer

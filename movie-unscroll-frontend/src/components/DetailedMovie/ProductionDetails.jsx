@@ -221,7 +221,13 @@ function ProductionDetails({ movie }) {
                 />
               </LogoContainer>
             ) : (
-              c.name
+              <LogoContainer key={c.id} style={{ width: 100 }}>
+                <p
+                  style={{ color: "black", textAlign: "center", fontSize: 12 }}
+                >
+                  {c.name}
+                </p>
+              </LogoContainer>
             ),
           )}
         </div>

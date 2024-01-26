@@ -27,13 +27,13 @@ const RatedContainer = styled.div`
   flex-direction: column;
   gap: 30px;
   max-width: 800px;
-  min-height: 90vh;
+  min-height: 80vh;
 `;
 
 const Loader = styled.div`
   height: 30px;
   width: 100%;
-  margin: 20px 0;
+  margin-top: 20px;
   border: 1px solid gold;
 `;
 
@@ -73,6 +73,20 @@ function RatedMovies() {
     }
   }, []);
 
+  async function deleteRating(id) {
+    const config = {
+      headers: {
+        Authorization: `bearer ${loggedUser.token}`,
+      },
+    };
+    try {
+      await axios.delete(`/api/movies/${id}`, config);
+      setRatings((p) => p.filter((m) => m.id !== id));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     if (intersecting && !stopLoading) {
       setOffset((prev) => prev + LIMIT);
@@ -107,7 +121,12 @@ function RatedMovies() {
         <Title style={{ width: "100%" }} text="Your ratings" />
         <RatedContainer>
           {ratings.map((r) => (
-            <RatedMovie key={r.id} movie={r} user={loggedUser} />
+            <RatedMovie
+              key={r.id}
+              movie={r}
+              user={loggedUser}
+              deleteRating={deleteRating}
+            />
           ))}
         </RatedContainer>
       </MainContainer>

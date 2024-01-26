@@ -25,6 +25,7 @@ const IconContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   transform: rotateZ(-10deg);
   transition: transform 0.3s;
 
@@ -33,11 +34,11 @@ const IconContainer = styled.div`
   }
 `;
 
-function Delete() {
+function Delete({ deleteRating, id }) {
   return (
     <>
-      <DeleteContainer></DeleteContainer>
-      <IconContainer>
+      <DeleteContainer />
+      <IconContainer onClick={() => deleteRating(id)}>
         <FontAwesomeIcon
           style={{ fontSize: "18px", color: "gold" }}
           icon={faTrashCan}
