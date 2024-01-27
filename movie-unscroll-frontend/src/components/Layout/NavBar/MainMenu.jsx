@@ -41,10 +41,22 @@ function MainMenu() {
           Home
         </MenuIcon>
       </Link>
-      <Link to="rated-movies">
+      <Link to="suggestions">
         <MenuIcon
           $left="0px"
           $delay="0.3"
+          $selected={selected}
+          $color="rgb(255, 68, 0)"
+          $color2="#002f2f"
+          $color3="gold"
+        >
+          Custom
+        </MenuIcon>
+      </Link>
+      <Link to="rated-movies">
+        <MenuIcon
+          $left="0px"
+          $delay="0.6"
           $selected={selected}
           $color="rgb(255, 68, 0)"
           $color2="#002f2f"

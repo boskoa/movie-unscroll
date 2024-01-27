@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Delete from "./Delete";
 import RatingBox from "./RatingBox";
+import { Link } from "react-router-dom";
 
 const RatedMovieContainer = styled.div`
   /* box-shadow:
@@ -127,7 +128,12 @@ function RatedMovie({ movie, user, deleteRating }) {
     <RatedMovieContainer>
       <Delete id={movie.id} deleteRating={deleteRating} />
       <RatingBox rating={rating.rating} />
-      <MovieTitle>{movie.title}</MovieTitle>
+      <Link
+        style={{ textDecoration: "none", cursor: "pointer", color: "inherit" }}
+        to={`/detailed-movie/${movie.tmdbId}`}
+      >
+        <MovieTitle>{movie.title}</MovieTitle>
+      </Link>
       <StarsContainer
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}

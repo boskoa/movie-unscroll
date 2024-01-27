@@ -1,6 +1,9 @@
 const axios = require("axios");
 const router = require("express").Router();
 const { TMDB_KEY } = require("../utils/config");
+const { User, Actor, Director, Genre } = require("../models");
+const { tokenExtractor } = require("../utils/tokenExtractor");
+const { Op } = require("sequelize");
 
 router.get("/", async (_req, res, next) => {
   try {
@@ -18,6 +21,103 @@ router.get("/", async (_req, res, next) => {
       `https://api.themoviedb.org/3/movie/${result.data.results[item].id}?api_key=${TMDB_KEY}&include_adult=false`,
     );
     return res.status(200).json(movieResult.data);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/personalized", tokenExtractor, async (req, res, next) => {
+  const user = await User.findByPk(req.decodedToken.id);
+
+  if (!user) {
+    return res.status(400).json({ error: "Not logged in" });
+  }
+
+  const actors = await Actor.findAll({
+    where: { userId: user.id, count: { [Op.gt]: 0 } },
+    order: [["count", "DESC"]],
+    limit: 10,
+  });
+  const randomActor = actors.length
+    ? actors[Math.floor(Math.random() * actors.length)]
+    : null;
+
+  const directors = await Director.findAll({
+    where: { userId: user.id, count: { [Op.gt]: 0 } },
+    order: [["count", "DESC"]],
+    limit: 10,
+  });
+  const randomDirector = directors.length
+    ? directors[Math.floor(Math.random() * directors.length)]
+    : null;
+
+  const genres = (
+    await Genre.findAll({
+      where: { userId: user.id, count: { [Op.gt]: 0 } },
+      order: [["count", "DESC"]],
+      limit: 5,
+      attributes: ["tmdbId"],
+      raw: true,
+    })
+  ).map((g) => g?.tmdbId);
+
+  let all = [];
+
+  try {
+    if (randomActor) {
+      const actorMoviesResponse = await axios.get(
+        `https://api.themoviedb.org/3/person/${randomActor.tmdbId}/movie_credits?api_key=${TMDB_KEY}`,
+      );
+      all = all.concat(
+        actorMoviesResponse.data.cast.filter((m) => m.character !== "Self"),
+      );
+    }
+
+    if (randomDirector) {
+      const directorMoviesResponse = await axios.get(
+        `https://api.themoviedb.org/3/person/${randomDirector.tmdbId}/movie_credits?api_key=${TMDB_KEY}`,
+      );
+      all = all.concat(
+        directorMoviesResponse.data.crew.filter((m) => m.job !== "Director"),
+      );
+    }
+
+    let filteredAllIds = all.length
+      ? all
+          .filter((m) => m.genre_ids.some((g) => genres.includes(g)))
+          .map((m) => m.id)
+          .sort(() => Math.random() - 0.5)
+          .slice(0, 7)
+      : [];
+
+    const topRandomLength = await axios.get(
+      `https://api.themoviedb.org/3/movie/top_rated?api_key=${TMDB_KEY}&include_adult=false`,
+    );
+    const page = Math.floor(Math.random() * topRandomLength.data.total_pages);
+
+    const topRandomThree = (
+      await axios.get(
+        `https://api.themoviedb.org/3/movie/top_rated?api_key=${TMDB_KEY}&include_adult=false&page=${page}`,
+      )
+    ).data.results
+      .slice(0, 3)
+      .map((m) => m.id);
+
+    let allIds = [
+      topRandomThree[0],
+      ...filteredAllIds,
+      ...topRandomThree.slice(1),
+    ];
+
+    let axiosRequests = allIds.map((id) =>
+      axios.get(
+        `https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_KEY}&include_adult=false`,
+      ),
+    );
+
+    const final = (await axios.all([...axiosRequests])).map((f) => f.data);
+
+    return res.status(200).json(final);
   } catch (error) {
     next(error);
   }

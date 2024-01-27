@@ -13,6 +13,7 @@ const UpdateUser = lazy(() => import("./features/users/UpdateUser"));
 const DetailedMovie = lazy(() => import("./components/DetailedMovie"));
 const RatedMovies = lazy(() => import("./components/RatedMovies"));
 const Home = lazy(() => import("./components/Home"));
+const Suggestions = lazy(() => import("./features/suggestions/Suggestions"));
 
 function App() {
   const dispatch = useDispatch();
@@ -55,6 +56,14 @@ function App() {
           element: (
             <Suspense>
               <RatedMovies />
+            </Suspense>
+          ),
+        },
+        {
+          path: "suggestions",
+          element: (
+            <Suspense>
+              <Suggestions />
             </Suspense>
           ),
         },

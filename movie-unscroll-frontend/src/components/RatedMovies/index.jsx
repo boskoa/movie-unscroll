@@ -7,6 +7,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import RatedMovie from "./RatedMovie";
 import useIntersectionObserver from "../../customHooks/useIntersectionObserver";
+import { useNavigate } from "react-router-dom";
 
 const SuperMainContainer = styled.div`
   max-width: 700px;
@@ -46,6 +47,7 @@ function RatedMovies() {
   const [offset, setOffset] = useState(0);
   const [stopLoading, setStopLoading] = useState(false);
   const loaderRef = useRef();
+  const navigate = useNavigate();
   const intersecting = useIntersectionObserver(loaderRef);
   const getRatings = useCallback(async (o, token) => {
     const config = {
@@ -107,9 +109,15 @@ function RatedMovies() {
     }
   }, [loggedUser, offset, getRatings]);
 
+  useEffect(() => {}, [loggedUser]);
+
   useEffect(() => {
     setTimeout(() => setLoaded(true), 500);
   }, []);
+
+  useEffect(() => {
+    if (!loggedUser) navigate("/");
+  }, [loggedUser, navigate]);
 
   if (!loggedUser) return <NotLogged />;
 
