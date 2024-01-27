@@ -11,31 +11,19 @@ const MovieContainer = styled.div`
   justify-content: center;
   align-items: stretch;
   padding: 30px;
-  //opacity: 0;
   overflow: hidden;
   transition: all 0.5s;
 
   @media only screen and (max-width: 700px) {
     flex-direction: column;
     align-items: center;
+    justify-content: start;
   }
 `;
 
 const PosterContainer = styled.div`
   position: relative;
-  height: 80vh;
-  //opacity: 0;
-`;
-
-const descriptionExpand = keyframes`
-  from {
-    width: 0px;
-    padding: 0px;
-  }
-  to {
-    width: 46%;
-    padding: 0 30px;
-  }
+  height: 70vh;
 `;
 
 const Description = styled.div`
@@ -48,27 +36,22 @@ const Description = styled.div`
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  /* animation: ${() => css`1s ${descriptionExpand} 9s forwards`}; */
 
   @media only screen and (max-width: 700px) {
     animation: none;
     width: 100%;
     padding: 20px;
-    //min-height: 70vh;
-    max-height: 120vh;
   }
 `;
 
 const Title = styled.h4`
   font-size: 26px;
   margin-bottom: 30px;
-  //opacity: 0;
   text-align: center;
 `;
 
 const Overview = styled.p`
   font-size: 14px;
-  //opacity: 0;
   text-align: justify;
   overflow-y: auto;
   padding-right: 5px;
@@ -101,10 +84,8 @@ const Overview = styled.p`
 `;
 
 const Genres = styled.p`
-  //flex: 2;
   font-size: 14px;
   font-style: italic;
-  //opacity: 0;
   color: grey;
   align-self: start;
 `;
@@ -119,6 +100,7 @@ function Suggestion({ movie }) {
       <PosterContainer>
         <Rating rating={Math.round(movie.vote_average * 10) / 10} />
         <img
+          draggable="false"
           alt="poster"
           src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
           onError={(e) => (e.currentTarget.alt = "No poster for this movie...")}
