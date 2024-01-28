@@ -25,9 +25,10 @@ const MainContainer = styled.div`
   width: 100%;
   min-height: 90vh;
   opacity: ${({ $loaded }) => ($loaded ? 1 : 0)};
+  transform: ${({ $show }) => ($show ? "" : "translateY(-100%)")};
   transition: opacity 1s;
   overflow: hidden;
-  transition-delay: 4s;
+  transition-delay: 1s;
 `;
 
 const Container = styled.div`
@@ -43,8 +44,8 @@ const SuggestionsContainer = styled.div`
 `;
 
 const Left = styled.button`
-  position: absolute;
-  top: calc(50% - 13px);
+  position: fixed;
+  top: calc(50vh - 13px);
   left: 5px;
   border: none;
   background-color: rgba(255, 0, 0, 0.1);
@@ -60,8 +61,8 @@ const Left = styled.button`
 `;
 
 const Right = styled.button`
-  position: absolute;
-  top: calc(50% - 13px);
+  position: fixed;
+  top: calc(50vh - 13px);
   right: 5px;
   border: none;
   background-color: rgba(255, 0, 0, 0.1);
@@ -74,6 +75,26 @@ const Right = styled.button`
   font-size: 24px;
   backdrop-filter: blur(10px);
   cursor: pointer;
+`;
+
+const RefetchButton = styled.button`
+  position: absolute;
+  bottom: 10px;
+  left: calc(50vw - 60px);
+  width: 120px;
+  color: gold;
+  background-color: inherit;
+  border: 2px solid gold;
+  border-radius: 5px;
+  padding: 3px;
+  cursor: pointer;
+  transition: all 0.1s;
+
+  &:active {
+    box-shadow:
+      0 0 5px 0 gold,
+      0 0 5px 0 gold inset;
+  }
 `;
 
 function Suggestions() {
@@ -96,7 +117,6 @@ function Suggestions() {
 
     return () => {
       clearTimeout(index);
-      //dispatch(clearSuggestions());
     };
   }, [dispatch, loggedUser, suggestions]);
 
@@ -131,8 +151,12 @@ function Suggestions() {
   return (
     <>
       {show ? <RotorComponent animate={animate} count={count} /> : ""}
-      <MainContainer $show={!show} $loaded={suggestions.length}>
-        <FilmStrip />
+      <MainContainer $show={!show} $loaded={!show}>
+        <FilmStrip
+          ids={suggestions.map((s) => s.id)}
+          position={position}
+          setPosition={setPosition}
+        />
         <Container
           onTouchStart={(e) => {
             setStart(e.targetTouches[0].clientX);
@@ -183,6 +207,17 @@ function Suggestions() {
           >
             <FontAwesomeIcon icon={faChevronRight} />
           </Right>
+          <RefetchButton
+            onClick={() => {
+              setShow(true);
+              setCount(3);
+              setAnimate(true);
+              setPosition(0);
+              dispatch(clearSuggestions());
+            }}
+          >
+            Another batch
+          </RefetchButton>
         </Container>
       </MainContainer>
     </>

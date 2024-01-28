@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import styled, { css, keyframes } from "styled-components";
+import styled from "styled-components";
 import Rating from "./Rating";
 
 const MovieContainer = styled.div`
@@ -13,6 +13,7 @@ const MovieContainer = styled.div`
   padding: 30px;
   overflow: hidden;
   transition: all 0.5s;
+  color: #fff7c6;
 
   @media only screen and (max-width: 700px) {
     flex-direction: column;
@@ -45,8 +46,8 @@ const Description = styled.div`
 `;
 
 const Title = styled.h4`
-  font-size: 26px;
-  margin-bottom: 30px;
+  font-size: 22px;
+  margin-bottom: 10px;
   text-align: center;
 `;
 
@@ -54,6 +55,7 @@ const Overview = styled.p`
   font-size: 14px;
   text-align: justify;
   overflow-y: auto;
+  max-height: 50vh;
   padding-right: 5px;
   margin-bottom: 20px;
 

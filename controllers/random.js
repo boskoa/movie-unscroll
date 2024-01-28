@@ -10,7 +10,9 @@ router.get("/", async (_req, res, next) => {
     const lengthResponse = await axios.get(
       `https://api.themoviedb.org/3/movie/top_rated?api_key=${TMDB_KEY}&include_adult=false`,
     );
-    const page = Math.floor(Math.random() * lengthResponse.data.total_pages);
+    const page = Math.floor(
+      Math.random() * (lengthResponse.data.total_pages / 2),
+    );
     const item = Math.floor(Math.random() * 20);
 
     const result = await axios.get(
@@ -101,7 +103,9 @@ router.get("/personalized", tokenExtractor, async (req, res, next) => {
     const topRandomLength = await axios.get(
       `https://api.themoviedb.org/3/movie/top_rated?api_key=${TMDB_KEY}&include_adult=false`,
     );
-    const page = Math.floor(Math.random() * topRandomLength.data.total_pages);
+    const page = Math.floor(
+      Math.random() * (topRandomLength.data.total_pages / 2),
+    );
 
     const topRandomThree = (
       await axios.get(
@@ -109,13 +113,13 @@ router.get("/personalized", tokenExtractor, async (req, res, next) => {
       )
     ).data.results
       .filter((m) => !watched.includes(m.id))
-      .slice(0, 3)
+      .slice(0, 10)
       .map((m) => m.id);
 
     let allIds = [
       topRandomThree[0],
       ...filteredAllIds,
-      ...topRandomThree.slice(1),
+      ...topRandomThree.slice(1, -filteredAllIds.length),
     ];
 
     let axiosRequests = allIds.map((id) =>
