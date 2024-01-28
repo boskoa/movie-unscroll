@@ -5,7 +5,7 @@ import Rating from "./Rating";
 const MovieContainer = styled.div`
   top: 0px;
   left: 0;
-  min-height: 90vh;
+  min-height: 80vh;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -23,13 +23,13 @@ const MovieContainer = styled.div`
 
 const PosterContainer = styled.div`
   position: relative;
-  height: 70vh;
+  height: 60vh;
 `;
 
 const Description = styled.div`
   position: relative;
   width: 46%;
-  max-height: 80vh;
+  max-height: 70vh;
   overflow: hidden;
   padding: 0 30px;
   display: flex;

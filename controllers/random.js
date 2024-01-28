@@ -1,7 +1,7 @@
 const axios = require("axios");
 const router = require("express").Router();
 const { TMDB_KEY } = require("../utils/config");
-const { User, Actor, Director, Genre } = require("../models");
+const { User, Actor, Director, Genre, Movie } = require("../models");
 const { tokenExtractor } = require("../utils/tokenExtractor");
 const { Op } = require("sequelize");
 
@@ -63,13 +63,19 @@ router.get("/personalized", tokenExtractor, async (req, res, next) => {
 
   let all = [];
 
+  const watched = (
+    await Movie.findAll({ attributes: ["tmdbId"], raw: true })
+  ).map((m) => m.tmdbId);
+
   try {
     if (randomActor) {
       const actorMoviesResponse = await axios.get(
         `https://api.themoviedb.org/3/person/${randomActor.tmdbId}/movie_credits?api_key=${TMDB_KEY}`,
       );
       all = all.concat(
-        actorMoviesResponse.data.cast.filter((m) => m.character !== "Self"),
+        actorMoviesResponse.data.cast.filter(
+          (m) => m.character !== "Self" && !watched.includes(m.id),
+        ),
       );
     }
 
@@ -78,7 +84,9 @@ router.get("/personalized", tokenExtractor, async (req, res, next) => {
         `https://api.themoviedb.org/3/person/${randomDirector.tmdbId}/movie_credits?api_key=${TMDB_KEY}`,
       );
       all = all.concat(
-        directorMoviesResponse.data.crew.filter((m) => m.job !== "Director"),
+        directorMoviesResponse.data.crew.filter(
+          (m) => m.job !== "Director" && !watched.includes(m.id),
+        ),
       );
     }
 
@@ -100,6 +108,7 @@ router.get("/personalized", tokenExtractor, async (req, res, next) => {
         `https://api.themoviedb.org/3/movie/top_rated?api_key=${TMDB_KEY}&include_adult=false&page=${page}`,
       )
     ).data.results
+      .filter((m) => !watched.includes(m.id))
       .slice(0, 3)
       .map((m) => m.id);
 

@@ -60,6 +60,10 @@ export const {
   selectById: selectSuggestionById,
 } = suggestionsAdapter.getSelectors((state) => state.suggestions);
 
+export function selectSuggestionsLoading(state) {
+  return state.suggestions.loading;
+}
+
 export const { clearSuggestions } = suggestionsSlice.actions;
 
 export default suggestionsSlice.reducer;
