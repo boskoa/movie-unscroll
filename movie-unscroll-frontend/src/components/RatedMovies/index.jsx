@@ -8,6 +8,7 @@ import axios from "axios";
 import RatedMovie from "./RatedMovie";
 import useIntersectionObserver from "../../customHooks/useIntersectionObserver";
 import { useNavigate } from "react-router-dom";
+import Search from "./Search";
 
 const SuperMainContainer = styled.div`
   max-width: 700px;
@@ -35,7 +36,7 @@ const Loader = styled.div`
   height: 30px;
   width: 100%;
   margin-top: 20px;
-  border: 1px solid gold;
+  //border: 1px solid gold;
 `;
 
 const LIMIT = 5;
@@ -127,6 +128,7 @@ function RatedMovies() {
     <SuperMainContainer $loaded={loaded}>
       <MainContainer>
         <Title style={{ width: "100%" }} text="Your ratings" />
+        <Search />
         <RatedContainer>
           {ratings.map((r) => (
             <RatedMovie

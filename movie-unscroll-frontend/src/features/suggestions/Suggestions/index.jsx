@@ -3,6 +3,7 @@ import {
   clearSuggestions,
   getSuggestions,
   selectAllSuggestions,
+  selectSuggestionsLoading,
 } from "../suggestionsSlice";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { selectLoggedUser } from "../../login/loginSlice";
@@ -106,6 +107,7 @@ function Suggestions() {
   const [animate, setAnimate] = useState(false);
   const loggedUser = useSelector(selectLoggedUser);
   const suggestions = useSelector(selectAllSuggestions);
+  const loading = useSelector(selectSuggestionsLoading);
   const suggestionsRef = useRef();
   const dispatch = useDispatch();
 
@@ -136,11 +138,11 @@ function Suggestions() {
   }, []);
 
   useEffect(() => {
-    if (count === 0) {
+    if (count === 0 && !loading) {
       setTimeout(() => setShow(false), 1500);
       setAnimate(false);
     }
-  }, [count]);
+  }, [count, loading]);
 
   useLayoutEffect(() => {
     if (suggestions.length && count === 3) {
@@ -151,7 +153,7 @@ function Suggestions() {
   return (
     <>
       {show ? <RotorComponent animate={animate} count={count} /> : ""}
-      <MainContainer $show={!show} $loaded={!show}>
+      <MainContainer $show={!show && !loading} $loaded={!show}>
         <FilmStrip
           ids={suggestions.map((s) => s.id)}
           position={position}

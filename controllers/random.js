@@ -93,7 +93,7 @@ router.get("/personalized", tokenExtractor, async (req, res, next) => {
     }
 
     let filteredAllIds = all.length
-      ? all
+      ? [...new Set(all)]
           .filter((m) => m.genre_ids.some((g) => genres.includes(g)))
           .map((m) => m.id)
           .sort(() => Math.random() - 0.5)
@@ -107,7 +107,7 @@ router.get("/personalized", tokenExtractor, async (req, res, next) => {
       Math.random() * (topRandomLength.data.total_pages / 2),
     );
 
-    const topRandomThree = (
+    const topRandomTen = (
       await axios.get(
         `https://api.themoviedb.org/3/movie/top_rated?api_key=${TMDB_KEY}&include_adult=false&page=${page}`,
       )
@@ -117,11 +117,11 @@ router.get("/personalized", tokenExtractor, async (req, res, next) => {
       .map((m) => m.id);
 
     let allIds = [
-      topRandomThree[0],
+      topRandomTen[0],
       ...filteredAllIds,
-      ...topRandomThree.slice(1, -filteredAllIds.length),
+      ...topRandomTen.slice(1, -filteredAllIds.length),
     ];
-
+    console.log("ALL", allIds.length);
     let axiosRequests = allIds.map((id) =>
       axios.get(
         `https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_KEY}&include_adult=false`,
