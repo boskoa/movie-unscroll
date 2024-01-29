@@ -22,16 +22,34 @@ router.get("/user-ratings", tokenExtractor, async (req, res, next) => {
     return res.status(404).send("Not logged in");
   }
 
+  let where = { userId: user.id };
+  if (req.query.title) {
+    where = {
+      ...where,
+      title: { [Op.iLike]: `%${req.query.title.split("+").join(" ")}%` },
+    };
+  }
+
   let pagination = {};
   if (req.query.pagination) {
     const [offset, limit] = req.query.pagination.split(",");
     pagination = { offset, limit };
   }
 
+  let order = [];
+  if (req.query.order) {
+    const [field, criterium] = req.query.order.split(",");
+    order = [
+      [field, criterium],
+      ["id", "ASC"],
+    ];
+  }
+
   try {
     const ratings = await Movie.findAll({
-      where: { userId: user.id },
+      where,
       ...pagination,
+      order,
     });
     return res.status(200).json(ratings);
   } catch (error) {

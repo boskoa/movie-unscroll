@@ -1,6 +1,6 @@
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 const MainContainer = styled.div`
@@ -15,6 +15,7 @@ const MainContainer = styled.div`
     $active ? "0 0 5px 0 gold, 0 0 5px 0 gold inset" : ""};
   transition: all 0.3s;
   display: flex;
+  justify-content: end;
   align-items: center;
   overflow: hidden;
 `;
@@ -37,9 +38,10 @@ const SearchInput = styled.input`
   border: none;
   outline: none;
   width: 158px;
+  height: 16px;
   background-color: black;
   color: gold;
-  margin-left: 30px;
+  margin-right: 10px;
   flex-shrink: 20;
 
   &:focus {
@@ -47,16 +49,34 @@ const SearchInput = styled.input`
   }
 `;
 
-function Search({ search, setSearch }) {
+function Search({ search, setSearch, setOffset, setRatings }) {
   const [active, setActive] = useState(false);
   const inputRef = useRef();
+  const searchRef = useRef();
+
+  useEffect(() => {
+    if (active) {
+      setTimeout(() => inputRef.current.focus(), 0);
+    }
+  }, [active, setSearch]);
+
+  useEffect(() => {
+    function clickAway(e) {
+      if (searchRef.current && !searchRef.current.contains(e.target)) {
+        setActive(false);
+      }
+    }
+
+    document.addEventListener("click", clickAway);
+
+    return () => document.removeEventListener("click", clickAway);
+  }, []);
 
   return (
-    <MainContainer $active={active}>
+    <MainContainer ref={searchRef} $active={active}>
       <IconContainer
         onClick={() => {
           setActive((p) => !p);
-          //inputRef.current.focus();
         }}
       >
         <FontAwesomeIcon
@@ -67,7 +87,15 @@ function Search({ search, setSearch }) {
           }}
         />
       </IconContainer>
-      <SearchInput ref={inputRef} />
+      <SearchInput
+        ref={inputRef}
+        value={search}
+        onChange={(e) => {
+          setSearch(e.target.value);
+          setOffset(0);
+          setRatings([]);
+        }}
+      />
     </MainContainer>
   );
 }

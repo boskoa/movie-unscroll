@@ -46,11 +46,13 @@ function RatedMovies() {
   const [ratings, setRatings] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const [offset, setOffset] = useState(0);
+  const [search, setSearch] = useState("");
+  const [order, setOrder] = useState("rating,DESC");
   const [stopLoading, setStopLoading] = useState(false);
   const loaderRef = useRef();
   const navigate = useNavigate();
   const intersecting = useIntersectionObserver(loaderRef);
-  const getRatings = useCallback(async (o, token) => {
+  const getRatings = useCallback(async (o, token, order, s = "") => {
     const config = {
       headers: {
         Authorization: `bearer ${token}`,
@@ -58,7 +60,7 @@ function RatedMovies() {
     };
     try {
       const response = await axios.get(
-        `/api/movies/user-ratings?pagination=${o},${LIMIT}`,
+        `/api/movies/user-ratings?title=${s}&order=${order}&pagination=${o},${LIMIT}`,
         config,
       );
       if (response.data.length === 0) {
@@ -106,11 +108,16 @@ function RatedMovies() {
 
   useEffect(() => {
     if (loggedUser) {
-      getRatings(offset, loggedUser.token);
+      getRatings(offset, loggedUser.token, order);
     }
-  }, [loggedUser, offset, getRatings]);
+  }, [loggedUser, offset, getRatings, order]);
 
-  useEffect(() => {}, [loggedUser]);
+  useEffect(() => {
+    if (loggedUser && search) {
+      const s = search.split(" ").join("+");
+      getRatings(offset, loggedUser.token, s, order);
+    }
+  }, [getRatings, loggedUser, offset, search, order]);
 
   useEffect(() => {
     setTimeout(() => setLoaded(true), 500);
@@ -128,7 +135,12 @@ function RatedMovies() {
     <SuperMainContainer $loaded={loaded}>
       <MainContainer>
         <Title style={{ width: "100%" }} text="Your ratings" />
-        <Search />
+        <Search
+          search={search}
+          setSearch={setSearch}
+          setOffset={setOffset}
+          setRatings={setRatings}
+        />
         <RatedContainer>
           {ratings.map((r) => (
             <RatedMovie
