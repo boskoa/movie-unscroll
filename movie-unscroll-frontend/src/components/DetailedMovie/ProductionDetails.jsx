@@ -136,7 +136,7 @@ function ProductionDetails({ movie }) {
                   <CrewImage
                     draggable="false"
                     alt={c.name}
-                    src={`https://image.tmdb.org/t/p/original/${c.profile_path}`}
+                    src={`https://image.tmdb.org/t/p/w185/${c.profile_path}`}
                     onError={(e) => {
                       e.currentTarget.onerror = null;
                       e.currentTarget.src =

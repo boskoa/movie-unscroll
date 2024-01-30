@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Rating from "./Rating";
+import { useEffect, useRef, useState } from "react";
+import useIntersectionObserver from "../../../customHooks/useIntersectionObserver";
 
 const MovieContainer = styled.div`
   top: 0px;
@@ -25,6 +27,9 @@ const MovieContainer = styled.div`
 const PosterContainer = styled.div`
   position: relative;
   height: 60vh;
+  aspect-ratio: 0.6666667;
+  filter: ${({ $loaded }) => ($loaded ? "" : "blur(10px)")};
+  transition: filter 1s;
 `;
 
 const Description = styled.div`
@@ -93,21 +98,40 @@ const Genres = styled.p`
 `;
 
 function Suggestion({ movie }) {
+  const posterRef = useRef();
+  const intersecting = useIntersectionObserver(posterRef);
+  const [load, setLoad] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    if (intersecting) {
+      setLoad(true);
+    }
+  }, [intersecting]);
+
   if (!movie) {
     return null;
   }
 
   return (
     <MovieContainer>
-      <PosterContainer>
+      <PosterContainer ref={posterRef} $loaded={loaded}>
         <Rating rating={Math.round(movie.vote_average * 10) / 10} />
-        <img
-          draggable="false"
-          alt="poster"
-          src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-          onError={(e) => (e.currentTarget.alt = "No poster for this movie...")}
-          height="100%"
-        />
+        {load ? (
+          <img
+            draggable="false"
+            alt="poster"
+            src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+            onError={(e) => {
+              e.currentTarget.alt = "No poster for this movie...";
+              setLoaded(true);
+            }}
+            height="100%"
+            width="100%"
+            onLoad={() => setLoaded(true)}
+            style={{ display: loaded ? "block" : "none" }}
+          />
+        ) : null}
       </PosterContainer>
       <Description>
         <Title>

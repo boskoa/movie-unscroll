@@ -53,7 +53,7 @@ function DetailedMovie() {
 
   return (
     <DetailedContainer $loaded={imageLoaded}>
-      <Title text={movie.title} />
+      <Title text={movie.title} style={{ margin: "0 50px" }} />
       <MainInfo movie={movie} setImageLoaded={setImageLoaded} />
       <Actors actors={movie.credits.cast.slice(0, 10)} />
       <ProductionDetails movie={movie} />

@@ -5,7 +5,6 @@ const OUTER_R = "40px";
 const INNER_R = "34px";
 
 const RatingContainer = styled.div`
-  --ang: ${({ $ang }) => `${$ang}deg`};
   position: absolute;
   top: 10px;
   right: 10px;
@@ -14,38 +13,13 @@ const RatingContainer = styled.div`
   align-items: center;
   width: ${OUTER_R};
   height: ${OUTER_R};
-  background: conic-gradient(gold var(--ang), rgb(255, 68, 0) var(--ang));
+  background: ${({ $ang }) =>
+    `conic-gradient(gold ${$ang}deg, rgb(255, 68, 0) ${$ang}deg)`};
   border-radius: 50%;
   transition: opacity 0.8s;
-  animation: 0.5s fort linear;
 
   &:hover {
     opacity: 0;
-    animation: 0.5s back linear;
-  }
-
-  @keyframes fort {
-    0% {
-      --ang: 0deg;
-    }
-    100% {
-      --ang: ${({ $ang }) => `${$ang}deg`};
-    }
-  }
-
-  @keyframes back {
-    0% {
-      --ang: ${({ $ang }) => `${$ang}deg`};
-    }
-    100% {
-      --ang: 0deg;
-    }
-  }
-
-  @property --ang {
-    syntax: "<angle>";
-    inherits: false;
-    initial-value: 0deg;
   }
 `;
 

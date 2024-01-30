@@ -68,7 +68,7 @@ function Actor({ actor, elementWidth }) {
       <ActorImage
         draggable="false"
         alt={actor.name}
-        src={`https://image.tmdb.org/t/p/original/${actor.profile_path}`}
+        src={`https://image.tmdb.org/t/p/w185/${actor.profile_path}`}
         onError={(e) => {
           e.currentTarget.onerror = null;
           e.currentTarget.src = actor.gender === 1 ? actressLogo : actorLogo;
