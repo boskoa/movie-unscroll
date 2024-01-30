@@ -9,6 +9,8 @@ import RatedMovie from "./RatedMovie";
 import useIntersectionObserver from "../../customHooks/useIntersectionObserver";
 import { useNavigate } from "react-router-dom";
 import Search from "./Search";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
 const SuperMainContainer = styled.div`
   max-width: 700px;
@@ -39,6 +41,33 @@ const Loader = styled.div`
   //border: 1px solid gold;
 `;
 
+const FilterContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 20px;
+`;
+
+const OrderContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+  border: 2px solid gold;
+  border-radius: 15px;
+  cursor: pointer;
+  color: gold;
+  transform: ${({ $rotate }) => ($rotate ? "rotateZ(180deg)" : "")};
+  transition: all 0.1s;
+
+  &:active {
+    box-shadow:
+      0 0 5px 0 gold,
+      0 0 5px 0 gold inset;
+  }
+`;
+
 const LIMIT = 5;
 
 function RatedMovies() {
@@ -52,7 +81,7 @@ function RatedMovies() {
   const loaderRef = useRef();
   const navigate = useNavigate();
   const intersecting = useIntersectionObserver(loaderRef);
-  const getRatings = useCallback(async (o, token, order, s = "") => {
+  const getRatings = useCallback(async (o, token, s, order) => {
     const config = {
       headers: {
         Authorization: `bearer ${token}`,
@@ -108,16 +137,14 @@ function RatedMovies() {
 
   useEffect(() => {
     if (loggedUser) {
-      getRatings(offset, loggedUser.token, order);
+      if (!search.length) {
+        getRatings(offset, loggedUser.token, "", order);
+      } else {
+        const s = search.split(" ").join("+");
+        getRatings(offset, loggedUser.token, s, order);
+      }
     }
-  }, [loggedUser, offset, getRatings, order]);
-
-  useEffect(() => {
-    if (loggedUser && search) {
-      const s = search.split(" ").join("+");
-      getRatings(offset, loggedUser.token, s, order);
-    }
-  }, [getRatings, loggedUser, offset, search, order]);
+  }, [loggedUser, offset, getRatings, order, search]);
 
   useEffect(() => {
     setTimeout(() => setLoaded(true), 500);
@@ -127,6 +154,10 @@ function RatedMovies() {
     if (!loggedUser) navigate("/");
   }, [loggedUser, navigate]);
 
+  useEffect(() => {
+    console.log(order);
+  }, [order]);
+
   if (!loggedUser) return <NotLogged />;
 
   if (!ratings) return null;
@@ -135,12 +166,26 @@ function RatedMovies() {
     <SuperMainContainer $loaded={loaded}>
       <MainContainer>
         <Title style={{ width: "100%" }} text="Your ratings" />
-        <Search
-          search={search}
-          setSearch={setSearch}
-          setOffset={setOffset}
-          setRatings={setRatings}
-        />
+        <FilterContainer>
+          <Search
+            search={search}
+            setSearch={setSearch}
+            setOffset={setOffset}
+            setRatings={setRatings}
+          />
+          <OrderContainer
+            onClick={() => {
+              setOrder((p) =>
+                p === "rating,DESC" ? "rating,ASC" : "rating,DESC",
+              );
+              setOffset(0);
+              setRatings([]);
+            }}
+            $rotate={order === "rating,DESC"}
+          >
+            <FontAwesomeIcon icon={faChevronUp} />
+          </OrderContainer>
+        </FilterContainer>
         <RatedContainer>
           {ratings.map((r) => (
             <RatedMovie

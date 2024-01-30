@@ -5,10 +5,8 @@ import styled from "styled-components";
 
 const MainContainer = styled.div`
   position: relative;
-  align-self: flex-start;
   height: 30px;
   width: ${({ $active }) => ($active ? "200px" : "30px")};
-  margin-left: 14px;
   border: 2px solid gold;
   border-radius: 15px;
   box-shadow: ${({ $active }) =>
@@ -41,7 +39,6 @@ const SearchInput = styled.input`
   height: 16px;
   background-color: black;
   color: gold;
-  margin-right: 10px;
   flex-shrink: 20;
 
   &:focus {
@@ -62,7 +59,11 @@ function Search({ search, setSearch, setOffset, setRatings }) {
 
   useEffect(() => {
     function clickAway(e) {
-      if (searchRef.current && !searchRef.current.contains(e.target)) {
+      if (
+        !inputRef.current.value.length &&
+        searchRef.current &&
+        !searchRef.current.contains(e.target)
+      ) {
         setActive(false);
       }
     }
