@@ -93,9 +93,13 @@ router.get("/personalized", tokenExtractor, async (req, res, next) => {
     }
 
     let filteredAllIds = all.length
-      ? [...new Set(all)]
-          .filter((m) => m.genre_ids.some((g) => genres.includes(g)))
-          .map((m) => m.id)
+      ? [
+          ...new Set(
+            all
+              .filter((m) => m.genre_ids.some((g) => genres.includes(g)))
+              .map((m) => m.id),
+          ),
+        ]
           .sort(() => Math.random() - 0.5)
           .slice(0, 7)
       : [];
@@ -121,7 +125,7 @@ router.get("/personalized", tokenExtractor, async (req, res, next) => {
       ...filteredAllIds,
       ...topRandomTen.slice(1, -filteredAllIds.length),
     ];
-    console.log("ALL", allIds.length);
+
     let axiosRequests = allIds.map((id) =>
       axios.get(
         `https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_KEY}&include_adult=false`,

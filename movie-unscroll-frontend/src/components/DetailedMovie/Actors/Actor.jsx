@@ -78,7 +78,7 @@ function Actor({ actor, elementWidth }) {
         <ActorData>
           <p>{actor.name}</p>
           <p style={{ fontWeight: 400 }}>
-            <i>as {actor.character}</i>
+            {actor.character && <i>as {actor.character}</i>}
           </p>
         </ActorData>
       </ActorDataContainer>

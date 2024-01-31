@@ -129,7 +129,7 @@ function Suggestion({ movie }) {
             height="100%"
             width="100%"
             onLoad={() => setLoaded(true)}
-            style={{ display: loaded ? "block" : "none" }}
+            style={{ opacity: loaded ? "1" : "0" }}
           />
         ) : null}
       </PosterContainer>
