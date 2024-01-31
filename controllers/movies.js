@@ -57,6 +57,24 @@ router.get("/user-ratings", tokenExtractor, async (req, res, next) => {
   }
 });
 
+router.get("/trending", tokenExtractor, async (req, res, next) => {
+  const user = await User.findByPk(req.decodedToken.id);
+  if (!user) {
+    return res.status(404).send("Not logged in");
+  }
+
+  let page = req.query.page;
+
+  try {
+    const trending = await axios.get(
+      `https://api.themoviedb.org/3/trending/movie/week?api_key=${TMDB_KEY}&include_adult=false&page=${page}`,
+    );
+    return res.status(200).json(trending.data.results);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get("/:id", tokenExtractor, async (req, res, next) => {
   const user = await User.findByPk(req.decodedToken.id);
 

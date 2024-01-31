@@ -1,11 +1,14 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectLoggedUser } from "../../features/login/loginSlice";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Moto from "./Moto";
 import Section from "./Section";
 import Title from "../Title";
 import styled from "styled-components";
+import {
+  getTrending,
+  selectAllTrending,
+} from "../../features/trending/trendingSlice";
 
 const MainContainer = styled.div`
   display: flex;
@@ -20,23 +23,31 @@ const SectionsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 30px;
 `;
 
 function Home() {
   const [loaded, setLoaded] = useState(false);
   const loggedUser = useSelector(selectLoggedUser);
+  const trending = useSelector(selectAllTrending).slice(0, 4);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!loggedUser) {
       navigate(-1);
+    } else {
+      dispatch(getTrending({ token: loggedUser.token, page: 1 }));
     }
-  }, [loggedUser, navigate]);
+  }, [dispatch, loggedUser, navigate]);
 
   useEffect(() => {
     setTimeout(() => setLoaded(true), 500);
   }, []);
+
+  useEffect(() => {
+    console.log("TRENDING", trending);
+  }, [trending]);
 
   if (!loggedUser) return null;
 
@@ -44,10 +55,10 @@ function Home() {
     <MainContainer $loaded={loaded}>
       <Title text="home" />
       <SectionsContainer>
-        <Section title="trending" />
-        <Section title="theaters" />
-        <Section title="popular" />
-        <Section title="top rated" />
+        <Section title="trending" movies={trending} />
+        <Section title="theaters" movies={trending} />
+        <Section title="popular" movies={trending} />
+        <Section title="top rated" movies={trending} />
       </SectionsContainer>
     </MainContainer>
   );

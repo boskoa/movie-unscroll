@@ -11,8 +11,10 @@ const TitleContainer = styled.h3`
   font-size: 26px;
   text-transform: uppercase;
   color: black;
+  mix-blend-mode: lighten;
   writing-mode: vertical-rl;
   text-orientation: upright;
+  z-index: 1;
 `;
 
 function SectionTitle({ title }) {
