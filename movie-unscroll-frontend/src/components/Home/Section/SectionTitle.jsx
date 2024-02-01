@@ -8,7 +8,7 @@ const TitleContainer = styled.h3`
   justify-content: center;
   align-items: center;
   background-color: gold;
-  font-size: 26px;
+  font-size: 22px;
   text-transform: uppercase;
   color: black;
   mix-blend-mode: lighten;

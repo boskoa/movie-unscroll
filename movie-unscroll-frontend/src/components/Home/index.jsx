@@ -15,15 +15,25 @@ const MainContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 30px;
+  margin-bottom: 50px;
   opacity: ${({ $loaded }) => ($loaded ? 1 : 0)};
   transition: opacity 0.5s;
 `;
 
 const SectionsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-areas:
+    "trending theaters"
+    "popular top-rated";
   gap: 30px;
+
+  @media only screen and (max-width: 920px) {
+    grid-template-areas:
+      "trending"
+      "theaters"
+      "popular"
+      "top-rated";
+  }
 `;
 
 function Home() {
@@ -44,10 +54,6 @@ function Home() {
   useEffect(() => {
     setTimeout(() => setLoaded(true), 500);
   }, []);
-
-  useEffect(() => {
-    console.log("TRENDING", trending);
-  }, [trending]);
 
   if (!loggedUser) return null;
 
