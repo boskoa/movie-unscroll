@@ -58,6 +58,7 @@ const Title = styled.h4`
   justify-content: center;
   align-items: center;
   padding: 2px;
+  color: #fff7c6;
 `;
 
 const Highlight = styled.div`
@@ -66,7 +67,7 @@ const Highlight = styled.div`
   width: 100%;
   height: 25%;
   background-color: ${({ $color }) => $color};
-  mix-blend-mode: lighten;
+  mix-blend-mode: exclusion;
   transform: translateY(${({ $position }) => $position * 100}%);
   transition: all 1s;
 `;

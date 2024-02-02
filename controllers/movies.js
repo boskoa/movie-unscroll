@@ -75,6 +75,60 @@ router.get("/trending", tokenExtractor, async (req, res, next) => {
   }
 });
 
+router.get("/theaters", tokenExtractor, async (req, res, next) => {
+  const user = await User.findByPk(req.decodedToken.id);
+  if (!user) {
+    return res.status(404).send("Not logged in");
+  }
+
+  let page = req.query.page;
+
+  try {
+    const theaters = await axios.get(
+      `https://api.themoviedb.org/3/movie/now_playing?api_key=${TMDB_KEY}&include_adult=false?language=en-US&region=GB&page=${page}`,
+    );
+    return res.status(200).json(theaters.data.results);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/popular", tokenExtractor, async (req, res, next) => {
+  const user = await User.findByPk(req.decodedToken.id);
+  if (!user) {
+    return res.status(404).send("Not logged in");
+  }
+
+  let page = req.query.page;
+
+  try {
+    const popular = await axios.get(
+      `https://api.themoviedb.org/3/movie/popular?api_key=${TMDB_KEY}&include_adult=false?language=en-US&page=${page}`,
+    );
+    return res.status(200).json(popular.data.results);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/top-rated", tokenExtractor, async (req, res, next) => {
+  const user = await User.findByPk(req.decodedToken.id);
+  if (!user) {
+    return res.status(404).send("Not logged in");
+  }
+
+  let page = req.query.page;
+
+  try {
+    const top = await axios.get(
+      `https://api.themoviedb.org/3/movie/top_rated?api_key=${TMDB_KEY}&include_adult=false?language=en-US&page=${page}`,
+    );
+    return res.status(200).json(top.data.results);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get("/:id", tokenExtractor, async (req, res, next) => {
   const user = await User.findByPk(req.decodedToken.id);
 

@@ -17,7 +17,7 @@ const translate = keyframes`
   0% {
     transform: translateY(0);
   }
-  80% {
+  60% {
     transform: translateY(0);
   }
   100% {
@@ -31,8 +31,9 @@ const Scanner = styled.div`
   margin: 0 5px;
   position: absolute;
   top: 0;
-  background-color: ${({ $color }) => $color};
-  box-shadow: 0 0 5px 0 ${({ $color }) => $color};
+  background-color: rgb(150, 4, 45);
+  box-shadow: 0 0 5px 0 rgb(150, 4, 45);
+  mix-blend-mode: lighten;
   transform: translateY(0px);
   animation: ${() => css`7s ${translate} infinite`};
 `;

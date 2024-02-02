@@ -38,7 +38,6 @@ const Loader = styled.div`
   height: 30px;
   width: 100%;
   margin-top: 20px;
-  //border: 1px solid gold;
 `;
 
 const FilterContainer = styled.div`

@@ -9,6 +9,18 @@ import {
   getTrending,
   selectAllTrending,
 } from "../../features/trending/trendingSlice";
+import {
+  getTheaters,
+  selectAllTheaters,
+} from "../../features/theaters/theatersSlice";
+import {
+  getPopular,
+  selectAllPopular,
+} from "../../features/popular/popularSlice";
+import {
+  getTopRated,
+  selectAllTopRated,
+} from "../../features/topRated/topRatedSlice";
 
 const MainContainer = styled.div`
   display: flex;
@@ -40,6 +52,9 @@ function Home() {
   const [loaded, setLoaded] = useState(false);
   const loggedUser = useSelector(selectLoggedUser);
   const trending = useSelector(selectAllTrending).slice(0, 4);
+  const theaters = useSelector(selectAllTheaters).slice(0, 4);
+  const popular = useSelector(selectAllPopular).slice(0, 4);
+  const topRated = useSelector(selectAllTopRated).slice(0, 4);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -48,6 +63,9 @@ function Home() {
       navigate(-1);
     } else {
       dispatch(getTrending({ token: loggedUser.token, page: 1 }));
+      dispatch(getTheaters({ token: loggedUser.token, page: 1 }));
+      dispatch(getPopular({ token: loggedUser.token, page: 1 }));
+      dispatch(getTopRated({ token: loggedUser.token, page: 1 }));
     }
   }, [dispatch, loggedUser, navigate]);
 
@@ -63,27 +81,27 @@ function Home() {
       <SectionsContainer>
         <Section
           delay={0}
-          sectionColor="gold"
+          sectionColor="orange"
           title="trending"
           movies={trending}
         />
         <Section
           delay={1}
-          sectionColor="teal"
+          sectionColor="rgb(178, 180, 40)"
           title="theaters"
-          movies={trending}
+          movies={theaters}
         />
         <Section
           delay={2}
-          sectionColor="orange"
+          sectionColor="rgb(205, 165, 10)"
           title="popular"
-          movies={trending}
+          movies={popular}
         />
         <Section
           delay={3}
-          sectionColor="limegreen"
+          sectionColor="rgb(191, 68, 70)"
           title="top rated"
-          movies={trending}
+          movies={topRated}
         />
       </SectionsContainer>
     </MainContainer>

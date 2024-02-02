@@ -6,17 +6,17 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 
-const BASE_URL = "/api/movies/trending";
+const BASE_URL = "/api/movies/top-rated";
 
-const trendingAdapter = createEntityAdapter();
+const topRatedAdapter = createEntityAdapter();
 
-const initialState = trendingAdapter.getInitialState({
+const initialState = topRatedAdapter.getInitialState({
   loading: false,
   error: null,
 });
 
-export const getTrending = createAsyncThunk(
-  "trending/getTrending",
+export const getTopRated = createAsyncThunk(
+  "topRated/getTopRated",
   async (data) => {
     const { token, page } = data;
     const config = {
@@ -29,22 +29,22 @@ export const getTrending = createAsyncThunk(
   },
 );
 
-const trendingSlice = createSlice({
+const topRatedSlice = createSlice({
   name: "trending",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getTrending.pending, (state) => {
+      .addCase(getTopRated.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(getTrending.fulfilled, (state, action) => {
+      .addCase(getTopRated.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        trendingAdapter.upsertMany(state, action.payload);
+        topRatedAdapter.upsertMany(state, action.payload);
       })
-      .addCase(getTrending.rejected, (state, action) => {
+      .addCase(getTopRated.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });
@@ -52,13 +52,13 @@ const trendingSlice = createSlice({
 });
 
 export const {
-  selectAll: selectAllTrending,
-  selectIds: selectTrendingIds,
-  selectById: selectTrendingById,
-} = trendingAdapter.getSelectors((state) => state.trending);
+  selectAll: selectAllTopRated,
+  selectIds: selectTopRatedIds,
+  selectById: selectTopRatedById,
+} = topRatedAdapter.getSelectors((state) => state.topRated);
 
-export function selectTrendingLoading(state) {
-  return state.trending.loading;
+export function selectTopRatedLoading(state) {
+  return state.topRated.loading;
 }
 
-export default trendingSlice.reducer;
+export default topRatedSlice.reducer;
