@@ -61,10 +61,30 @@ function Home() {
     <MainContainer $loaded={loaded}>
       <Title text="home" />
       <SectionsContainer>
-        <Section title="trending" movies={trending} />
-        <Section title="theaters" movies={trending} />
-        <Section title="popular" movies={trending} />
-        <Section title="top rated" movies={trending} />
+        <Section
+          delay={0}
+          sectionColor="gold"
+          title="trending"
+          movies={trending}
+        />
+        <Section
+          delay={1}
+          sectionColor="teal"
+          title="theaters"
+          movies={trending}
+        />
+        <Section
+          delay={2}
+          sectionColor="orange"
+          title="popular"
+          movies={trending}
+        />
+        <Section
+          delay={3}
+          sectionColor="limegreen"
+          title="top rated"
+          movies={trending}
+        />
       </SectionsContainer>
     </MainContainer>
   );

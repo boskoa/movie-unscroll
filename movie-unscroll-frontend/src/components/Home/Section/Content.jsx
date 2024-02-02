@@ -42,6 +42,10 @@ const TitlesContainer = styled.div`
   font-size: 16px;
   overflow: hidden;
 
+  &:hover > span {
+    transform: rotateZ(-45deg) translateY(0px);
+  }
+
   @media only screen and (max-width: 600px) {
     font-size: 12px;
   }
@@ -53,6 +57,7 @@ const Title = styled.h4`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 2px;
 `;
 
 const Highlight = styled.div`
@@ -60,13 +65,31 @@ const Highlight = styled.div`
   top: 0;
   width: 100%;
   height: 25%;
-  background-color: rgb(255, 68, 0);
+  background-color: ${({ $color }) => $color};
   mix-blend-mode: lighten;
   transform: translateY(${({ $position }) => $position * 100}%);
   transition: all 1s;
 `;
 
-function Content({ movies, position, setPosition }) {
+const More = styled.span`
+  position: absolute;
+  bottom: -30px;
+  right: -30px;
+  height: 60px;
+  width: 60px;
+  background-color: gold;
+  box-shadow: 0 0 5px 0 gold;
+  color: black;
+  font-size: 12px;
+  text-align: center;
+  z-index: 3;
+  transform: rotateZ(-45deg) translateY(30px);
+  transition: all 0.5s;
+  cursor: pointer;
+  mix-blend-mode: difference;
+`;
+
+function Content({ sectionColor, movies, position, setPosition }) {
   const posterRef = useRef();
   const intersecting = useIntersectionObserver(posterRef);
   const [load, setLoad] = useState(false);
@@ -105,7 +128,8 @@ function Content({ movies, position, setPosition }) {
             {m.title}
           </Title>
         ))}
-        <Highlight $position={position} />
+        <Highlight $color={sectionColor} $position={position} />
+        <More>more</More>
       </TitlesContainer>
     </ContentContainer>
   );

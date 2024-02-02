@@ -7,18 +7,17 @@ const TitleContainer = styled.h3`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: gold;
+  background-color: ${({ $color }) => $color};
   font-size: 22px;
   text-transform: uppercase;
   color: black;
   mix-blend-mode: lighten;
   writing-mode: vertical-rl;
   text-orientation: upright;
-  z-index: 1;
 `;
 
-function SectionTitle({ title }) {
-  return <TitleContainer>{title}</TitleContainer>;
+function SectionTitle({ title, sectionColor }) {
+  return <TitleContainer $color={sectionColor}>{title}</TitleContainer>;
 }
 
 export default SectionTitle;
