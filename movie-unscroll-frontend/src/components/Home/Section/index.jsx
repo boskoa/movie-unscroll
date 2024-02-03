@@ -58,6 +58,7 @@ function Section({ title, movies, delay, sectionColor }) {
       <SectionTitle sectionColor={sectionColor} title={title} />
       <Scanner $color={sectionColor} />
       <Content
+        title={title}
         sectionColor={sectionColor}
         movies={movies}
         position={position}

@@ -14,6 +14,7 @@ const DetailedMovie = lazy(() => import("./components/DetailedMovie"));
 const RatedMovies = lazy(() => import("./components/RatedMovies"));
 const Home = lazy(() => import("./components/Home"));
 const Suggestions = lazy(() => import("./features/suggestions/Suggestions"));
+const AllTrending = lazy(() => import("./features/trending/AllTrending"));
 
 function App() {
   const dispatch = useDispatch();
@@ -64,6 +65,14 @@ function App() {
           element: (
             <Suspense>
               <Suggestions />
+            </Suspense>
+          ),
+        },
+        {
+          path: "trending",
+          element: (
+            <Suspense>
+              <AllTrending />
             </Suspense>
           ),
         },

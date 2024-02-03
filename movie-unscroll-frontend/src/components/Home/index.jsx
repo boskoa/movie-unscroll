@@ -35,16 +35,16 @@ const MainContainer = styled.div`
 const SectionsContainer = styled.div`
   display: grid;
   grid-template-areas:
-    "trending theaters"
-    "popular top-rated";
+    "trending top-rated"
+    "popular theaters";
   gap: 30px;
 
   @media only screen and (max-width: 920px) {
     grid-template-areas:
       "trending"
-      "theaters"
+      "top-rated"
       "popular"
-      "top-rated";
+      "theaters";
   }
 `;
 
@@ -88,8 +88,8 @@ function Home() {
         <Section
           delay={1}
           sectionColor="rgb(178, 180, 40)"
-          title="theaters"
-          movies={theaters}
+          title="top rated"
+          movies={topRated}
         />
         <Section
           delay={2}
@@ -100,8 +100,8 @@ function Home() {
         <Section
           delay={3}
           sectionColor="rgb(191, 68, 70)"
-          title="top rated"
-          movies={topRated}
+          title="theaters"
+          movies={theaters}
         />
       </SectionsContainer>
     </MainContainer>

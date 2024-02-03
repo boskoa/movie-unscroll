@@ -82,6 +82,7 @@ const More = styled.span`
   box-shadow: 0 0 5px 0 gold;
   color: black;
   font-size: 12px;
+  font-weight: 600;
   text-align: center;
   z-index: 3;
   transform: rotateZ(-45deg) translateY(30px);
@@ -90,7 +91,7 @@ const More = styled.span`
   mix-blend-mode: difference;
 `;
 
-function Content({ sectionColor, movies, position, setPosition }) {
+function Content({ title, sectionColor, movies, position, setPosition }) {
   const posterRef = useRef();
   const intersecting = useIntersectionObserver(posterRef);
   const [load, setLoad] = useState(false);
@@ -130,7 +131,14 @@ function Content({ sectionColor, movies, position, setPosition }) {
           </Title>
         ))}
         <Highlight $color={sectionColor} $position={position} />
-        <More>more</More>
+        <More>
+          <Link
+            to={`/${title}`}
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            more
+          </Link>
+        </More>
       </TitlesContainer>
     </ContentContainer>
   );
