@@ -80,6 +80,7 @@ const TitleComponent = styled.h1`
   font-weight: 400;
   letter-spacing: 2px;
   padding: 5px;
+  min-width: 160px;
   color: gold;
   border: 3px solid gold;
   box-shadow:

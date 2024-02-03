@@ -45,6 +45,7 @@ const Dots = styled.span`
   font-weight: 600;
   background: linear-gradient(transparent, #004141f2 80%, #004141);
   padding-left: 10px;
+  letter-spacing: 2px;
 `;
 
 const Title = styled(Link)`
