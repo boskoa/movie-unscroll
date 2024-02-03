@@ -133,8 +133,14 @@ function Content({ title, sectionColor, movies, position, setPosition }) {
         <Highlight $color={sectionColor} $position={position} />
         <More>
           <Link
-            to={`/${title}`}
-            style={{ textDecoration: "none", color: "inherit" }}
+            to={`/${title.replace(" ", "-")}`}
+            style={{
+              textDecoration: "none",
+              color: "inherit",
+              height: "100%",
+              width: "100%",
+              display: "inline-block",
+            }}
           >
             more
           </Link>

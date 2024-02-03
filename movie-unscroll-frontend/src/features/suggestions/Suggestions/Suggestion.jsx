@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Rating from "./Rating";
+import Rating from "../../../components/Rating";
 import { useEffect, useRef, useState } from "react";
 import useIntersectionObserver from "../../../customHooks/useIntersectionObserver";
 
@@ -116,7 +116,7 @@ function Suggestion({ movie }) {
   return (
     <MovieContainer>
       <PosterContainer ref={posterRef} $loaded={loaded}>
-        <Rating rating={Math.round(movie.vote_average * 10) / 10} />
+        <Rating rating={movie.vote_average} />
         {load ? (
           <img
             draggable="false"

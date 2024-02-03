@@ -15,6 +15,9 @@ const RatedMovies = lazy(() => import("./components/RatedMovies"));
 const Home = lazy(() => import("./components/Home"));
 const Suggestions = lazy(() => import("./features/suggestions/Suggestions"));
 const AllTrending = lazy(() => import("./features/trending/AllTrending"));
+const AllTopRated = lazy(() => import("./features/topRated/AllTopRated"));
+const AllPopular = lazy(() => import("./features/popular/AllPopular"));
+const AllTheaters = lazy(() => import("./features/theaters/AllTheaters"));
 
 function App() {
   const dispatch = useDispatch();
@@ -73,6 +76,30 @@ function App() {
           element: (
             <Suspense>
               <AllTrending />
+            </Suspense>
+          ),
+        },
+        {
+          path: "top-rated",
+          element: (
+            <Suspense>
+              <AllTopRated />
+            </Suspense>
+          ),
+        },
+        {
+          path: "popular",
+          element: (
+            <Suspense>
+              <AllPopular />
+            </Suspense>
+          ),
+        },
+        {
+          path: "theaters",
+          element: (
+            <Suspense>
+              <AllTheaters />
             </Suspense>
           ),
         },

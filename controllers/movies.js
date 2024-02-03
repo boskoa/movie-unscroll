@@ -67,7 +67,7 @@ router.get("/trending", tokenExtractor, async (req, res, next) => {
 
   try {
     const trending = await axios.get(
-      `https://api.themoviedb.org/3/trending/movie/week?api_key=${TMDB_KEY}&include_adult=false&page=${page}`,
+      `https://api.themoviedb.org/3/trending/movie/day?api_key=${TMDB_KEY}&include_adult=false&page=${page}`,
     );
     return res.status(200).json(trending.data.results);
   } catch (error) {
@@ -85,7 +85,7 @@ router.get("/theaters", tokenExtractor, async (req, res, next) => {
 
   try {
     const theaters = await axios.get(
-      `https://api.themoviedb.org/3/movie/now_playing?api_key=${TMDB_KEY}&include_adult=false?language=en-US&region=GB&page=${page}`,
+      `https://api.themoviedb.org/3/movie/now_playing?api_key=${TMDB_KEY}&include_adult=false?language=en-US&region=US&page=${page}`,
     );
     return res.status(200).json(theaters.data.results);
   } catch (error) {

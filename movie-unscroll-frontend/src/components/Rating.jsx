@@ -48,7 +48,7 @@ function Rating({ rating }) {
 
   return (
     <RatingContainer $ang={ang}>
-      <RatingCounter>{rating}</RatingCounter>
+      <RatingCounter>{Math.round(rating * 10) / 10}</RatingCounter>
     </RatingContainer>
   );
 }

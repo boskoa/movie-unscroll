@@ -51,9 +51,13 @@ const SectionsContainer = styled.div`
 function Home() {
   const [loaded, setLoaded] = useState(false);
   const loggedUser = useSelector(selectLoggedUser);
-  const trending = useSelector(selectAllTrending).slice(0, 4);
   const theaters = useSelector(selectAllTheaters).slice(0, 4);
-  const popular = useSelector(selectAllPopular).slice(0, 4);
+  const trending = useSelector(selectAllTrending)
+    .filter((t) => !theaters.map((m) => m.id).includes(t.id))
+    .slice(0, 4);
+  const popular = useSelector(selectAllPopular)
+    .filter((t) => !theaters.map((m) => m.id).includes(t.id))
+    .slice(0, 4);
   const topRated = useSelector(selectAllTopRated).slice(0, 4);
   const navigate = useNavigate();
   const dispatch = useDispatch();

@@ -1,9 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getTrending,
-  selectAllTrending,
-  selectTrendingLoading,
-} from "../trendingSlice";
 import MovieListItem from "../../../components/MovieListItem";
 import Title from "../../../components/Title";
 import { useEffect, useState } from "react";
@@ -13,17 +8,22 @@ import {
   MainContainer,
   MovieContainer,
 } from "../../../components/styledComponents";
+import {
+  getTopRated,
+  selectAllTopRated,
+  selectTopRatedLoading,
+} from "../topRatedSlice";
 
-function AllTrending() {
+function AllTopRated() {
   const loggedUser = useSelector(selectLoggedUser);
-  const trending = useSelector(selectAllTrending);
+  const topRated = useSelector(selectAllTopRated);
   const [page, setPage] = useState(1);
-  const loading = useSelector(selectTrendingLoading);
+  const loading = useSelector(selectTopRatedLoading);
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getTrending({ token: loggedUser.token, page }));
+    dispatch(getTopRated({ token: loggedUser.token, page }));
   }, [page, loggedUser, dispatch]);
 
   useEffect(() => {
@@ -38,9 +38,9 @@ function AllTrending() {
 
   return (
     <MainContainer $loaded={loaded}>
-      <Title text="trending" />
+      <Title text="top rated" />
       <MovieContainer $loaded={!loading}>
-        {trending.slice(page * 20 - 20, page * 20).map((t) => (
+        {topRated.slice(page * 20 - 20, page * 20).map((t) => (
           <MovieListItem key={t.id} movie={t} />
         ))}
       </MovieContainer>
@@ -49,4 +49,4 @@ function AllTrending() {
   );
 }
 
-export default AllTrending;
+export default AllTopRated;
