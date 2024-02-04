@@ -23,6 +23,7 @@ const AllTrending = lazy(() => import("./features/trending/AllTrending"));
 const AllTopRated = lazy(() => import("./features/topRated/AllTopRated"));
 const AllPopular = lazy(() => import("./features/popular/AllPopular"));
 const AllTheaters = lazy(() => import("./features/theaters/AllTheaters"));
+const Discover = lazy(() => import("./features/discover/Discover"));
 
 function App() {
   const dispatch = useDispatch();
@@ -131,6 +132,14 @@ function App() {
           element: (
             <Suspense>
               <AllTheaters />
+            </Suspense>
+          ),
+        },
+        {
+          path: "discover",
+          element: (
+            <Suspense>
+              <Discover />
             </Suspense>
           ),
         },

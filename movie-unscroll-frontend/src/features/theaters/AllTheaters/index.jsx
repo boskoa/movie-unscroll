@@ -13,6 +13,7 @@ import {
   selectAllTheaters,
   selectTheatersLoading,
 } from "../theatersSlice";
+import { useNavigate } from "react-router-dom";
 
 function AllTheaters() {
   const loggedUser = useSelector(selectLoggedUser);
@@ -21,6 +22,7 @@ function AllTheaters() {
   const loading = useSelector(selectTheatersLoading);
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getTheaters({ token: loggedUser.token, page }));
@@ -35,6 +37,12 @@ function AllTheaters() {
 
     return () => clearTimeout(index);
   }, []);
+
+  useEffect(() => {
+    if (!loggedUser) {
+      navigate(-1);
+    }
+  }, [loggedUser, navigate]);
 
   return (
     <MainContainer $loaded={loaded}>

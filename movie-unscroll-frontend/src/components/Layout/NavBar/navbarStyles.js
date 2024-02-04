@@ -142,7 +142,6 @@ const MainIcon = styled.div`
   border-radius: 50%;
   background-color: ${({ $color }) => $color};
   overflow: hidden;
-  //filter: brightness(0.9);
 `;
 
 const UserIcon = styled.img`
@@ -150,7 +149,6 @@ const UserIcon = styled.img`
   height: 100%;
   object-fit: contain;
   border-radius: 50%;
-  //padding: 2px;
 `;
 
 export { Icon, slideOption, blurOut, MenuIcon, MainIcon, UserIcon };

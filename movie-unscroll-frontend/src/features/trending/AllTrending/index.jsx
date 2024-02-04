@@ -13,6 +13,7 @@ import {
   MainContainer,
   MovieContainer,
 } from "../../../components/styledComponents";
+import { useNavigate } from "react-router-dom";
 
 function AllTrending() {
   const loggedUser = useSelector(selectLoggedUser);
@@ -21,6 +22,7 @@ function AllTrending() {
   const loading = useSelector(selectTrendingLoading);
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getTrending({ token: loggedUser.token, page }));
@@ -35,6 +37,12 @@ function AllTrending() {
 
     return () => clearTimeout(index);
   }, []);
+
+  useEffect(() => {
+    if (!loggedUser) {
+      navigate(-1);
+    }
+  }, [loggedUser, navigate]);
 
   return (
     <MainContainer $loaded={loaded}>

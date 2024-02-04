@@ -21,6 +21,7 @@ import {
   getTopRated,
   selectAllTopRated,
 } from "../../features/topRated/topRatedSlice";
+import DiscoverSection from "./DiscoverSection";
 
 const MainContainer = styled.div`
   display: flex;
@@ -36,7 +37,8 @@ const SectionsContainer = styled.div`
   display: grid;
   grid-template-areas:
     "trending top-rated"
-    "popular theaters";
+    "popular theaters"
+    "discover discover";
   gap: 30px;
 
   @media only screen and (max-width: 920px) {
@@ -44,7 +46,9 @@ const SectionsContainer = styled.div`
       "trending"
       "top-rated"
       "popular"
-      "theaters";
+      "theaters"
+      "discover"
+      "discover";
   }
 `;
 
@@ -107,6 +111,7 @@ function Home() {
           title="theaters"
           movies={theaters}
         />
+        <DiscoverSection sectionColor="rgb(169, 255, 78)" title="discover" />
       </SectionsContainer>
     </MainContainer>
   );

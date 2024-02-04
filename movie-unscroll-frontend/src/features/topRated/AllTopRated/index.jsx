@@ -13,6 +13,7 @@ import {
   selectAllTopRated,
   selectTopRatedLoading,
 } from "../topRatedSlice";
+import { useNavigate } from "react-router-dom";
 
 function AllTopRated() {
   const loggedUser = useSelector(selectLoggedUser);
@@ -21,6 +22,7 @@ function AllTopRated() {
   const loading = useSelector(selectTopRatedLoading);
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getTopRated({ token: loggedUser.token, page }));
@@ -35,6 +37,12 @@ function AllTopRated() {
 
     return () => clearTimeout(index);
   }, []);
+
+  useEffect(() => {
+    if (!loggedUser) {
+      navigate(-1);
+    }
+  }, [loggedUser, navigate]);
 
   return (
     <MainContainer $loaded={loaded}>

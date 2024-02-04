@@ -13,6 +13,7 @@ import {
   selectAllPopular,
   selectPopularLoading,
 } from "../popularSlice";
+import { useNavigate } from "react-router-dom";
 
 function AllPopular() {
   const loggedUser = useSelector(selectLoggedUser);
@@ -21,6 +22,7 @@ function AllPopular() {
   const loading = useSelector(selectPopularLoading);
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getPopular({ token: loggedUser.token, page }));
@@ -35,6 +37,12 @@ function AllPopular() {
 
     return () => clearTimeout(index);
   }, []);
+
+  useEffect(() => {
+    if (!loggedUser) {
+      navigate(-1);
+    }
+  }, [loggedUser, navigate]);
 
   return (
     <MainContainer $loaded={loaded}>
