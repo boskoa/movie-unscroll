@@ -11,6 +11,9 @@ import { alreadyLogged } from "./features/login/loginSlice";
 
 const UpdateUser = lazy(() => import("./features/users/UpdateUser"));
 const DetailedMovie = lazy(() => import("./components/DetailedMovie"));
+const MovieSearch = lazy(
+  () => import("./components/DetailedMovie/MovieSearch"),
+);
 const DetailedPerson = lazy(() => import("./components/DetailedPerson"));
 const Details = lazy(() => import("./components/DetailedPerson/Details"));
 const RatedMovies = lazy(() => import("./components/RatedMovies"));
@@ -46,6 +49,14 @@ function App() {
           element: (
             <Suspense>
               <UpdateUser />
+            </Suspense>
+          ),
+        },
+        {
+          path: "movie-search",
+          element: (
+            <Suspense>
+              <MovieSearch />
             </Suspense>
           ),
         },

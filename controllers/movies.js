@@ -16,6 +16,27 @@ router.get("/detailed-movie/:id", async (req, res, next) => {
   }
 });
 
+router.get("/search", tokenExtractor, async (req, res, next) => {
+  const user = await User.findByPk(req.decodedToken.id);
+  const search = req.query.search;
+  if (!user) {
+    return res.status(404).send("Not logged in");
+  }
+
+  if (!search) {
+    return res.status(404).send("No search term");
+  }
+
+  try {
+    const movie = await axios.get(
+      `https://api.themoviedb.org/3/search/movie?query=${search}&api_key=${TMDB_KEY}&language=en-US&include_adult=false&page=1`,
+    );
+    return res.status(200).json(movie.data);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get("/user-ratings", tokenExtractor, async (req, res, next) => {
   const user = await User.findByPk(req.decodedToken.id);
   if (!user) {

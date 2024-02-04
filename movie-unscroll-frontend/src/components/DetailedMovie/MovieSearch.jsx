@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
-import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { selectLoggedUser } from "../../features/login/loginSlice";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import {
   EnterIcon,
   Error,
@@ -15,21 +16,19 @@ import {
 import Title from "../Title";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightToBracket, faSearch } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
 
-function DetailedPerson() {
-  const { id } = useParams();
+function MovieSearch() {
   const [search, setSearch] = useState("");
   const [active, setActive] = useState();
-  const [persons, setPersons] = useState();
+  const [movies, setMovies] = useState();
   const [error, setError] = useState();
   const [loaded, setLoaded] = useState(false);
   const loggedUser = useSelector(selectLoggedUser);
   const searchRef = useRef();
   const inputRef = useRef();
   const navigate = useNavigate();
-  const searchPerson = useCallback(async (person, token) => {
-    if (!person) return;
+  const searchMovie = useCallback(async (movie, token) => {
+    if (!movie) return;
     try {
       const config = {
         headers: {
@@ -37,7 +36,7 @@ function DetailedPerson() {
         },
       };
       const response = await axios.get(
-        `/api/actors/search?search=${person}`,
+        `/api/movies/search?search=${movie}`,
         config,
       );
       if (response.data.results.length < 1) {
@@ -45,7 +44,7 @@ function DetailedPerson() {
       } else {
         setError("");
       }
-      setPersons(response.data.results);
+      setMovies(response.data.results);
     } catch {
       setError("Nothing found");
     }
@@ -84,66 +83,62 @@ function DetailedPerson() {
   useEffect(() => {
     function fetch(e) {
       if (search && active && e.key === "Enter") {
-        searchPerson(search, loggedUser.token);
+        searchMovie(search, loggedUser.token);
       }
     }
     document.addEventListener("keypress", fetch);
 
     return () => document.removeEventListener("keypress", fetch);
-  }, [active, loggedUser.token, search, searchPerson]);
+  }, [active, loggedUser.token, search, searchMovie]);
 
   return (
     <MainContainer $loaded={loaded}>
-      <Title text="people profile" />
-      {!id && (
-        <InputContainer ref={searchRef}>
-          <SearchIcon onClick={() => setActive(true)}>
-            <FontAwesomeIcon
-              icon={faSearch}
-              color="gold"
-              style={{ fontSize: "20px", zIndex: 3 }}
-            />
-          </SearchIcon>
-          <StyledInput
-            id="search"
-            name="search"
-            type="text"
-            ref={inputRef}
-            $active={active}
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+      <Title text="search for movies" />
+      <InputContainer ref={searchRef}>
+        <SearchIcon onClick={() => setActive(true)}>
+          <FontAwesomeIcon
+            icon={faSearch}
+            color="gold"
+            style={{ fontSize: "20px", zIndex: 3 }}
           />
-          <EnterIcon
-            $active={active}
-            disabled={search?.length < 1}
-            onClick={() => {
-              if (search) {
-                searchPerson(search, loggedUser.token);
-              }
-            }}
-          >
-            <FontAwesomeIcon
-              icon={faRightToBracket}
-              color="gold"
-              style={{ fontSize: "20px" }}
-            />
-          </EnterIcon>
-        </InputContainer>
-      )}
+        </SearchIcon>
+        <StyledInput
+          id="search"
+          name="search"
+          type="text"
+          ref={inputRef}
+          $active={active}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <EnterIcon
+          $active={active}
+          disabled={search?.length < 1}
+          onClick={() => {
+            if (search) {
+              searchMovie(search, loggedUser.token);
+            }
+          }}
+        >
+          <FontAwesomeIcon
+            icon={faRightToBracket}
+            color="gold"
+            style={{ fontSize: "20px" }}
+          />
+        </EnterIcon>
+      </InputContainer>
       {error?.length > 0 && <Error>{error}</Error>}
-      {!id && persons?.length > 0 && (
+      {movies?.length > 0 && (
         <SearchResults>
-          {persons.map((p) => (
-            <StyledLink to={`/detailed-person/${p.id}`} key={p.id}>
-              {p.name}{" "}
-              {p.known_for_department ? `(${p.known_for_department})` : null}
+          {movies.map((m) => (
+            <StyledLink to={`/detailed-movie/${m.id}`} key={m.id}>
+              {m.title} ({m.release_date.slice(0, 4)})
             </StyledLink>
           ))}
         </SearchResults>
       )}
-      <Outlet />
     </MainContainer>
   );
 }
 
-export default DetailedPerson;
+export default MovieSearch;

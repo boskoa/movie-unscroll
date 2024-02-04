@@ -115,7 +115,7 @@ const MenuIcon = styled.div`
         )} ${$delay}s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards`
       : css`0.5s ${backOption(
           $delay,
-        )} calc(0.3s + 0.3s - ${$delay}s) cubic-bezier(0.175, 0.885, 0.32, 1.275) both`};
+        )} calc(0.9s - ${$delay}s) cubic-bezier(0.175, 0.885, 0.32, 1.275) both`};
 
   &::after {
     content: "";
@@ -128,8 +128,8 @@ const MenuIcon = styled.div`
     filter: blur(0px);
     animation: ${({ $selected, $delay }) =>
       $selected
-        ? css`0.8s ${blurOut} calc(0.5s + ${$delay}s) both`
-        : css`0.3s ${blurIn} calc(0.3s - ${$delay}s) both`};
+        ? css`0.8s ${blurOut} calc(0.3s + ${$delay}s) both`
+        : css`0.3s ${blurIn} calc(0.7s - ${$delay}s) both`};
   }
 `;
 

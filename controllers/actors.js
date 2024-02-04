@@ -40,4 +40,25 @@ router.get("/detailed/:id", tokenExtractor, async (req, res, next) => {
   }
 });
 
+router.get("/search", tokenExtractor, async (req, res, next) => {
+  const user = await User.findByPk(req.decodedToken.id);
+  const search = req.query.search;
+  if (!user) {
+    return res.status(404).send("Not logged in");
+  }
+
+  if (!search) {
+    return res.status(404).send("No search term");
+  }
+
+  try {
+    const person = await axios.get(
+      `https://api.themoviedb.org/3/search/person?query=${search}&api_key=${TMDB_KEY}&language=en-US&include_adult=false&page=1`,
+    );
+    return res.status(200).json(person.data);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

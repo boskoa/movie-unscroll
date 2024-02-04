@@ -44,9 +44,21 @@ function UserMenu({ id }) {
           Profile
         </MenuIcon>
       </Link>
+      <Link to="rated-movies">
+        <MenuIcon
+          $right="0px"
+          $delay="0.3"
+          $selected={selected}
+          $color="gold"
+          $color2="#002f2f"
+          $color3="rgb(255, 68, 0)"
+        >
+          Ratings
+        </MenuIcon>
+      </Link>
       <MenuIcon
         $right="0px"
-        $delay="0.3"
+        $delay="0.6"
         $selected={selected}
         $color="gold"
         $color2="#002f2f"

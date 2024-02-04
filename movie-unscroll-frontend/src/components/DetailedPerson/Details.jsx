@@ -85,6 +85,16 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
+const Error = styled.p`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 60px;
+  font-size: 26px;
+  color: gold;
+`;
+
 const formater = new Intl.DateTimeFormat("en-US", {
   year: "numeric",
   month: "long",
@@ -94,6 +104,7 @@ const formater = new Intl.DateTimeFormat("en-US", {
 function Details() {
   const { id } = useParams();
   const [person, setPerson] = useState();
+  const [error, setError] = useState();
   const [loaded, setLoaded] = useState(false);
   const loggedUser = useSelector(selectLoggedUser);
 
@@ -108,14 +119,18 @@ function Details() {
       try {
         const response = await axios.get(`/api/actors/detailed/${id}`, config);
         setPerson(response.data);
-      } catch (error) {
-        console.log("Error", error);
+      } catch {
+        setError("No person with that id");
       }
     }
     if (id && loggedUser) {
       getPerson();
     }
   }, [id, loggedUser]);
+
+  if (error?.length > 0) {
+    return <Error>{error}</Error>;
+  }
 
   if (!person) {
     return null;
@@ -143,7 +158,7 @@ function Details() {
         <Text>
           Born:{" "}
           {`${formater(new Date(person.birthday))} (${
-            person.place_of_birth || ""
+            person.place_of_birth || "no place of birth data"
           })` || "no data"}
         </Text>
         {person.deathday && (
@@ -151,7 +166,7 @@ function Details() {
         )}
         <Biography>Biography: {person.biography || "no data"}</Biography>
       </PersonalDetails>
-      {person.credits.cast.length && (
+      {person.credits.cast.length > 0 && (
         <>
           <Role>Actor:</Role>
           <MovieContainer>
@@ -166,7 +181,7 @@ function Details() {
           </MovieContainer>
         </>
       )}
-      {person.credits.crew.length && (
+      {person.credits.crew.filter((r) => r.job === "Director").length > 0 && (
         <>
           <Role>Director:</Role>
           <MovieContainer>
@@ -183,7 +198,7 @@ function Details() {
           </MovieContainer>
         </>
       )}
-      {person.credits.crew.length && (
+      {person.credits.crew.filter((r) => r.job === "Writer").length > 0 && (
         <>
           <Role>Writer:</Role>
           <MovieContainer>

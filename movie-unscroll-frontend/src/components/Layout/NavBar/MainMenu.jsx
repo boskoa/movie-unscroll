@@ -53,7 +53,7 @@ function MainMenu() {
           Custom
         </MenuIcon>
       </Link>
-      <Link to="rated-movies">
+      <Link to="movie-search">
         <MenuIcon
           $left="0px"
           $delay="0.6"
@@ -62,7 +62,19 @@ function MainMenu() {
           $color2="#002f2f"
           $color3="gold"
         >
-          Ratings
+          Movies
+        </MenuIcon>
+      </Link>
+      <Link to="detailed-person">
+        <MenuIcon
+          $left="0px"
+          $delay="0.9"
+          $selected={selected}
+          $color="rgb(255, 68, 0)"
+          $color2="#002f2f"
+          $color3="gold"
+        >
+          People
         </MenuIcon>
       </Link>
       <MainIcon $color="rgb(255, 68, 0)">
