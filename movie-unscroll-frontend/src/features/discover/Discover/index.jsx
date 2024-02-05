@@ -14,6 +14,7 @@ import Title from "../../../components/Title";
 import MovieListItem from "../../../components/MovieListItem";
 import Pagination from "../../../components/Pagination";
 import { useNavigate } from "react-router-dom";
+import Filter from "./Filter";
 
 function Discover() {
   const loggedUser = useSelector(selectLoggedUser);
@@ -53,6 +54,7 @@ function Discover() {
   return (
     <MainContainer $loaded={loaded}>
       <Title text="discover" />
+      <Filter />
       <div>
         <button
           onClick={() =>
