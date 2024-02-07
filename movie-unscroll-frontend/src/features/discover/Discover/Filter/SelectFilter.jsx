@@ -1,11 +1,14 @@
+import { useDispatch } from "react-redux";
 import { Select, SelectContainer, Title } from "./filterStyles";
 
 function SelectFilter({ options, setSelectedOption, selectedOption, title }) {
+  const dispatch = useDispatch();
+
   return (
     <SelectContainer>
       <Title>{title}</Title>
       <Select
-        onChange={(e) => setSelectedOption(e.target.value)}
+        onChange={(e) => dispatch(setSelectedOption(e.target.value))}
         defaultValue={selectedOption ?? ""}
       >
         {title.includes("rating") && <option value="" />}

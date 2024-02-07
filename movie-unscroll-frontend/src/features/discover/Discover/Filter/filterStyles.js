@@ -77,3 +77,22 @@ export const ShortInput = styled.input`
     outline: none;
   }
 `;
+
+export const Discover = styled.button`
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: #0061ac;
+  color: #fffac8;
+  text-transform: uppercase;
+  border: none;
+  padding: 5px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 1s;
+  cursor: pointer;
+
+  &:active {
+    transform: rotateX(720deg);
+  }
+`;

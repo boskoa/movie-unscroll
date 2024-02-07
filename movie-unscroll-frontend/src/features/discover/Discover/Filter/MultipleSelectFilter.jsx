@@ -1,3 +1,4 @@
+import { useDispatch } from "react-redux";
 import { Option, SelectContainer, Title } from "./filterStyles";
 
 function MultipleSelectFilter({
@@ -6,6 +7,8 @@ function MultipleSelectFilter({
   setSelectedOptions,
   title,
 }) {
+  const dispatch = useDispatch();
+
   return (
     <SelectContainer>
       <Title>{title}</Title>
@@ -14,8 +17,12 @@ function MultipleSelectFilter({
           $bg={selectedOptions.includes(v) ? "1" : "0"}
           key={k}
           onClick={() =>
-            setSelectedOptions((p) =>
-              p.includes(v) ? p.filter((i) => i !== v) : [...p, v],
+            dispatch(
+              setSelectedOptions(
+                selectedOptions.includes(v)
+                  ? selectedOptions.filter((i) => i !== v)
+                  : [...selectedOptions, v],
+              ),
             )
           }
         >

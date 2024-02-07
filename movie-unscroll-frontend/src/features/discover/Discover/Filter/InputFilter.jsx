@@ -8,7 +8,7 @@ import {
 } from "./filterStyles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectLoggedUser } from "../../../login/loginSlice";
 
 function InputFilter({
@@ -23,6 +23,7 @@ function InputFilter({
   const [search, setSearch] = useState("");
   const loggedUser = useSelector(selectLoggedUser);
   const inputRef = useRef();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     function get(e) {
@@ -67,8 +68,12 @@ function InputFilter({
             key={v.id}
             onClick={() => {
               setSearched((p) => p.filter((i) => i.id !== v.id));
-              setSelectedOptions((p) =>
-                !p.map((i) => i.id).includes(v.id) ? [...p, v] : p,
+              dispatch(
+                setSelectedOptions(
+                  !selectedOptions.map((i) => i.id).includes(v.id)
+                    ? [...selectedOptions, v]
+                    : selectedOptions,
+                ),
               );
             }}
           >
@@ -82,8 +87,11 @@ function InputFilter({
             $bg="1"
             key={v.id}
             onClick={() => {
-              setSelectedOptions((p) => p.filter((i) => i.id !== v.id));
-              console.log(v.name.includes(search), v.name, search);
+              dispatch(
+                setSelectedOptions(
+                  selectedOptions.filter((i) => i.id !== v.id),
+                ),
+              );
               setSearched((p) =>
                 v.name.toLowerCase().includes(search)
                   ? !p.map((e) => e.id).includes(v.id)
@@ -97,19 +105,6 @@ function InputFilter({
           </Option>
         ))}
       </AvailableOptions>
-      {/* {Object.entries(options).map(([k, v]) => (
-        <Option
-          $bg={selectedOptions.includes(v) ? "1" : "0"}
-          key={k}
-          onClick={() =>
-            setSelectedOptions((p) =>
-              p.includes(v) ? p.filter((i) => i !== v) : [...p, v],
-            )
-          }
-        >
-          {k}
-        </Option>
-      ))} */}
     </SelectContainer>
   );
 }

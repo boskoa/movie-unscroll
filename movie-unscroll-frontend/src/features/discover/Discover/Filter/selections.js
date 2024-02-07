@@ -13,7 +13,7 @@ export const genres = {
   Music: 10402,
   Mystery: 9648,
   Romance: 10749,
-  "Science Fictio": 878,
+  "Science Fiction": 878,
   "TV Movie": 10770,
   Thriller: 53,
   War: 10752,

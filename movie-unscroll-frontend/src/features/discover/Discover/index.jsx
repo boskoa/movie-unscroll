@@ -1,6 +1,11 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectLoggedUser } from "../../login/loginSlice";
-import { selectAllDiscover, selectDiscoverLoading } from "../discoverSlice";
+import {
+  selectAllDiscover,
+  selectDiscoverLoading,
+  selectPages,
+  setPages,
+} from "../discoverSlice";
 import { useEffect, useState } from "react";
 import {
   MainContainer,
@@ -15,14 +20,17 @@ import Filter from "./Filter";
 function Discover() {
   const loggedUser = useSelector(selectLoggedUser);
   const movies = useSelector(selectAllDiscover);
-  const [page, setPage] = useState(1);
+  const pages = useSelector(selectPages);
+  const [page, setPage] = useState(pages);
   const loading = useSelector(selectDiscoverLoading);
   const [loaded, setLoaded] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [page]);
+    dispatch(setPages(page));
+  }, [dispatch, page]);
 
   useEffect(() => {
     const index = setTimeout(() => setLoaded(true), 1000);
