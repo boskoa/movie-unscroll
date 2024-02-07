@@ -48,32 +48,28 @@ router.post("/discover", tokenExtractor, async (req, res, next) => {
     ? `with_original_language=${req.body.language}`
     : "";
   let releaseGte = req.body.releaseGte
-    ? `with_original_language=${req.body.releaseGte}`
+    ? `release_date.gte=${req.body.releaseGte}`
     : "";
   let releaseLte = req.body.releaseLte
-    ? `with_original_language=${req.body.releaseLte}`
+    ? `release_date.lte=${req.body.releaseLte}`
     : "";
-  let sortBy = req.body.sortBy
-    ? `with_original_language=${req.body.sortBy}`
-    : "";
+  let sortBy = req.body.sortBy ? `sort_by=${req.body.sortBy}` : "";
   let voteAverageGte = req.body.voteAverageGte
-    ? `with_original_language=${req.body.voteAverageGte}`
+    ? `vote_average.gte=${req.body.voteAverageGte}`
     : "";
   let voteAverageLte = req.body.voteAverageLte
-    ? `with_original_language=${req.body.voteAverageLte}`
+    ? `vote_average.lte=${req.body.voteAverageLte}`
     : "";
   let voteCountGte = req.body.voteCountGte
-    ? `with_original_language=${req.body.voteCountGte}`
+    ? `vote_count.gte=${req.body.voteCountGte}`
     : "";
   let voteCountLte = req.body.voteCountLte
-    ? `with_original_language=${req.body.voteCountLte}`
+    ? `vote_count.lte=${req.body.voteCountLte}`
     : "";
-  let cast = req.body.cast ? `with_original_language=${req.body.cast}` : "";
-  let crew = req.body.crew ? `with_original_language=${req.body.crew}` : "";
-  let genre = req.body.genre ? `with_original_language=${req.body.genre}` : "";
-  let noGenre = req.body.noGenre
-    ? `with_original_language=${req.body.noGenre}`
-    : "";
+  let cast = req.body.cast ? `with_cast=${req.body.cast}` : "";
+  let crew = req.body.crew ? `with_crew=${req.body.crew}` : "";
+  let genre = req.body.genre ? `with_genres=${req.body.genre}` : "";
+  let noGenre = req.body.noGenre ? `without_genres=${req.body.noGenre}` : "";
 
   let query = [
     language,
@@ -92,11 +88,15 @@ router.post("/discover", tokenExtractor, async (req, res, next) => {
     .filter((i) => i.length)
     .join("&");
   query = query.length > 0 ? query + "&" : query;
-
+  console.log(
+    "QUERYYYYYYYYYYYY",
+    `https://api.themoviedb.org/3/discover/movie?${query}language=en-US&include_video=false&include_adult=false&api_key=${TMDB_KEY}&page=${req.query.page}`,
+  );
   try {
     const movie = await axios.get(
       `https://api.themoviedb.org/3/discover/movie?${query}language=en-US&include_video=false&include_adult=false&api_key=${TMDB_KEY}&page=${req.query.page}`,
     );
+    console.log("RESUUUUUUUUULT", movie.data.results);
     return res.status(200).json(movie.data.results);
   } catch (error) {
     next(error);

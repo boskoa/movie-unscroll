@@ -69,4 +69,6 @@ export function selectDiscoverLoading(state) {
   return state.popular.discover;
 }
 
+export const { clearDiscover } = discoverSlice.actions;
+
 export default discoverSlice.reducer;

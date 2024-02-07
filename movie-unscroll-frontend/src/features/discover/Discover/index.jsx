@@ -1,10 +1,6 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectLoggedUser } from "../../login/loginSlice";
-import {
-  getDiscover,
-  selectAllDiscover,
-  selectDiscoverLoading,
-} from "../discoverSlice";
+import { selectAllDiscover, selectDiscoverLoading } from "../discoverSlice";
 import { useEffect, useState } from "react";
 import {
   MainContainer,
@@ -22,18 +18,7 @@ function Discover() {
   const [page, setPage] = useState(1);
   const loading = useSelector(selectDiscoverLoading);
   const [loaded, setLoaded] = useState(false);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    dispatch(
-      getDiscover({
-        token: loggedUser.token,
-        searchData: { language: "en" },
-        page,
-      }),
-    );
-  }, [page, loggedUser, dispatch]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -54,22 +39,7 @@ function Discover() {
   return (
     <MainContainer $loaded={loaded}>
       <Title text="discover" />
-      <Filter />
-      <div>
-        <button
-          onClick={() =>
-            dispatch(
-              getDiscover({
-                token: loggedUser.token,
-                searchData: { language: "en" },
-                page,
-              }),
-            )
-          }
-        >
-          discover
-        </button>
-      </div>
+      <Filter page={page} setPage={setPage} />
       {movies && (
         <MovieContainer $loaded={!loading}>
           {movies.slice(page * 20 - 20, page * 20).map((t) => (

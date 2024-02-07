@@ -60,5 +60,20 @@ export const MinMaxContainer = styled.div`
   justify-content: start;
   align-items: center;
   flex-wrap: wrap;
+  color: #fffac8;
   gap: 5px;
+`;
+
+export const ShortInput = styled.input`
+  background-color: black;
+  border: none;
+  font-size: 12px;
+  color: #fffac8;
+  padding: 0 5px;
+  width: ${({ $width }) => $width};
+  height: 24px;
+
+  &:focus {
+    outline: none;
+  }
 `;

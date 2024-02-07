@@ -7,6 +7,10 @@ import InputFilter from "./InputFilter";
 import axios from "axios";
 import SelectLanguage from "./SelectLanguage";
 import MinMax from "./MinMax";
+import MinMaxInput from "./MinMaxInput";
+import { useDispatch, useSelector } from "react-redux";
+import { selectLoggedUser } from "../../../login/loginSlice";
+import { clearDiscover, getDiscover } from "../../discoverSlice";
 
 const MainContainer = styled.div`
   width: 96vw;
@@ -23,19 +27,23 @@ const Title = styled.h4`
   font-weight: 600;
 `;
 
-function Filter() {
+function Filter({ page, setPage }) {
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [excludedGenres, setExcludedGenres] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState();
-  const [selectedSort, setSelectedSort] = useState();
+  const [selectedSort, setSelectedSort] = useState("vote_average.desc");
   const [searchedCast, setSearchedCast] = useState([]);
   const [cast, setCast] = useState([]);
   const [searchedCrew, setSearchedCrew] = useState([]);
   const [crew, setCrew] = useState([]);
-  const [voteAvgMin, setVoteAvgMin] = useState();
-  const [voteAvgMax, setVoteAvgMax] = useState();
-  const [voteCountMin, setVoteCountMin] = useState();
-  const [voteCountMax, setVoteCountMax] = useState();
+  const [voteAvgMin, setVoteAvgMin] = useState(1);
+  const [voteAvgMax, setVoteAvgMax] = useState(10);
+  const [voteCountMin, setVoteCountMin] = useState("");
+  const [voteCountMax, setVoteCountMax] = useState("");
+  const [minYear, setMinYear] = useState("");
+  const [maxYear, setMaxYear] = useState("");
+  const loggedUser = useSelector(selectLoggedUser);
+  const dispatch = useDispatch();
   const fetchCast = useCallback(async (search, token, role, set) => {
     try {
       const config = {
@@ -59,8 +67,49 @@ function Filter() {
   }, []);
 
   useEffect(() => {
-    console.log(selectedLanguage);
-  }, [selectedLanguage]);
+    if (page > 1) {
+      dispatch(
+        getDiscover({
+          token: loggedUser.token,
+          searchData: {
+            language: selectedLanguage,
+            releaseGte: minYear.slice(0, 4),
+            releaseLte: maxYear.slice(0, 4),
+            sortBy: selectedSort,
+            voteAverageGte: voteAvgMin,
+            voteAverageLte: voteAvgMax,
+            voteCountGte: voteCountMin,
+            voteCountLte: voteCountMax,
+            cast: cast.map((c) => c.id).join("|"),
+            crew: crew.map((c) => c.id).join("|"),
+            genre: selectedGenres.join("|"),
+            noGenre: excludedGenres.join("|"),
+          },
+          page,
+        }),
+      );
+    }
+  }, [
+    page,
+    loggedUser,
+    dispatch,
+    selectedLanguage,
+    minYear,
+    maxYear,
+    selectedSort,
+    voteAvgMin,
+    voteAvgMax,
+    voteCountMin,
+    voteCountMax,
+    cast,
+    crew,
+    selectedGenres,
+    excludedGenres,
+  ]);
+
+  useEffect(() => {
+    console.log(page, selectedSort);
+  }, [page, selectedSort]);
 
   return (
     <MainContainer>
@@ -101,6 +150,24 @@ function Filter() {
         setMax={setVoteAvgMax}
         titles={["Min rating", "Max rating"]}
       />
+      <MinMaxInput
+        min={voteCountMin}
+        setMin={setVoteCountMin}
+        max={voteCountMax}
+        setMax={setVoteCountMax}
+        titles={["Min vote count", "Max vote count"]}
+        type="number"
+        width="10ch"
+      />
+      <MinMaxInput
+        min={minYear}
+        setMin={setMinYear}
+        max={maxYear}
+        setMax={setMaxYear}
+        titles={["Released from", "to"]}
+        type="date"
+        width="16ch"
+      />
       <SelectLanguage
         options={languages}
         setSelectedOption={setSelectedLanguage}
@@ -109,8 +176,39 @@ function Filter() {
       <SelectFilter
         options={sorts}
         setSelectedOption={setSelectedSort}
+        selectedOption={selectedSort}
         title="Sort by:"
       />
+      <div>
+        <button
+          onClick={() => {
+            dispatch(clearDiscover());
+            setPage(1);
+            dispatch(
+              getDiscover({
+                token: loggedUser.token,
+                searchData: {
+                  language: selectedLanguage,
+                  releaseGte: minYear.slice(0, 4),
+                  releaseLte: maxYear.slice(0, 4),
+                  sortBy: selectedSort,
+                  voteAverageGte: voteAvgMin,
+                  voteAverageLte: voteAvgMax,
+                  voteCountGte: voteCountMin,
+                  voteCountLte: voteCountMax,
+                  cast: cast.map((c) => c.id).join("|"),
+                  crew: crew.map((c) => c.id).join("|"),
+                  genre: selectedGenres.join("|"),
+                  noGenre: excludedGenres.join("|"),
+                },
+                page,
+              }),
+            );
+          }}
+        >
+          discover
+        </button>
+      </div>
     </MainContainer>
   );
 }
