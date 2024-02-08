@@ -13,6 +13,7 @@ import { selectLoggedUser } from "../../../login/loginSlice";
 import {
   clearDiscover,
   getDiscover,
+  selectAllFilters,
   selectCast,
   selectCrew,
   selectGenres,
@@ -72,6 +73,7 @@ function Filter({ page, setPage }) {
   const releaseGte = useSelector(selectReleaseGte);
   const releaseLte = useSelector(selectReleaseLte);
   const loggedUser = useSelector(selectLoggedUser);
+  const filters = useSelector(selectAllFilters);
   const [toFirst, setToFirst] = useState(false);
   const dispatch = useDispatch();
   const fetchCast = useCallback(async (search, token, role, set) => {
@@ -120,9 +122,6 @@ function Filter({ page, setPage }) {
         }),
       );
     }
-    if (page > 1) {
-      setToFirst(true);
-    }
   }, [
     page,
     loggedUser,
@@ -141,6 +140,19 @@ function Filter({ page, setPage }) {
     noGenre,
     toFirst,
   ]);
+
+  useEffect(() => {
+    if (page > 1) {
+      setToFirst(true);
+    } else {
+      setToFirst(false);
+    }
+  }, [page, filters, setPage, dispatch]);
+
+  useEffect(() => {
+    setPage(1);
+    dispatch(clearDiscover());
+  }, [dispatch, filters, setPage]);
 
   return (
     <MainContainer>

@@ -19,14 +19,14 @@ const initialState = discoverAdapter.getInitialState({
     sortBy: "vote_average.desc",
     voteAverageGte: "",
     voteAverageLte: "",
-    voteCountGte: 1,
+    voteCountGte: 50,
     voteCountLte: "",
     cast: [],
     crew: [],
     genres: [],
     noGenres: [],
-    savedPage: 1,
   },
+  savedPage: 1,
 });
 
 export const getDiscover = createAsyncThunk(
@@ -92,7 +92,7 @@ const discoverSlice = createSlice({
       state.filters.noGenres = action.payload;
     },
     setSavedPage: (state, action) => {
-      state.filters.savedPage = action.payload;
+      state.savedPage = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -172,7 +172,11 @@ export function selectNoGenres(state) {
 }
 
 export function selectSavedPage(state) {
-  return state.discover.filters.savedPage;
+  return state.discover.savedPage;
+}
+
+export function selectAllFilters(state) {
+  return state.discover.filters;
 }
 
 export const {

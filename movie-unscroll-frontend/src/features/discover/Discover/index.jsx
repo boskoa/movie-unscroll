@@ -59,7 +59,11 @@ function Discover() {
         </MovieContainer>
       )}
       {!loading && movies.length ? (
-        <Pagination page={page} setPage={setPage} />
+        <Pagination
+          disable={movies.length % 20 !== 0}
+          page={page}
+          setPage={setPage}
+        />
       ) : null}
     </MainContainer>
   );

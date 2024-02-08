@@ -41,7 +41,7 @@ const Right = styled.button`
   background-color: rgba(255, 0, 0, 1);
   color: gold;
   border-radius: 50%;
-  box-shadow: 0 0 10px 0 red;
+  box-shadow: ${({ $disable }) => !$disable && "0 0 10px 0 red"};
   padding: 3px;
   height: 30px;
   width: 30px;
@@ -56,7 +56,7 @@ const Right = styled.button`
   }
 
   &:hover {
-    filter: invert(1);
+    filter: ${({ $disable }) => !$disable && "invert(1)"};
   }
 `;
 
@@ -108,7 +108,7 @@ const FirstPage = styled.span`
   font-size: 12px;
 `;
 
-function Pagination({ page, setPage }) {
+function Pagination({ page, setPage, disable }) {
   return (
     <PaginationContainer>
       <Left
@@ -121,7 +121,10 @@ function Pagination({ page, setPage }) {
         <Number>Page {page}</Number>
         <FirstPage onClick={() => setPage(1)}>To page 1</FirstPage>
       </Page>
-      <Right onClick={() => setPage((p) => p + 1)}>
+      <Right
+        $disable={disable}
+        onClick={() => setPage((p) => (disable ? p : p + 1))}
+      >
         {" "}
         <FontAwesomeIcon icon={faChevronRight} />
       </Right>
