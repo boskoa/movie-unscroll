@@ -72,6 +72,7 @@ function Filter({ page, setPage }) {
   const releaseGte = useSelector(selectReleaseGte);
   const releaseLte = useSelector(selectReleaseLte);
   const loggedUser = useSelector(selectLoggedUser);
+  const [toFirst, setToFirst] = useState(false);
   const dispatch = useDispatch();
   const fetchCast = useCallback(async (search, token, role, set) => {
     try {
@@ -96,7 +97,8 @@ function Filter({ page, setPage }) {
   }, []);
 
   useEffect(() => {
-    if (page > 1) {
+    if (toFirst) {
+      dispatch(clearDiscover());
       dispatch(
         getDiscover({
           token: loggedUser.token,
@@ -118,6 +120,9 @@ function Filter({ page, setPage }) {
         }),
       );
     }
+    if (page > 1) {
+      setToFirst(true);
+    }
   }, [
     page,
     loggedUser,
@@ -134,6 +139,7 @@ function Filter({ page, setPage }) {
     crew,
     genre,
     noGenre,
+    toFirst,
   ]);
 
   return (

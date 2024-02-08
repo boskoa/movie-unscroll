@@ -19,13 +19,13 @@ const initialState = discoverAdapter.getInitialState({
     sortBy: "vote_average.desc",
     voteAverageGte: "",
     voteAverageLte: "",
-    voteCountGte: "",
+    voteCountGte: 1,
     voteCountLte: "",
     cast: [],
     crew: [],
     genres: [],
     noGenres: [],
-    pages: 1,
+    savedPage: 1,
   },
 });
 
@@ -91,8 +91,8 @@ const discoverSlice = createSlice({
     setNoGenres: (state, action) => {
       state.filters.noGenres = action.payload;
     },
-    setPages: (state, action) => {
-      state.filters.pages = action.payload;
+    setSavedPage: (state, action) => {
+      state.filters.savedPage = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -171,8 +171,8 @@ export function selectNoGenres(state) {
   return state.discover.filters.noGenres;
 }
 
-export function selectPages(state) {
-  return state.discover.filters.pages;
+export function selectSavedPage(state) {
+  return state.discover.filters.savedPage;
 }
 
 export const {
@@ -190,6 +190,7 @@ export const {
   setGenres,
   setNoGenres,
   setPages,
+  setSavedPage,
 } = discoverSlice.actions;
 
 export default discoverSlice.reducer;
