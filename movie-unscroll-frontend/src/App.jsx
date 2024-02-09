@@ -152,9 +152,9 @@ function App() {
   ]);
 
   useEffect(() => {
-    const loggedAuthor = window.localStorage.getItem("loggedMovieUnscroll");
-    if (loggedAuthor) {
-      dispatch(alreadyLogged(JSON.parse(loggedAuthor)));
+    const loggedUser = window.localStorage.getItem("loggedMovieUnscroll");
+    if (loggedUser) {
+      dispatch(alreadyLogged(JSON.parse(loggedUser)));
     }
   }, [dispatch]);
 

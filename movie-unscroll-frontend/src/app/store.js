@@ -8,6 +8,7 @@ import theaters from "../features/theaters/theatersSlice";
 import popular from "../features/popular/popularSlice";
 import topRated from "../features/topRated/topRatedSlice";
 import discover from "../features/discover/discoverSlice";
+import bookmarks from "../features/bookmarks/bookmarksSlice";
 
 const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ const store = configureStore({
     popular,
     topRated,
     discover,
+    bookmarks,
   },
 });
 

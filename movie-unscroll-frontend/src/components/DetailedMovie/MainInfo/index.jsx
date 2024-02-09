@@ -17,7 +17,7 @@ const MainInfoContainer = styled.div`
 function MainInfo({ movie, setImageLoaded }) {
   return (
     <MainInfoContainer>
-      <Poster path={movie.poster_path} setImageLoaded={setImageLoaded} />
+      <Poster movie={movie} setImageLoaded={setImageLoaded} />
       <Info movie={movie} />
     </MainInfoContainer>
   );
