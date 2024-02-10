@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import actorLogo from "../../assets/actor.jpg";
 import actressLogo from "../../assets/actress.jpg";
+import { Link } from "react-router-dom";
 
 const MainContainer = styled.div`
   position: relative;
@@ -72,7 +73,8 @@ const CrewImage = styled.img`
   user-select: none;
 `;
 
-const CrewName = styled.div`
+const CrewName = styled(Link)`
+  all: unset;
   position: absolute;
   width: 100%;
   height: 30%;
@@ -90,6 +92,7 @@ const CrewName = styled.div`
   color: black;
   text-shadow: 0 0 5px white;
   backdrop-filter: blur(5px);
+  cursor: pointer;
 `;
 
 const Money = styled.div`
@@ -130,9 +133,7 @@ function ProductionDetails({ movie }) {
               .filter((c) => ["Screenplay", "Writer"].includes(c.job))
               .map((c) => (
                 <ImageContainer key={c.id}>
-                  <CrewName>
-                    <p>{c.name}</p>
-                  </CrewName>
+                  <CrewName to={`/detailed-person/${c.id}`}>{c.name}</CrewName>
                   <CrewImage
                     draggable="false"
                     alt={c.name}
@@ -154,7 +155,7 @@ function ProductionDetails({ movie }) {
               .filter((c) => c.job === "Director")
               .map((c) => (
                 <ImageContainer key={c.id}>
-                  <CrewName>
+                  <CrewName to={`/detailed-person/${c.id}`}>
                     <p>{c.name}</p>
                   </CrewName>
                   <CrewImage

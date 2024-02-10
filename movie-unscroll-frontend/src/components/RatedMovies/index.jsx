@@ -153,10 +153,6 @@ function RatedMovies() {
     if (!loggedUser) navigate("/");
   }, [loggedUser, navigate]);
 
-  useEffect(() => {
-    console.log(order);
-  }, [order]);
-
   if (!loggedUser) return <NotLogged />;
 
   if (!ratings) return null;

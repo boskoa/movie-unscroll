@@ -56,9 +56,21 @@ function UserMenu({ id }) {
           Ratings
         </MenuIcon>
       </Link>
+      <Link to="bookmarks">
+        <MenuIcon
+          $right="0px"
+          $delay="0.6"
+          $selected={selected}
+          $color="gold"
+          $color2="#002f2f"
+          $color3="rgb(255, 68, 0)"
+        >
+          Bookmarks
+        </MenuIcon>
+      </Link>
       <MenuIcon
         $right="0px"
-        $delay="0.6"
+        $delay="0.9"
         $selected={selected}
         $color="gold"
         $color2="#002f2f"

@@ -24,6 +24,7 @@ const AllTopRated = lazy(() => import("./features/topRated/AllTopRated"));
 const AllPopular = lazy(() => import("./features/popular/AllPopular"));
 const AllTheaters = lazy(() => import("./features/theaters/AllTheaters"));
 const Discover = lazy(() => import("./features/discover/Discover"));
+const Bookmarks = lazy(() => import("./features/bookmarks/Bookmarks"));
 
 function App() {
   const dispatch = useDispatch();
@@ -140,6 +141,14 @@ function App() {
           element: (
             <Suspense>
               <Discover />
+            </Suspense>
+          ),
+        },
+        {
+          path: "bookmarks",
+          element: (
+            <Suspense>
+              <Bookmarks />
             </Suspense>
           ),
         },

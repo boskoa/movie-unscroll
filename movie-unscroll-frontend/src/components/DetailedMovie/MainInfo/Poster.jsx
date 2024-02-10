@@ -9,7 +9,6 @@ import {
   removeBookmark,
   selectBookmarkById,
 } from "../../../features/bookmarks/bookmarksSlice";
-import { useEffect } from "react";
 
 const PosterContainer = styled.div`
   position: relative;
@@ -37,6 +36,7 @@ const Bookmark = styled.button`
   top: 40px;
   left: 30px;
   z-index: 2;
+  cursor: pointer;
 `;
 
 function Poster({ movie, setImageLoaded }) {
@@ -45,10 +45,6 @@ function Poster({ movie, setImageLoaded }) {
     selectBookmarkById(state, movie.id),
   );
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    console.log(movie, bookmarked);
-  }, [bookmarked, movie]);
 
   return (
     <PosterContainer>

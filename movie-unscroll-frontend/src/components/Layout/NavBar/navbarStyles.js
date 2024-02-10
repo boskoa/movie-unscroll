@@ -41,7 +41,7 @@ const slideOption = ($delay) => keyframes`
   }
   100% {
     transform: translateY(calc(${$delay * 3 * 50}px + 50px));
-    width: 70px;
+    width: 90px;
     border-radius: 20px;
     opacity: 1;
   }
@@ -50,7 +50,7 @@ const slideOption = ($delay) => keyframes`
 const backOption = ($delay) => keyframes`
   0% {
     transform: translateY(calc(${$delay * 3 * 50}px + 50px));
-    width: 70px;
+    width: 90px;
     border-radius: 20px;
     opacity: 1;
   }

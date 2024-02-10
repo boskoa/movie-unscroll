@@ -65,7 +65,7 @@ const Description = styled.p`
     height: 100%;
     background-image: url("public/collage.jpg");
     background-position: 50%;
-    filter: blur(5px);
+    filter: blur(2px);
     z-index: -1;
   }
 
@@ -83,7 +83,7 @@ function DiscoverSection({ title, sectionColor }) {
         <Description>
           <StyledLink
             to="/discover"
-            style={{ color: "gold", textShadow: "0 0 5px black" }}
+            style={{ color: "gold", textShadow: "0 0 2px red" }}
           >
             Find new movies based on your favourite genres, actors, directors
             etc.

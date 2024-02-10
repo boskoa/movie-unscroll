@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import actorLogo from "../../../assets/actor.jpg";
 import actressLogo from "../../../assets/actress.jpg";
+import { Link } from "react-router-dom";
 
 const ActorContainer = styled.div`
   position: relative;
@@ -62,6 +63,11 @@ const ActorData = styled.div`
   }
 `;
 
+export const ActorLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+`;
+
 function Actor({ actor, elementWidth }) {
   return (
     <ActorContainer $width={elementWidth}>
@@ -76,7 +82,9 @@ function Actor({ actor, elementWidth }) {
       />
       <ActorDataContainer>
         <ActorData>
-          <p>{actor.name}</p>
+          <ActorLink to={`/detailed-person/${actor.id}`}>
+            {actor.name}
+          </ActorLink>
           <p style={{ fontWeight: 400 }}>
             {actor.character && <i>as {actor.character}</i>}
           </p>
