@@ -1,12 +1,9 @@
-import styled from "styled-components";
-
-export const TitleContainer = styled.div`
+import{u as i,j as t}from"./index-XMF6nw69.js";const n=i.div`
   --light: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
-  width: 100%;
   filter: brightness(var(--light));
   animation: 3s flicker linear infinite;
 
@@ -65,13 +62,11 @@ export const TitleContainer = styled.div`
   }
 
   @property --light {
-    syntax: "<number>";
+    syntax: "<angle>";
     inherits: false;
     initial-value: 1;
   }
-`;
-
-const TitleComponent = styled.h1`
+`,l=i.h1`
   position: relative;
   text-align: center;
   text-transform: uppercase;
@@ -80,7 +75,7 @@ const TitleComponent = styled.h1`
   font-weight: 400;
   letter-spacing: 2px;
   padding: 5px;
-  min-width: 170px;
+  min-width: 270px;
   color: gold;
   border: 3px solid gold;
   box-shadow:
@@ -92,7 +87,10 @@ const TitleComponent = styled.h1`
   &::before {
     content: "";
     position: absolute;
-    inset: 0;
+    top: 0px;
+    bottom: 0;
+    left: 0;
+    right: 0;
     opacity: 1;
     filter: blur(1em);
     transform-origin: 50% 0%;
@@ -103,16 +101,6 @@ const TitleComponent = styled.h1`
 
   @media only screen and (max-width: 600px) {
     font-size: 16px;
-    max-width: 100%;
+    max-width: none;
   }
-`;
-
-function Title({ text }) {
-  return (
-    <TitleContainer>
-      <TitleComponent>{text}</TitleComponent>
-    </TitleContainer>
-  );
-}
-
-export default Title;
+`;function r({text:e}){return t.jsx(n,{children:t.jsx(l,{children:e})})}export{r as T};

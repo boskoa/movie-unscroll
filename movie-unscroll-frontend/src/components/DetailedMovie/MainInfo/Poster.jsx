@@ -76,12 +76,12 @@ function Poster({ movie, setImageLoaded }) {
       )}
       <Glow
         alt="poster glow"
-        src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+        src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`}
         onError={(e) => (e.currentTarget.alt = "")}
       />
       <Image
         alt="poster"
-        src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+        src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`}
         onError={(e) => {
           e.currentTarget.alt = "No poster for this movie...";
           setImageLoaded(true);

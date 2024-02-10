@@ -161,7 +161,7 @@ function ProductionDetails({ movie }) {
                   <CrewImage
                     draggable="false"
                     alt={c.name}
-                    src={`https://image.tmdb.org/t/p/original/${c.profile_path}`}
+                    src={`https://image.tmdb.org/t/p/w185/${c.profile_path}`}
                     onError={(e) => {
                       e.currentTarget.onerror = null;
                       e.currentTarget.src =
@@ -215,7 +215,7 @@ function ProductionDetails({ movie }) {
                   title={c.name}
                   draggable="false"
                   alt={c.name}
-                  src={`https://image.tmdb.org/t/p/original/${c.logo_path}`}
+                  src={`https://image.tmdb.org/t/p/w154/${c.logo_path}`}
                   onError={(e) => {
                     e.currentTarget.onerror = null;
                   }}

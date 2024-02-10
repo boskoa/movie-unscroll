@@ -210,7 +210,7 @@ function RandomMovie({ show }) {
         />
         <img
           alt="poster"
-          src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+          src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
           onError={(e) => (e.currentTarget.alt = "No poster for this movie...")}
           height="100%"
         />
