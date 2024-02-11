@@ -88,10 +88,6 @@ router.post("/discover", tokenExtractor, async (req, res, next) => {
     .filter((i) => i.length)
     .join("&");
   query = query.length > 0 ? query + "&" : query;
-  console.log(
-    "QUERYYYYYYYYYYYY",
-    `https://api.themoviedb.org/3/discover/movie?${query}language=en-US&include_video=false&include_adult=false&api_key=${TMDB_KEY}&page=${req.query.page}`,
-  );
   try {
     const movie = await axios.get(
       `https://api.themoviedb.org/3/discover/movie?${query}language=en-US&include_video=false&include_adult=false&api_key=${TMDB_KEY}&page=${req.query.page}`,

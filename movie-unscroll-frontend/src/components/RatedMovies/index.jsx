@@ -11,6 +11,8 @@ import { useNavigate } from "react-router-dom";
 import Search from "./Search";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import StatisticsModal from "./StatisticsModal";
+import StatisticsButton from "./StatisticsButton";
 
 const SuperMainContainer = styled.div`
   max-width: 700px;
@@ -71,6 +73,7 @@ const LIMIT = 5;
 
 function RatedMovies() {
   const loggedUser = useSelector(selectLoggedUser);
+  const [active, setActive] = useState(false);
   const [ratings, setRatings] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const [offset, setOffset] = useState(0);
@@ -153,6 +156,10 @@ function RatedMovies() {
     if (!loggedUser) navigate("/");
   }, [loggedUser, navigate]);
 
+  useEffect(() => {
+    console.log(active);
+  }, [active]);
+
   if (!loggedUser) return <NotLogged />;
 
   if (!ratings) return null;
@@ -193,6 +200,8 @@ function RatedMovies() {
         </RatedContainer>
       </MainContainer>
       <Loader ref={loaderRef} />
+      <StatisticsModal active={active} />
+      <StatisticsButton setActive={setActive} />
     </SuperMainContainer>
   );
 }

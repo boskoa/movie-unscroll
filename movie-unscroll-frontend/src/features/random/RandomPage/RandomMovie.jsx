@@ -24,6 +24,7 @@ const MovieContainer = styled.div`
   justify-content: center;
   align-items: stretch;
   padding: 30px;
+  color: #fffac8;
   opacity: 0;
   overflow: hidden;
   transition: all 0.5s;

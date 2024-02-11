@@ -13,6 +13,11 @@ router.get("/:id", tokenExtractor, async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id, {
       attributes: { exclude: ["passwordHash"] },
+      include: [
+        { model: Actor, order: [["count", "DESC"]], limit: 5 },
+        { model: Director, order: [["count", "DESC"]], limit: 5 },
+        { model: Genre, order: [["count", "DESC"]], limit: 5 },
+      ],
     });
     return res.status(200).json(user);
   } catch (error) {

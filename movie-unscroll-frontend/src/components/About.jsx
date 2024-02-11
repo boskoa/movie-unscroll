@@ -21,8 +21,12 @@ const ContentContainer = styled.div`
 `;
 
 const Moto = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
   z-index: 2;
-  padding: 20px 0 90px 0;
+  padding: 20px 0 50px 0;
   color: #050400;
 `;
 
@@ -164,6 +168,7 @@ const Section = styled.p`
   text-align: start;
   color: #fffac8;
   width: 100%;
+  max-width: 800px;
   animation: ${() => css`2s ${sectionIntro} 30s linear forwards`};
 `;
 
@@ -178,11 +183,6 @@ function About() {
 
   return (
     <AboutContainer>
-      {/* <Text $delay="2s">Tired of endless scrolling</Text>
-      <Text $delay="8s">in search of something good to watch?</Text>
-      <Text $delay="14s">And stil ending up watching crap?</Text>
-      <Text $delay="20s">Remove the scrolling part</Text>
-      <Text $delay="28s">and watch crap straight away!</Text> */}
       <Title text="About" $show={showTitle} />
       <ContentContainer>
         <Moto>
@@ -194,16 +194,11 @@ function About() {
         </Moto>
         <Light />
         <Section>
-          Put your trust in popular opinion and go for default, random pick.
-        </Section>
-        <Section>
-          Or rate some movies, and get customized recommendation based on your
-          actors or direstor preferences.
-        </Section>
-        <Section>Or use many filters to narrow your search down.</Section>
-        <Section>
-          You can also use existing trending, popular or best rated lists to
-          find something to watch.
+          Put your trust in popular opinion and go for default, random pick. Or
+          rate some movies, and get customized recommendation based on your
+          actors, directors or genres preferences. Or use available filters to
+          narrow your search down. You can also use existing trending, popular
+          or best rated lists to find something to watch.
         </Section>
       </ContentContainer>
     </AboutContainer>
