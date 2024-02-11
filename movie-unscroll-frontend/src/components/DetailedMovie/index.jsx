@@ -6,6 +6,7 @@ import Title from "../Title";
 import MainInfo from "./MainInfo";
 import Actors from "./Actors";
 import ProductionDetails from "./ProductionDetails";
+import TrailerModal from "./TrailerModal";
 
 const DetailedContainer = styled.div`
   display: flex;
@@ -29,6 +30,7 @@ function DetailedMovie() {
   const { id } = useParams();
   const [movie, setMovie] = useState();
   const [error, setError] = useState();
+  const [trailer, setTrailer] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
@@ -54,9 +56,19 @@ function DetailedMovie() {
   return (
     <DetailedContainer $loaded={imageLoaded}>
       <Title text={movie.title} style={{ margin: "0 50px" }} />
-      <MainInfo movie={movie} setImageLoaded={setImageLoaded} />
+      <MainInfo
+        movie={movie}
+        setImageLoaded={setImageLoaded}
+        setTrailer={setTrailer}
+      />
       <Actors actors={movie.credits.cast.slice(0, 10)} />
       <ProductionDetails movie={movie} />
+      {trailer && movie.videos.results.length > 0 && (
+        <TrailerModal
+          video={movie.videos.results[movie.videos.results.length - 1]}
+          setTrailer={setTrailer}
+        />
+      )}
     </DetailedContainer>
   );
 }

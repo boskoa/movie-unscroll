@@ -14,10 +14,14 @@ const MainInfoContainer = styled.div`
   }
 `;
 
-function MainInfo({ movie, setImageLoaded }) {
+function MainInfo({ movie, setImageLoaded, setTrailer }) {
   return (
     <MainInfoContainer>
-      <Poster movie={movie} setImageLoaded={setImageLoaded} />
+      <Poster
+        movie={movie}
+        setImageLoaded={setImageLoaded}
+        setTrailer={setTrailer}
+      />
       <Info movie={movie} />
     </MainInfoContainer>
   );

@@ -1,5 +1,8 @@
 import { faBookmark } from "@fortawesome/free-regular-svg-icons";
-import { faBookmark as faBookmarkSolid } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBookmark as faBookmarkSolid,
+  faFilm,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
@@ -39,7 +42,16 @@ const Bookmark = styled.button`
   cursor: pointer;
 `;
 
-function Poster({ movie, setImageLoaded }) {
+const Trailer = styled.button`
+  all: unset;
+  position: absolute;
+  top: 40px;
+  right: 30px;
+  z-index: 2;
+  cursor: pointer;
+`;
+
+function Poster({ movie, setImageLoaded, setTrailer }) {
   const loggedUser = useSelector(selectLoggedUser);
   const bookmarked = useSelector((state) =>
     selectBookmarkById(state, movie.id),
@@ -51,6 +63,7 @@ function Poster({ movie, setImageLoaded }) {
       {loggedUser && (
         <Bookmark
           type="button"
+          title="Bookmark this movie"
           onClick={() =>
             bookmarked
               ? dispatch(
@@ -74,6 +87,16 @@ function Poster({ movie, setImageLoaded }) {
           />
         </Bookmark>
       )}
+      <Trailer
+        type="button"
+        title="Watch trailer"
+        onClick={() => setTrailer(true)}
+      >
+        <FontAwesomeIcon
+          icon={faFilm}
+          style={{ fontSize: 20, color: "gold" }}
+        />
+      </Trailer>
       <Glow
         alt="poster glow"
         src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`}
