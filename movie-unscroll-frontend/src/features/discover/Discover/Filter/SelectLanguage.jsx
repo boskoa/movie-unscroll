@@ -7,7 +7,10 @@ function SelectLanguage({ options, setSelectedOption, title }) {
   return (
     <SelectContainer>
       <Title>{title}</Title>
-      <Select onChange={(e) => dispatch(setSelectedOption(e.target.value))}>
+      <Select
+        aria-label={title}
+        onChange={(e) => dispatch(setSelectedOption(e.target.value))}
+      >
         {options.map((v) => (
           <option value={v.iso} key={v.iso}>
             {v.name}

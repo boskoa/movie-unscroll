@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=production node index.js",
+    "build:ui": "rm -rf dist && cd ./movie-unscroll-frontend/ && npm run build && cp -r dist ..",
     "dev": "NODE_ENV=development nodemon index.js"
   },
   "author": "",
@@ -21,6 +22,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "axios": "^1.6.5",
     "bcrypt": "^5.1.1",
+    "compression": "^1.7.4",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",

@@ -89,6 +89,7 @@ function Search({ search, setSearch, setOffset, setRatings }) {
         />
       </IconContainer>
       <SearchInput
+        aria-label="search rated movies"
         ref={inputRef}
         value={search}
         onChange={(e) => {

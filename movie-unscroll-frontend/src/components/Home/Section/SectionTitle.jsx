@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const TitleContainer = styled.h3`
+const TitleContainer = styled.h2`
   height: 100%;
   width: 40px;
   display: flex;

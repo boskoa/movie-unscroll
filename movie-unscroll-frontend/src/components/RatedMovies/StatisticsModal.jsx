@@ -62,9 +62,9 @@ function StatisticsModal({ active }) {
   return (
     <ModalContainer $active={active}>
       <DataBox>
-        <h4 style={{ textAlign: "center", marginBottom: 5 }}>
+        <h2 style={{ textAlign: "center", marginBottom: 5, fontSize: 18 }}>
           Your preferences
-        </h4>
+        </h2>
         {data?.actors?.length && (
           <p>
             Actors:{" "}

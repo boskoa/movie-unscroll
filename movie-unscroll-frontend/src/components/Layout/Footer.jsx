@@ -24,7 +24,7 @@ const FooterContainer = styled.footer`
   }
 `;
 
-const Title = styled.h3`
+const Title = styled.h2`
   font-size: 16px;
   font-weight: 600;
   color: rgb(255, 68, 0);
@@ -86,8 +86,13 @@ function Footer() {
       </Title>
       <PoweredBy>
         Powered by:{" "}
-        <a rel="noreferrer" target="_blank" href="https://www.themoviedb.org/">
-          <img width="70px" src={tmdb} />
+        <a
+          rel="noreferrer"
+          target="_blank"
+          href="https://www.themoviedb.org/"
+          aria-label="TMDB"
+        >
+          <img alt="tmdb logo" width="70px" src={tmdb} />
         </a>
       </PoweredBy>
     </FooterContainer>

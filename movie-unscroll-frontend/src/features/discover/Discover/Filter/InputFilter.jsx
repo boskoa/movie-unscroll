@@ -44,6 +44,7 @@ function InputFilter({
     <SelectContainer>
       <Title>{title}</Title>
       <Input
+        aria-label={title}
         ref={inputRef}
         value={search}
         onChange={(e) => setSearch(e.target.value)}

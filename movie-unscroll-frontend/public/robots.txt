@@ -1,0 +1,23 @@
+User-agent: *
+Disallow: /user-settings
+Disallow: /movie-search
+Disallow: /rated-movies
+Disallow: /suggestions
+Disallow: /trending
+Disallow: /top-rated
+Disallow: /popular
+Disallow: /theaters
+Disallow: /discover
+Disallow: /bookmarks
+
+User-Agent: AdsBot-Google
+Disallow: /user-settings
+Disallow: /movie-search
+Disallow: /rated-movies
+Disallow: /suggestions
+Disallow: /trending
+Disallow: /top-rated
+Disallow: /popular
+Disallow: /theaters
+Disallow: /discover
+Disallow: /bookmarks

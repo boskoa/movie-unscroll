@@ -171,6 +171,7 @@ function Logo() {
       </MovieContainer>
       <Link to="/">
         <Roll
+          alt="logo"
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
           $hover={hover}

@@ -51,7 +51,7 @@ const MainContainer = styled.div`
   background: rgba(0, 67, 67, 0.5);
 `;
 
-const Title = styled.h4`
+const Title = styled.h2`
   color: gold;
   font-size: 20px;
   font-weight: 600;

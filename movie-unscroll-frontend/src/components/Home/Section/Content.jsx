@@ -51,7 +51,7 @@ const TitlesContainer = styled.div`
   }
 `;
 
-const Title = styled.h4`
+const Title = styled.h3`
   height: 25%;
   text-align: center;
   display: flex;
@@ -107,7 +107,11 @@ function Content({ title, sectionColor, movies, position, setPosition }) {
       <Posters>
         <PosterContainer ref={posterRef} $position={position}>
           {movies.map((m) => (
-            <Link to={`/detailed-movie/${m.id}`} key={m.id}>
+            <Link
+              to={`/detailed-movie/${m.id}`}
+              key={m.id}
+              aria-label={`link to ${m.title}`}
+            >
               {load ? (
                 <Poster
                   draggable="false"
@@ -133,6 +137,7 @@ function Content({ title, sectionColor, movies, position, setPosition }) {
         <Highlight $color={sectionColor} $position={position} />
         <More>
           <Link
+            aria-label={`link to more ${title}`}
             to={`/${title.replace(" ", "-")}`}
             style={{
               textDecoration: "none",

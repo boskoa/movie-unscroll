@@ -108,6 +108,7 @@ function DetailedPerson() {
             id="search"
             name="search"
             type="text"
+            araia-label="find a person"
             ref={inputRef}
             $active={active}
             value={search}

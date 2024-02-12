@@ -8,6 +8,7 @@ function MinMaxInput({ min, setMin, max, setMax, titles, type, width }) {
     <MinMaxContainer>
       <Title>{titles[0]}</Title>
       <ShortInput
+        aria-label="min"
         $width={width}
         type={type}
         min={0}
@@ -16,6 +17,7 @@ function MinMaxInput({ min, setMin, max, setMax, titles, type, width }) {
       />
       <Title>{titles[1]}</Title>
       <ShortInput
+        aria-label="max"
         $width={width}
         type={type}
         min={0}

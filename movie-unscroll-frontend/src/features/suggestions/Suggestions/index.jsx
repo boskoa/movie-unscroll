@@ -196,6 +196,7 @@ function Suggestions() {
             ))}
           </SuggestionsContainer>
           <Left
+            aria-label="left button"
             onClick={() => {
               setPosition((p) => (p > 0 ? p - 1 : suggestions.length - 1));
             }}
@@ -203,6 +204,7 @@ function Suggestions() {
             <FontAwesomeIcon icon={faChevronLeft} />
           </Left>
           <Right
+            aria-label="right button"
             onClick={() => {
               setPosition((p) => (p < suggestions.length - 1 ? p + 1 : 0));
             }}

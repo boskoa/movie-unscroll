@@ -7,7 +7,7 @@ export const SelectContainer = styled.div`
   color: #fffac8;
 `;
 
-export const Title = styled.h5`
+export const Title = styled.h3`
   font-size: 14px;
   font-weight: 600;
 `;

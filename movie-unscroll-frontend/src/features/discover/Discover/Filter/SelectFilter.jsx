@@ -8,6 +8,7 @@ function SelectFilter({ options, setSelectedOption, selectedOption, title }) {
     <SelectContainer>
       <Title>{title}</Title>
       <Select
+        aria-label={title}
         onChange={(e) => dispatch(setSelectedOption(e.target.value))}
         defaultValue={selectedOption ?? ""}
       >

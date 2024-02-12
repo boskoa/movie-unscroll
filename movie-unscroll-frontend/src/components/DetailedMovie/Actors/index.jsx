@@ -168,6 +168,7 @@ function Actors({ actors }) {
         ))}
       </ActorsFlex>
       <Left
+        aria-label="left button"
         disabled={disabled}
         onClick={() => {
           if (width > 600) {
@@ -182,6 +183,7 @@ function Actors({ actors }) {
         <FontAwesomeIcon icon={faChevronLeft} />
       </Left>
       <Right
+        aria-label="right button"
         disabled={disabled}
         onClick={() => {
           if (width > 600) {
