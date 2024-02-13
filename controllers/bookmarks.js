@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const axios = require("axios");
 const { tokenExtractor } = require("../utils/tokenExtractor");
 const { User } = require("../models");
 const { Bookmark } = require("../models/bookmark");

@@ -92,6 +92,7 @@ router.get("/personalized", tokenExtractor, async (req, res, next) => {
       );
     }
 
+    /* eslint-disable indent */
     let filteredAllIds = all.length
       ? [
           ...new Set(
@@ -103,6 +104,7 @@ router.get("/personalized", tokenExtractor, async (req, res, next) => {
           .sort(() => Math.random() - 0.5)
           .slice(0, 7)
       : [];
+    /* eslint-enable indent */
 
     const topRandomLength = await axios.get(
       `https://api.themoviedb.org/3/movie/top_rated?api_key=${TMDB_KEY}&include_adult=false`,
