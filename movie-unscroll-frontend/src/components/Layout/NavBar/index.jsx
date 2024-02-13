@@ -103,6 +103,7 @@ function NavBar({ setLogin, setRegister }) {
         <MainMenu />
       ) : (
         <LogInIcon
+          data-testid="login"
           onClick={() => setLogin(true)}
           $title="Log in"
           $color="rgb(255, 68, 0)"
@@ -115,6 +116,7 @@ function NavBar({ setLogin, setRegister }) {
         <UserMenu id={loggedUser.id} />
       ) : (
         <SignUpIcon
+          data-testid="register"
           onClick={() => setRegister(true)}
           $title="Sign up"
           $color="gold"

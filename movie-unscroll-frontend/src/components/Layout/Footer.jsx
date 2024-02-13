@@ -79,7 +79,10 @@ function Footer() {
   const location = useLocation().pathname;
 
   return (
-    <FooterContainer $loaded={!["/", "/suggestions"].includes(location)}>
+    <FooterContainer
+      data-testid="footer"
+      $loaded={!["/", "/suggestions"].includes(location)}
+    >
       <AboutLink to="/about">About</AboutLink>
       <Title>
         <span>Movie</span> <span>Unscroll</span>
