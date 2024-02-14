@@ -49,5 +49,3 @@ function Layout() {
 }
 
 export default Layout;
-
-// tired of endless scrolling in search of something good to watch? and stil ending up watching crap? remove the scrolling part and watch crap straigh away!

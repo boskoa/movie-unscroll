@@ -45,10 +45,6 @@ const Front = styled.div`
   filter: ${({ $clicked }) => ($clicked ? "brightness(1)" : "brightness(0.8)")};
   animation: ${({ $clicked }) =>
     $clicked ? css`0.5s ${open} forwards` : css`0.5s ${close} forwards`};
-  /* transform: ${({ $clicked }) =>
-    $clicked
-      ? "perspective(200px) translateZ(5px) translateY(-25px)"
-      : "translateY(0px)"}; */
   box-shadow: ${({ $clicked }) =>
     $clicked
       ? `inset 5px 5px 20px rgba(255, 255, 255, 0.9),

@@ -83,7 +83,6 @@ function UpdateForm() {
   } = useForm({ mode: "onBlur" });
 
   function handleUpdate(data) {
-    console.log("HAI");
     dispatch(clearUsersError());
     dispatch(
       updateUser({ id: loggedUser.id, token: loggedUser.token, newData: data }),

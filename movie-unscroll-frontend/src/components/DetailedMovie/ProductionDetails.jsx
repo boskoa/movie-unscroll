@@ -2,10 +2,11 @@ import styled from "styled-components";
 import actorLogo from "../../assets/actor.jpg";
 import actressLogo from "../../assets/actress.jpg";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectLoggedUser } from "../../features/login/loginSlice";
 
 const MainContainer = styled.div`
   position: relative;
-  //text-shadow: 0 0 8px gold;
   font-size: 14px;
   font-weight: 400;
   max-width: 96%;
@@ -93,6 +94,7 @@ const CrewName = styled(Link)`
   text-shadow: 0 0 5px white;
   backdrop-filter: blur(5px);
   cursor: pointer;
+  pointer-events: ${({ $logged }) => ($logged ? "" : "none")};
 `;
 
 const Money = styled.div`
@@ -123,6 +125,8 @@ const LogoImage = styled.img`
 `;
 
 function ProductionDetails({ movie }) {
+  const loggedUser = useSelector(selectLoggedUser);
+
   return (
     <MainContainer $backdrop={movie.backdrop_path}>
       <Crews>
@@ -133,7 +137,12 @@ function ProductionDetails({ movie }) {
               .filter((c) => ["Screenplay", "Writer"].includes(c.job))
               .map((c) => (
                 <ImageContainer key={c.id}>
-                  <CrewName to={`/detailed-person/${c.id}`}>{c.name}</CrewName>
+                  <CrewName
+                    $logged={loggedUser}
+                    to={`/detailed-person/${c.id}`}
+                  >
+                    {c.name}
+                  </CrewName>
                   <CrewImage
                     draggable="false"
                     alt={c.name}
@@ -155,7 +164,10 @@ function ProductionDetails({ movie }) {
               .filter((c) => c.job === "Director")
               .map((c) => (
                 <ImageContainer key={c.id}>
-                  <CrewName to={`/detailed-person/${c.id}`}>
+                  <CrewName
+                    $logged={loggedUser}
+                    to={`/detailed-person/${c.id}`}
+                  >
                     <p>{c.name}</p>
                   </CrewName>
                   <CrewImage

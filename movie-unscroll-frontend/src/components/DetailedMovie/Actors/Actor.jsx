@@ -2,6 +2,8 @@ import styled from "styled-components";
 import actorLogo from "../../../assets/actor.jpg";
 import actressLogo from "../../../assets/actress.jpg";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectLoggedUser } from "../../../features/login/loginSlice";
 
 const ActorContainer = styled.div`
   position: relative;
@@ -69,6 +71,8 @@ export const ActorLink = styled(Link)`
 `;
 
 function Actor({ actor, elementWidth }) {
+  const loggedUser = useSelector(selectLoggedUser);
+
   return (
     <ActorContainer $width={elementWidth}>
       <ActorImage
@@ -82,9 +86,13 @@ function Actor({ actor, elementWidth }) {
       />
       <ActorDataContainer>
         <ActorData>
-          <ActorLink to={`/detailed-person/${actor.id}`}>
-            {actor.name}
-          </ActorLink>
+          {loggedUser ? (
+            <ActorLink to={`/detailed-person/${actor.id}`}>
+              {actor.name}
+            </ActorLink>
+          ) : (
+            <p>{actor.name}</p>
+          )}
           <p style={{ fontWeight: 400 }}>
             {actor.character && <i>as {actor.character}</i>}
           </p>

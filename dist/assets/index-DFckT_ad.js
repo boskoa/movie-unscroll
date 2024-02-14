@@ -1,11 +1,11 @@
-import{u as r,r as p,j as t,a as Y,h as f,b as h,c as d,s as $,d as E,e as F,f as I,g as Z,i as B,k as D,l as R,m as M,n as q}from"./index-Fa3IilTd.js";import{T as A}from"./Title-XEyrHU2K.js";const N=r.div`
+import{u as r,r as p,j as t,a as E,h as f,b as h,c as d,s as $,d as F,e as Y,f as I,g as B,i as Z,k as D,l as R,m as M,n as q}from"./index-28mlnusY.js";import{T as N}from"./Title-E4W34BXo.js";const O=r.div`
   padding-top: 40px;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: start;
   gap: 30px;
-`,O=r.form`
+`,V=r.form`
   display: flex;
   justify-content: space-between;
   align-items: start;
@@ -29,7 +29,7 @@ import{u as r,r as p,j as t,a as Y,h as f,b as h,c as d,s as $,d as E,e as F,f a
   &:active {
     box-shadow: 0 0 10px 0 rgb(255, 68, 0);
   }
-`,V=r.div`
+`,A=r.div`
   position: relative;
 `,W=r.img`
   position: relative;
@@ -50,7 +50,7 @@ import{u as r,r as p,j as t,a as Y,h as f,b as h,c as d,s as $,d as E,e as F,f a
   object-fit: cover;
   filter: blur(20px);
   z-index: 0;
-`;function H({loggedUser:e}){const[o,n]=p.useState("Choose avatar"),[s,i]=p.useState(null);async function c(a){a.preventDefault();const l=new FormData;l.append("name",o),l.append("file",s),await Y.post(`/api/avatars/${e.id}`,l,{headers:{"Content-Type":"multipart/form-data",Authorization:`bearer ${e.token}`}}),window.location.reload()}return t.jsxs(N,{children:[t.jsxs(V,{children:[t.jsx(G,{alt:"chosen avatar",src:s?URL.createObjectURL(s):`/public/uploads/avatars/${e.id}.webp`,onError:a=>{a.currentTarget.src="/public/user.jpg",a.currentTarget.height="28",a.currentTarget.width="28"}}),t.jsx(W,{alt:"chosen avatar",src:s?URL.createObjectURL(s):`/public/uploads/avatars/${e.id}.webp`,onError:a=>{a.currentTarget.src="/public/user.jpg",a.currentTarget.height="28",a.currentTarget.width="28"}})]}),t.jsxs(O,{id:"avatar-form",encType:"multipart/form-data",children:[t.jsxs("label",{htmlFor:"avatar",style:{maxWidth:"70%"},children:[t.jsx("input",{style:{display:"none"},id:"avatar",type:"file",name:"avatar",onChange:a=>{n(e.id),i(a.target.files[0])}}),t.jsx(y,{children:"Choose image"})]}),t.jsx(y,{type:"submit",disabled:!s,onClick:a=>c(a),children:"Set"})]})]})}const J=r.div`
+`;function H({loggedUser:e}){const[o,n]=p.useState("Choose avatar"),[s,i]=p.useState(null);async function c(a){a.preventDefault();const l=new FormData;l.append("name",o),l.append("file",s),await E.post(`/api/avatars/${e.id}`,l,{headers:{"Content-Type":"multipart/form-data",Authorization:`bearer ${e.token}`}}),window.location.reload()}return t.jsxs(O,{children:[t.jsxs(A,{children:[t.jsx(G,{alt:"chosen avatar",src:s?URL.createObjectURL(s):`/public/uploads/avatars/${e.id}.webp`,onError:a=>{a.currentTarget.src="/public/user.jpg",a.currentTarget.height="28",a.currentTarget.width="28"}}),t.jsx(W,{alt:"chosen avatar",src:s?URL.createObjectURL(s):`/public/uploads/avatars/${e.id}.webp`,onError:a=>{a.currentTarget.src="/public/user.jpg",a.currentTarget.height="28",a.currentTarget.width="28"}})]}),t.jsxs(V,{id:"avatar-form",encType:"multipart/form-data",children:[t.jsxs("label",{htmlFor:"avatar",style:{maxWidth:"70%"},children:[t.jsx("input",{style:{display:"none"},id:"avatar",type:"file",name:"avatar",onChange:a=>{n(e.id),i(a.target.files[0])}}),t.jsx(y,{children:"Choose image"})]}),t.jsx(y,{type:"submit",disabled:!s,onClick:a=>c(a),children:"Set"})]})]})}const J=r.div`
   position: relative;
   transition: all 0.5s;
 `,K=f`
@@ -87,7 +87,6 @@ import{u as r,r as p,j as t,a as Y,h as f,b as h,c as d,s as $,d as E,e as F,f a
   border-radius: 10px;
   filter: ${({$clicked:e})=>e?"brightness(1)":"brightness(0.8)"};
   animation: ${({$clicked:e})=>e?h`0.5s ${K} forwards`:h`0.5s ${P} forwards`};
-  /* transform: ${({$clicked:e})=>e?"perspective(200px) translateZ(5px) translateY(-25px)":"translateY(0px)"}; */
   box-shadow: ${({$clicked:e})=>e?`inset 5px 5px 20px rgba(255, 255, 255, 0.9),
     inset -5px -5px 20px rgba(255, 255, 255, 0.9)`:""};
   background: linear-gradient(
@@ -188,7 +187,7 @@ import{u as r,r as p,j as t,a as Y,h as f,b as h,c as d,s as $,d as E,e as F,f a
     inset 0 0 5px 0 red;
   text-shadow: 0 0 3px red;
   transition: all 0.4s;
-`;function se(){var b,j,v,w;const[e,o]=p.useState(!1),n=d($),s=d(g=>E(g,n.id)),i=d(F),c=d(I),a=Z(),l=B(),{register:x,handleSubmit:C,formState:{errors:u}}=D({mode:"onBlur"});function U(g){console.log("HAI"),a(M()),a(q({id:n.id,token:n.token,newData:g})),o(!0),setTimeout(()=>o(!1),600)}if(p.useEffect(()=>{e&&!i&&!c&&l(-1,{replace:!0})},[e,i,c,l,a]),p.useEffect(()=>{a(R({token:n.token,id:n.id}))},[a,n]),!(s!=null&&s.id))return"Loading...";const S={...x("name",{required:!0,minLength:{value:2,message:"More than 1 character."}}),placeholder:"name",name:"name",type:"text",defaultValue:s.name},z={...x("username",{required:!0,minLength:{value:2,message:"More than 1 character."}}),placeholder:"username",name:"username",type:"text",defaultValue:s.username},L={...x("email",{required:!0,pattern:{value:/\S+@\S+\.\S+/,message:"Wrong email format"}}),placeholder:"email",name:"email",type:"email",defaultValue:s.email},T={...x("password",{minLength:{value:6,message:"More than 5 characters."}}),placeholder:"password",name:"password",type:"password"};return t.jsxs(te,{onSubmit:C(U),children:[t.jsx(m,{params:S,error:(b=u.name)==null?void 0:b.message}),t.jsx(m,{params:z,error:(j=u.username)==null?void 0:j.message}),t.jsx(m,{params:L,error:(v=u.email)==null?void 0:v.message}),t.jsx(m,{params:T,error:(w=u.password)==null?void 0:w.message}),t.jsxs(ae,{children:[t.jsx(k,{type:"button",onClick:()=>l(-1),children:"Cancel"}),t.jsx(k,{type:"submit",children:"Update"}),t.jsx(re,{$error:i==null?void 0:i.length,children:i})]})]})}const ne=f`
+`;function se(){var b,j,v,w;const[e,o]=p.useState(!1),n=d($),s=d(g=>F(g,n.id)),i=d(Y),c=d(I),a=B(),l=Z(),{register:x,handleSubmit:C,formState:{errors:u}}=D({mode:"onBlur"});function U(g){a(M()),a(q({id:n.id,token:n.token,newData:g})),o(!0),setTimeout(()=>o(!1),600)}if(p.useEffect(()=>{e&&!i&&!c&&l(-1,{replace:!0})},[e,i,c,l,a]),p.useEffect(()=>{a(R({token:n.token,id:n.id}))},[a,n]),!(s!=null&&s.id))return"Loading...";const S={...x("name",{required:!0,minLength:{value:2,message:"More than 1 character."}}),placeholder:"name",name:"name",type:"text",defaultValue:s.name},z={...x("username",{required:!0,minLength:{value:2,message:"More than 1 character."}}),placeholder:"username",name:"username",type:"text",defaultValue:s.username},L={...x("email",{required:!0,pattern:{value:/\S+@\S+\.\S+/,message:"Wrong email format"}}),placeholder:"email",name:"email",type:"email",defaultValue:s.email},T={...x("password",{minLength:{value:6,message:"More than 5 characters."}}),placeholder:"password",name:"password",type:"password"};return t.jsxs(te,{onSubmit:C(U),children:[t.jsx(m,{params:S,error:(b=u.name)==null?void 0:b.message}),t.jsx(m,{params:z,error:(j=u.username)==null?void 0:j.message}),t.jsx(m,{params:L,error:(v=u.email)==null?void 0:v.message}),t.jsx(m,{params:T,error:(w=u.password)==null?void 0:w.message}),t.jsxs(ae,{children:[t.jsx(k,{type:"button",onClick:()=>l(-1),children:"Cancel"}),t.jsx(k,{type:"submit",children:"Update"}),t.jsx(re,{$error:i==null?void 0:i.length,children:i})]})]})}const ne=f`
   from {
     opacity: 0;
   }
@@ -211,4 +210,4 @@ import{u as r,r as p,j as t,a as Y,h as f,b as h,c as d,s as $,d as E,e as F,f a
     align-items: center;
     padding: 20px;
   }
-`;function de(){const e=d($);return e!=null&&e.id?t.jsxs(ie,{children:[t.jsx(A,{text:"User settings"}),t.jsxs(oe,{children:[t.jsx(H,{loggedUser:e}),t.jsx(se,{})]})]}):t.jsx("h2",{children:"Not authorized"})}export{de as default};
+`;function de(){const e=d($);return e!=null&&e.id?t.jsxs(ie,{children:[t.jsx(N,{text:"User settings"}),t.jsxs(oe,{children:[t.jsx(H,{loggedUser:e}),t.jsx(se,{})]})]}):t.jsx("h2",{children:"Not authorized"})}export{de as default};

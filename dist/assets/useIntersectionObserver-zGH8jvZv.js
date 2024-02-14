@@ -1,1 +1,0 @@
-import{r}from"./index-Fa3IilTd.js";function a(e){const[s,t]=r.useState(!1);return r.useEffect(()=>{const n={root:null,rootMargin:"0px",treshohld:1},o=new IntersectionObserver(c=>{const[i]=c;i.isIntersecting?t(!0):t(!1)},n);e.current&&o.observe(e.current)},[e]),s}export{a as u};

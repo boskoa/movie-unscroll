@@ -8,7 +8,6 @@ const AboutContainer = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 20px;
-  //margin-bottom: 10vh;
 `;
 
 const ContentContainer = styled.div`

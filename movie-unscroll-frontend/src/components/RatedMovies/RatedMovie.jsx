@@ -8,11 +8,6 @@ import RatingBox from "./RatingBox";
 import { Link } from "react-router-dom";
 
 const RatedMovieContainer = styled.div`
-  /* box-shadow:
-    0 0 10px 0 gold,
-    inset 0 0 10px 0 gold;
-  border-radius: 10px;
-  border: 3px solid gold; */
   min-height: 120px;
   color: black;
   background-color: gold;
@@ -21,7 +16,6 @@ const RatedMovieContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  //overflow: hidden;
   position: relative;
   margin: 0 15px;
 
@@ -40,7 +34,6 @@ const StarsContainer = styled.div`
   display: flex;
   align-items: center;
   background-color: black;
-  //height: 40px;
   padding: 5px;
   overflow: hidden;
 `;

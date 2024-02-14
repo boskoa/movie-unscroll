@@ -1,4 +1,4 @@
-import{u as r,r as e,j as n}from"./index-Fa3IilTd.js";const o="40px",i="34px",c=r.div`
+import{u as r,r as e,j as n}from"./index-28mlnusY.js";const o="40px",i="34px",c=r.div`
   position: absolute;
   top: 10px;
   right: 10px;

@@ -1,10 +1,9 @@
-import{u as e,h as a,b as r,r as i,j as t}from"./index-Fa3IilTd.js";import{T as l}from"./Title-XEyrHU2K.js";const f=e.div`
+import{u as e,h as a,b as r,r as i,j as t}from"./index-28mlnusY.js";import{T as l}from"./Title-E4W34BXo.js";const f=e.div`
   position: relative;
   display: flex;
   align-items: center;
   flex-direction: column;
   gap: 20px;
-  //margin-bottom: 10vh;
 `,d=e.div`
   position: relative;
   display: flex;
