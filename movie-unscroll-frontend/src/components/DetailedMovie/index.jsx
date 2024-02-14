@@ -19,7 +19,6 @@ const DetailedContainer = styled.div`
   padding-bottom: 20px;
   opacity: ${({ $loaded }) => ($loaded ? "1" : "0")};
   transition: all 0.5s;
-  //transition-delay: 2s;
 
   @media only screen and (max-width: 600px) {
     overflow: hidden;
@@ -54,7 +53,7 @@ function DetailedMovie() {
   if (!movie) return null;
 
   return (
-    <DetailedContainer $loaded={imageLoaded}>
+    <DetailedContainer data-testid="detailed" $loaded={imageLoaded}>
       <Title text={movie.title} style={{ margin: "0 50px" }} />
       <MainInfo
         movie={movie}

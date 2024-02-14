@@ -1,6 +1,5 @@
-import { beforeEach, describe, expect, test } from "vitest";
-import userEvent from "@testing-library/user-event";
-import { render, screen, waitFor } from "@testing-library/react";
+import { describe, expect, test } from "vitest";
+import { render, screen } from "@testing-library/react";
 import Footer from "../components/Layout/Footer";
 import { MemoryRouter } from "react-router-dom";
 
