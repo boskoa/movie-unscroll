@@ -8,7 +8,7 @@ import {
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { selectLoggedUser } from "../../login/loginSlice";
 import Suggestion from "./Suggestion";
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
@@ -17,19 +17,24 @@ import {
 import RotorComponent from "../../random/RandomPage/RotorComponent";
 import FilmStrip from "./FilmStrip";
 
+const appear = keyframes`
+  to {
+    opacity: 1;
+  }
+`;
+
 const MainContainer = styled.div`
-  position: absolute;
-  top: 50px;
-  display: flex;
+  display: ${({ $show }) => (!$show ? "none" : "flex")};
   flex-direction: column;
   align-items: center;
   width: 100%;
   min-height: 90vh;
-  opacity: ${({ $loaded }) => ($loaded ? 1 : 0)};
-  transform: ${({ $show }) => ($show ? "" : "translateY(-100%)")};
-  transition: opacity 1s;
+  opacity: 0;
+  animation: ${() => css`
+    ${appear} 1s ease-in forwards
+  `};
   overflow: hidden;
-  transition-delay: 1s;
+  padding-bottom: 50px;
 `;
 
 const Container = styled.div`
@@ -162,6 +167,7 @@ function Suggestions() {
         <Container
           onTouchStart={(e) => {
             setStart(e.targetTouches[0].clientX);
+            setEnd(e.targetTouches[0].clientX);
           }}
           onTouchEnd={() => {
             if (start - end > 30) {

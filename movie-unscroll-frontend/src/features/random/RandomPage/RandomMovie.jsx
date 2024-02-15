@@ -16,8 +16,6 @@ const intro = keyframes`
 `;
 
 const MovieContainer = styled.div`
-  top: 0px;
-  left: 0;
   min-height: 90vh;
   width: 100%;
   display: flex;

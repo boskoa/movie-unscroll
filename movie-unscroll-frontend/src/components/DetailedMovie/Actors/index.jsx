@@ -113,6 +113,7 @@ function Actors({ actors }) {
       ref={containerRef}
       onTouchStart={(e) => {
         setStart(e.targetTouches[0].clientX);
+        setEnd(e.targetTouches[0].clientX);
       }}
       onTouchEnd={() => {
         if (start - end > 30) {
@@ -132,6 +133,7 @@ function Actors({ actors }) {
             setPosition((p) => (p > 0 ? p - 1 : actors.length - 2));
           }
         }
+        console.log("FOO", start, end);
       }}
       onTouchMove={(e) => {
         setEnd(e.targetTouches[0].clientX);
