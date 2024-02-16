@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled, { css, keyframes } from "styled-components";
 
 const trailerIntro = keyframes`
@@ -31,6 +31,18 @@ const Video = styled.iframe`
 function TrailerModal({ video, setTrailer }) {
   const iframeRef = useRef();
   const containerRef = useRef();
+  const [width, setWidth] = useState();
+  const [height, setHeight] = useState();
+
+  useEffect(() => {
+    if (document.body.clientWidth > 600) {
+      setWidth(560);
+      setHeight(315);
+    } else {
+      setWidth(280);
+      setHeight(158);
+    }
+  }, []);
 
   useEffect(() => {
     function clickAway(e) {
@@ -50,8 +62,8 @@ function TrailerModal({ video, setTrailer }) {
     <ModalContainer ref={containerRef}>
       <Video
         ref={iframeRef}
-        width="560"
-        height="315"
+        width={width}
+        height={height}
         src={`https://www.youtube-nocookie.com/embed/${video.key}`}
         title={video.name}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media"
