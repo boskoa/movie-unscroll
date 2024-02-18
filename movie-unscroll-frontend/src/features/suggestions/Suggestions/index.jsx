@@ -117,6 +117,10 @@ function Suggestions() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  useEffect(() => {
     let index;
     if (loggedUser && !suggestions.length) {
       index = setTimeout(() => dispatch(getSuggestions(loggedUser.token)), 100);
