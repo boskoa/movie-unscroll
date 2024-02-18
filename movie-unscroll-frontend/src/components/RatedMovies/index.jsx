@@ -124,6 +124,10 @@ function RatedMovies() {
   }
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  useEffect(() => {
     if (intersecting && !stopLoading) {
       setOffset((prev) => prev + LIMIT);
     }

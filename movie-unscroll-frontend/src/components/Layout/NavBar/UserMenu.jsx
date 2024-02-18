@@ -2,13 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../features/login/loginSlice";
 import { Icon, MainIcon, MenuIcon, UserIcon } from "./navbarStyles";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import user from "../../../assets/user.svg";
 
 function UserMenu({ id }) {
   const [selected, setSelected] = useState(false);
   const menuRef = useRef();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     function handleClick(e) {
@@ -78,6 +79,7 @@ function UserMenu({ id }) {
         onClick={() => {
           dispatch(logout());
           window.localStorage.removeItem("loggedMovieUnscroll");
+          navigate("/");
         }}
       >
         Log out

@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { selectLoggedUser } from "../../login/loginSlice";
 import Avatar from "./Avatar";
 import UpdateForm from "./UpdateForm";
+import { useEffect } from "react";
 
 const appear = keyframes`
   from {
@@ -36,6 +37,10 @@ const MainContainer = styled.div`
 
 function UpdateUser() {
   const loggedUser = useSelector(selectLoggedUser);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   if (!loggedUser?.id) {
     return <h2>Not authorized</h2>;

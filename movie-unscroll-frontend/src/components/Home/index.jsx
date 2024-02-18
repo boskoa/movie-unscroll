@@ -67,6 +67,10 @@ function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  useEffect(() => {
     if (!loggedUser) {
       navigate(-1);
     } else {

@@ -52,6 +52,10 @@ function DetailedPerson() {
   }, []);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  useEffect(() => {
     const index = setTimeout(() => setLoaded(true), 1000);
 
     return () => clearTimeout(index);
@@ -108,7 +112,7 @@ function DetailedPerson() {
             id="search"
             name="search"
             type="text"
-            araia-label="find a person"
+            aria-label="find a person"
             ref={inputRef}
             $active={active}
             value={search}

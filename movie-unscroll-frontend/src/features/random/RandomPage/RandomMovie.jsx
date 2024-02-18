@@ -78,7 +78,7 @@ const posterIntro = keyframes`
 
 const PosterContainer = styled.div`
   position: relative;
-  height: 80vh;
+  height: ${({ $height }) => $height};
   opacity: 0;
   animation: ${() => css`2s ${posterIntro} 5s forwards`};
 `;
@@ -109,7 +109,6 @@ const Description = styled.div`
   @media only screen and (max-width: 700px) {
     animation: none;
     width: 100%;
-    padding: 20px;
     min-height: 70vh;
     max-height: 120vh;
   }
@@ -185,12 +184,21 @@ function RandomMovie({ show }) {
   const dispatch = useDispatch();
   const movieRef = useRef();
   const [refetched, setRefetched] = useState(false);
+  const [height, setHeight] = useState();
 
   function handleAnother() {
     setRefetched(true);
     dispatch(getRandomMovie());
     setTimeout(() => setRefetched(false), 1000);
   }
+
+  useEffect(() => {
+    if (document.body.clientWidth > 400) {
+      setHeight("80vh");
+    } else {
+      setHeight("60vh");
+    }
+  }, []);
 
   useEffect(() => {
     dispatch(getRandomMovie());
@@ -202,7 +210,7 @@ function RandomMovie({ show }) {
 
   return (
     <MovieContainer ref={movieRef} $show={!show}>
-      <PosterContainer>
+      <PosterContainer $height={height}>
         <Rating
           show={!show}
           rating={Math.round(movie.vote_average * 10) / 10}

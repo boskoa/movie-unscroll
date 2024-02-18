@@ -49,6 +49,10 @@ const MainContainer = styled.div`
   gap: 20px;
   padding: 10px;
   background: rgba(0, 67, 67, 0.5);
+
+  @media only screen and (max-width: 400px) {
+    padding-bottom: 30px;
+  }
 `;
 
 const Title = styled.h2`

@@ -33,6 +33,10 @@ function DetailedMovie() {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  useEffect(() => {
     async function getMovie(movieId) {
       try {
         const response = await axios.get(

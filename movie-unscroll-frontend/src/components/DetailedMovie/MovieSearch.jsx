@@ -106,7 +106,7 @@ function MovieSearch() {
           id="search"
           name="search"
           type="text"
-          araia-label="find a movie"
+          aria-label="find a movie"
           ref={inputRef}
           $active={active}
           value={search}

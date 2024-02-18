@@ -180,7 +180,7 @@ function RegisterForm({ setRegister, setClapDown }) {
       </InputContainer>
       <ButtonContainer>
         <Button type="button" onClick={handleCancel}>
-          Cancel
+          Close
         </Button>
         <Button type="submit">Sign up</Button>
       </ButtonContainer>

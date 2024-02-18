@@ -64,6 +64,13 @@ export const MinMaxContainer = styled.div`
   gap: 5px;
 `;
 
+export const MinMaxSection = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 5px;
+`;
+
 export const ShortInput = styled.input`
   background-color: black;
   border: none;
@@ -94,5 +101,9 @@ export const Discover = styled.button`
 
   &:active {
     transform: rotateX(720deg);
+  }
+
+  @media only screen and (max-width: 400px) {
+    font-size: 10px;
   }
 `;
