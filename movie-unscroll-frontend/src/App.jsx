@@ -26,7 +26,7 @@ const AllTheaters = lazy(() => import("./features/theaters/AllTheaters"));
 const Discover = lazy(() => import("./features/discover/Discover"));
 const Bookmarks = lazy(() => import("./features/bookmarks/Bookmarks"));
 const About = lazy(() => import("./components/About"));
-//Testing CI/CD
+
 function App() {
   const dispatch = useDispatch();
 
