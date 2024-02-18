@@ -146,6 +146,10 @@ function Filter({ page, setPage }) {
   ]);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  useEffect(() => {
     if (page > 1) {
       setToFirst(true);
     } else {
