@@ -24,10 +24,10 @@ describe("Testing Register component", () => {
 
     const register = screen.getByTestId("register");
     await user.click(register);
-    const modal = screen.getByText("Cancel");
+    const modal = screen.getByText("Close");
     expect(modal).toBeInTheDocument();
     await user.click(modal);
-    const modalAfter = screen.getByText("Cancel");
+    const modalAfter = screen.getByText("Close");
     await waitFor(() => expect(modalAfter).not.toBeInTheDocument());
   });
 });
