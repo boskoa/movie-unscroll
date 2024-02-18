@@ -1,4 +1,4 @@
-import{u as s,r as o,j as n,L as k,c as v,s as C,Q as $,R,g as E,S as T,T as L,F as y,x as M,y as z,U as X}from"./index-28mlnusY.js";import{R as A}from"./Rating-fWQFsi7q.js";import{u as D}from"./useIntersectionObserver-FRmX3zdL.js";const F=s.div`
+import{u as s,r as o,j as n,L as k,h as $,b as C,c as v,s as R,Q as T,R as E,g as L,S as M,T as X,F as y,x as z,y as A,U as D}from"./index-aB-pfHqH.js";import{R as F}from"./Rating-ss6HWEwq.js";import{u as I}from"./useIntersectionObserver-brsw117w.js";const U=s.div`
   top: 0px;
   left: 0;
   min-height: 80vh;
@@ -16,13 +16,13 @@ import{u as s,r as o,j as n,L as k,c as v,s as C,Q as $,R,g as E,S as T,T as L,F
     align-items: center;
     justify-content: start;
   }
-`,I=s.div`
+`,_=s.div`
   position: relative;
   height: 60vh;
   aspect-ratio: 0.6666667;
   filter: ${({$loaded:e})=>e?"":"blur(10px)"};
   transition: filter 1s;
-`,U=s.div`
+`,B=s.div`
   position: relative;
   width: 46%;
   max-height: 70vh;
@@ -38,11 +38,11 @@ import{u as s,r as o,j as n,L as k,c as v,s as C,Q as $,R,g as E,S as T,T as L,F
     width: 100%;
     padding: 20px;
   }
-`,_=s.h4`
+`,G=s.h4`
   font-size: 22px;
   margin-bottom: 10px;
   text-align: center;
-`,B=s.p`
+`,O=s.p`
   font-size: 14px;
   text-align: justify;
   overflow-y: auto;
@@ -74,12 +74,12 @@ import{u as s,r as o,j as n,L as k,c as v,s as C,Q as $,R,g as E,S as T,T as L,F
     height: 0px;
     width: 0px;
   }
-`,G=s.p`
+`,P=s.p`
   font-size: 14px;
   font-style: italic;
   color: grey;
   align-self: start;
-`;function O({movie:e}){const r=o.useRef(),a=D(r),[d,l]=o.useState(!1),[g,c]=o.useState(!1);return o.useEffect(()=>{a&&l(!0)},[a]),e?n.jsxs(F,{children:[n.jsxs(I,{ref:r,$loaded:g,children:[n.jsx(A,{rating:e.vote_average}),d?n.jsx("img",{draggable:"false",alt:"poster",src:`https://image.tmdb.org/t/p/w342/${e.poster_path}`,onError:h=>{h.currentTarget.alt="No poster for this movie...",c(!0)},height:"100%",width:"100%",onLoad:()=>c(!0),style:{opacity:g?"1":"0"}}):null]}),n.jsxs(U,{children:[n.jsx(_,{children:n.jsxs(k,{style:{color:"inherit",textDecoration:"none"},to:`/detailed-movie/${e.id}`,children:[e.title," (",e.release_date.slice(0,4),")"]})}),n.jsx(B,{children:e.overview}),n.jsxs(G,{children:["Genres: ",e.genres.map(h=>h.name).join(", ")]})]})]}):null}const P=s.div`
+`;function N({movie:e}){const r=o.useRef(),a=I(r),[d,l]=o.useState(!1),[h,c]=o.useState(!1);return o.useEffect(()=>{a&&l(!0)},[a]),e?n.jsxs(U,{children:[n.jsxs(_,{ref:r,$loaded:h,children:[n.jsx(F,{rating:e.vote_average}),d?n.jsx("img",{draggable:"false",alt:"poster",src:`https://image.tmdb.org/t/p/w342/${e.poster_path}`,onError:g=>{g.currentTarget.alt="No poster for this movie...",c(!0)},height:"100%",width:"100%",onLoad:()=>c(!0),style:{opacity:h?"1":"0"}}):null]}),n.jsxs(B,{children:[n.jsx(G,{children:n.jsxs(k,{style:{color:"inherit",textDecoration:"none"},to:`/detailed-movie/${e.id}`,children:[e.title," (",e.release_date.slice(0,4),")"]})}),n.jsx(O,{children:e.overview}),n.jsxs(P,{children:["Genres: ",e.genres.map(g=>g.name).join(", ")]})]})]}):null}const Q=s.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -90,7 +90,7 @@ import{u as s,r as o,j as n,L as k,c as v,s as C,Q as $,R,g as E,S as T,T as L,F
   @media only screen and (max-width: 500px) {
     width: 100vw;
   }
-`,N=s.p`
+`,q=s.p`
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -108,28 +108,31 @@ import{u as s,r as o,j as n,L as k,c as v,s as C,Q as $,R,g as E,S as T,T as L,F
     width: 16px;
     height: 16px;
   }
-`;function Q({ids:e,position:r,setPosition:a}){return n.jsx(P,{children:e.map((d,l)=>n.jsx(N,{$glow:l===r,onClick:()=>a(l)},d))})}const Y=s.div`
-  position: absolute;
-  top: 50px;
-  display: flex;
+`;function H({ids:e,position:r,setPosition:a}){return n.jsx(Q,{children:e.map((d,l)=>n.jsx(q,{$glow:l===r,onClick:()=>a(l)},d))})}const J=$`
+  to {
+    opacity: 1;
+  }
+`,K=s.div`
+  display: ${({$show:e})=>e?"flex":"none"};
   flex-direction: column;
   align-items: center;
   width: 100%;
   min-height: 90vh;
-  opacity: ${({$loaded:e})=>e?1:0};
-  transform: ${({$show:e})=>e?"":"translateY(-100%)"};
-  transition: opacity 1s;
+  opacity: 0;
+  animation: ${()=>C`
+    ${J} 1s ease-in forwards
+  `};
   overflow: hidden;
-  transition-delay: 1s;
-`,q=s.div`
+  padding-bottom: 50px;
+`,V=s.div`
   width: 100%;
   min-height: 80vh;
   position: relative;
-`,H=s.div`
+`,W=s.div`
   display: flex;
   width: ${({$length:e})=>e*100}%;
   transition: all 0.8s;
-`,J=s.button`
+`,Y=s.button`
   position: fixed;
   top: calc(50vh - 13px);
   left: 5px;
@@ -144,7 +147,7 @@ import{u as s,r as o,j as n,L as k,c as v,s as C,Q as $,R,g as E,S as T,T as L,F
   font-size: 24px;
   backdrop-filter: blur(10px);
   cursor: pointer;
-`,K=s.button`
+`,Z=s.button`
   position: fixed;
   top: calc(50vh - 13px);
   right: 5px;
@@ -159,7 +162,7 @@ import{u as s,r as o,j as n,L as k,c as v,s as C,Q as $,R,g as E,S as T,T as L,F
   font-size: 24px;
   backdrop-filter: blur(10px);
   cursor: pointer;
-`,V=s.button`
+`,tt=s.button`
   position: absolute;
   bottom: 10px;
   left: calc(50vw - 60px);
@@ -177,4 +180,4 @@ import{u as s,r as o,j as n,L as k,c as v,s as C,Q as $,R,g as E,S as T,T as L,F
       0 0 5px 0 gold,
       0 0 5px 0 gold inset;
   }
-`;function et(){const[e,r]=o.useState(0),[a,d]=o.useState(),[l,g]=o.useState(),[c,h]=o.useState(3),[p,u]=o.useState(!0),[S,x]=o.useState(!1),f=v(C),i=v($),b=v(R),m=o.useRef(),w=E();return o.useEffect(()=>{let t;return f&&!i.length&&(t=setTimeout(()=>w(T(f.token)),100)),()=>{clearTimeout(t)}},[w,f,i]),o.useEffect(()=>{m.current&&(m.current.style.transform=`translateX(${e*-(100/i.length)}%)`)},[e,i.length]),o.useEffect(()=>{const t=setInterval(()=>h(j=>j>0?j-1:0),1e3);return x(!0),()=>clearInterval(t)},[]),o.useEffect(()=>{c===0&&!b&&(setTimeout(()=>u(!1),1500),x(!1))},[c,b]),o.useLayoutEffect(()=>{i.length&&c===3&&u(!1)},[i,c]),n.jsxs(n.Fragment,{children:[p?n.jsx(L,{animate:S,count:c}):"",n.jsxs(Y,{$show:!p&&!b,$loaded:!p,children:[n.jsx(Q,{ids:i.map(t=>t.id),position:e,setPosition:r}),n.jsxs(q,{onTouchStart:t=>{d(t.targetTouches[0].clientX)},onTouchEnd:()=>{a-l>30?r(t=>t<i.length-1?t+1:0):a-l<-30&&r(t=>t>0?t-1:i.length-1)},onTouchMove:t=>{g(t.targetTouches[0].clientX)},onMouseDown:t=>{d(t.pageX)},onMouseUp:()=>{a-l>30?r(t=>t<i.length-1?t+1:0):a-l<-30&&r(t=>t>0?t-1:i.length-1)},onMouseMove:t=>{g(t.pageX)},children:[n.jsx(H,{ref:m,$length:i.length,children:i.map(t=>n.jsx(O,{movie:t},t.id))}),n.jsx(J,{"aria-label":"left button",onClick:()=>{r(t=>t>0?t-1:i.length-1)},children:n.jsx(y,{icon:M})}),n.jsx(K,{"aria-label":"right button",onClick:()=>{r(t=>t<i.length-1?t+1:0)},children:n.jsx(y,{icon:z})}),n.jsx(V,{onClick:()=>{u(!0),h(3),x(!0),r(0),w(X())},children:"Another batch"})]})]})]})}export{et as default};
+`;function it(){const[e,r]=o.useState(0),[a,d]=o.useState(),[l,h]=o.useState(),[c,g]=o.useState(3),[p,u]=o.useState(!0),[S,x]=o.useState(!1),f=v(R),i=v(T),b=v(E),m=o.useRef(),w=L();return o.useEffect(()=>{let t;return f&&!i.length&&(t=setTimeout(()=>w(M(f.token)),100)),()=>{clearTimeout(t)}},[w,f,i]),o.useEffect(()=>{m.current&&(m.current.style.transform=`translateX(${e*-(100/i.length)}%)`)},[e,i.length]),o.useEffect(()=>{const t=setInterval(()=>g(j=>j>0?j-1:0),1e3);return x(!0),()=>clearInterval(t)},[]),o.useEffect(()=>{c===0&&!b&&(setTimeout(()=>u(!1),1500),x(!1))},[c,b]),o.useLayoutEffect(()=>{i.length&&c===3&&u(!1)},[i,c]),n.jsxs(n.Fragment,{children:[p?n.jsx(X,{animate:S,count:c}):"",n.jsxs(K,{$show:!p&&!b,$loaded:!p,children:[n.jsx(H,{ids:i.map(t=>t.id),position:e,setPosition:r}),n.jsxs(V,{onTouchStart:t=>{d(t.targetTouches[0].clientX),h(t.targetTouches[0].clientX)},onTouchEnd:()=>{a-l>30?r(t=>t<i.length-1?t+1:0):a-l<-30&&r(t=>t>0?t-1:i.length-1)},onTouchMove:t=>{h(t.targetTouches[0].clientX)},onMouseDown:t=>{d(t.pageX)},onMouseUp:()=>{a-l>30?r(t=>t<i.length-1?t+1:0):a-l<-30&&r(t=>t>0?t-1:i.length-1)},onMouseMove:t=>{h(t.pageX)},children:[n.jsx(W,{ref:m,$length:i.length,children:i.map(t=>n.jsx(N,{movie:t},t.id))}),n.jsx(Y,{"aria-label":"left button",onClick:()=>{r(t=>t>0?t-1:i.length-1)},children:n.jsx(y,{icon:z})}),n.jsx(Z,{"aria-label":"right button",onClick:()=>{r(t=>t<i.length-1?t+1:0)},children:n.jsx(y,{icon:A})}),n.jsx(tt,{onClick:()=>{u(!0),g(3),x(!0),r(0),w(D())},children:"Another batch"})]})]})]})}export{it as default};

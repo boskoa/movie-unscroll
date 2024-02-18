@@ -1,4 +1,4 @@
-import{u as r,r as p,j as t,a as E,h as f,b as h,c as d,s as $,d as F,e as Y,f as I,g as B,i as Z,k as D,l as R,m as M,n as q}from"./index-28mlnusY.js";import{T as N}from"./Title-E4W34BXo.js";const O=r.div`
+import{u as r,r as p,j as t,a as E,h as f,b as g,c as d,s as $,d as F,e as Y,f as I,g as B,i as Z,k as D,l as R,m as M,n as q}from"./index-aB-pfHqH.js";import{T as N}from"./Title-il1DVEMI.js";const O=r.div`
   padding-top: 40px;
   display: flex;
   flex-direction: column;
@@ -86,7 +86,7 @@ import{u as r,r as p,j as t,a as E,h as f,b as h,c as d,s as $,d as F,e as Y,f a
   z-index: 1;
   border-radius: 10px;
   filter: ${({$clicked:e})=>e?"brightness(1)":"brightness(0.8)"};
-  animation: ${({$clicked:e})=>e?h`0.5s ${K} forwards`:h`0.5s ${P} forwards`};
+  animation: ${({$clicked:e})=>e?g`0.5s ${K} forwards`:g`0.5s ${P} forwards`};
   box-shadow: ${({$clicked:e})=>e?`inset 5px 5px 20px rgba(255, 255, 255, 0.9),
     inset -5px -5px 20px rgba(255, 255, 255, 0.9)`:""};
   background: linear-gradient(
@@ -187,7 +187,7 @@ import{u as r,r as p,j as t,a as E,h as f,b as h,c as d,s as $,d as F,e as Y,f a
     inset 0 0 5px 0 red;
   text-shadow: 0 0 3px red;
   transition: all 0.4s;
-`;function se(){var b,j,v,w;const[e,o]=p.useState(!1),n=d($),s=d(g=>F(g,n.id)),i=d(Y),c=d(I),a=B(),l=Z(),{register:x,handleSubmit:C,formState:{errors:u}}=D({mode:"onBlur"});function U(g){a(M()),a(q({id:n.id,token:n.token,newData:g})),o(!0),setTimeout(()=>o(!1),600)}if(p.useEffect(()=>{e&&!i&&!c&&l(-1,{replace:!0})},[e,i,c,l,a]),p.useEffect(()=>{a(R({token:n.token,id:n.id}))},[a,n]),!(s!=null&&s.id))return"Loading...";const S={...x("name",{required:!0,minLength:{value:2,message:"More than 1 character."}}),placeholder:"name",name:"name",type:"text",defaultValue:s.name},z={...x("username",{required:!0,minLength:{value:2,message:"More than 1 character."}}),placeholder:"username",name:"username",type:"text",defaultValue:s.username},L={...x("email",{required:!0,pattern:{value:/\S+@\S+\.\S+/,message:"Wrong email format"}}),placeholder:"email",name:"email",type:"email",defaultValue:s.email},T={...x("password",{minLength:{value:6,message:"More than 5 characters."}}),placeholder:"password",name:"password",type:"password"};return t.jsxs(te,{onSubmit:C(U),children:[t.jsx(m,{params:S,error:(b=u.name)==null?void 0:b.message}),t.jsx(m,{params:z,error:(j=u.username)==null?void 0:j.message}),t.jsx(m,{params:L,error:(v=u.email)==null?void 0:v.message}),t.jsx(m,{params:T,error:(w=u.password)==null?void 0:w.message}),t.jsxs(ae,{children:[t.jsx(k,{type:"button",onClick:()=>l(-1),children:"Cancel"}),t.jsx(k,{type:"submit",children:"Update"}),t.jsx(re,{$error:i==null?void 0:i.length,children:i})]})]})}const ne=f`
+`;function se(){var b,j,v,w;const[e,o]=p.useState(!1),n=d($),s=d(h=>F(h,n.id)),i=d(Y),c=d(I),a=B(),l=Z(),{register:x,handleSubmit:C,formState:{errors:u}}=D({mode:"onBlur"});function U(h){a(M()),a(q({id:n.id,token:n.token,newData:h})),o(!0),setTimeout(()=>o(!1),600)}if(p.useEffect(()=>{e&&!i&&!c&&l(-1,{replace:!0})},[e,i,c,l,a]),p.useEffect(()=>{a(R({token:n.token,id:n.id}))},[a,n]),!(s!=null&&s.id))return"Loading...";const S={...x("name",{required:!0,minLength:{value:2,message:"More than 1 character."}}),placeholder:"name",name:"name",type:"text",defaultValue:s.name},T={...x("username",{required:!0,minLength:{value:2,message:"More than 1 character."}}),placeholder:"username",name:"username",type:"text",defaultValue:s.username},z={...x("email",{required:!0,pattern:{value:/\S+@\S+\.\S+/,message:"Wrong email format"}}),placeholder:"email",name:"email",type:"email",defaultValue:s.email},L={...x("password",{minLength:{value:6,message:"More than 5 characters."}}),placeholder:"password",name:"password",type:"password"};return t.jsxs(te,{onSubmit:C(U),children:[t.jsx(m,{params:S,error:(b=u.name)==null?void 0:b.message}),t.jsx(m,{params:T,error:(j=u.username)==null?void 0:j.message}),t.jsx(m,{params:z,error:(v=u.email)==null?void 0:v.message}),t.jsx(m,{params:L,error:(w=u.password)==null?void 0:w.message}),t.jsxs(ae,{children:[t.jsx(k,{type:"button",onClick:()=>l(-1),children:"Cancel"}),t.jsx(k,{type:"submit",children:"Update"}),t.jsx(re,{$error:i==null?void 0:i.length,children:i})]})]})}const ne=f`
   from {
     opacity: 0;
   }
@@ -198,7 +198,7 @@ import{u as r,r as p,j as t,a as E,h as f,b as h,c as d,s as $,d as F,e as Y,f a
   opacity: 0;
   max-width: 100%;
   overflow: hidden;
-  animation: ${()=>h`1s ${ne} 1s forwards`};
+  animation: ${()=>g`1s ${ne} 1s forwards`};
 `,oe=r.div`
   display: flex;
   justify-content: center;
@@ -210,4 +210,4 @@ import{u as r,r as p,j as t,a as E,h as f,b as h,c as d,s as $,d as F,e as Y,f a
     align-items: center;
     padding: 20px;
   }
-`;function de(){const e=d($);return e!=null&&e.id?t.jsxs(ie,{children:[t.jsx(N,{text:"User settings"}),t.jsxs(oe,{children:[t.jsx(H,{loggedUser:e}),t.jsx(se,{})]})]}):t.jsx("h2",{children:"Not authorized"})}export{de as default};
+`;function de(){const e=d($);return p.useEffect(()=>{window.scrollTo({top:0,behavior:"smooth"})},[]),e!=null&&e.id?t.jsxs(ie,{children:[t.jsx(N,{text:"User settings"}),t.jsxs(oe,{children:[t.jsx(H,{loggedUser:e}),t.jsx(se,{})]})]}):t.jsx("h2",{children:"Not authorized"})}export{de as default};
