@@ -136,7 +136,7 @@ function LoginForm({ setLogin, setClapDown }) {
       </InputContainer>
       <ButtonContainer>
         <Button type="button" onClick={handleCancel}>
-          Cancel
+          Close
         </Button>
         <Button type="submit">Log in</Button>
       </ButtonContainer>

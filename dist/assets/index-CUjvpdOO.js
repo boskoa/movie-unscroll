@@ -1,4 +1,4 @@
-import{u as s,r as o,j as n,L as k,h as $,b as C,c as v,s as R,Q as T,R as E,g as L,S as M,T as X,F as y,x as z,y as A,U as D}from"./index-aB-pfHqH.js";import{R as F}from"./Rating-ss6HWEwq.js";import{u as I}from"./useIntersectionObserver-brsw117w.js";const U=s.div`
+import{u as s,r as o,j as n,L as k,h as $,b as C,c as v,s as R,Q as T,R as E,g as L,S as M,T as X,F as y,x as z,y as A,U as D}from"./index-2mqUjVf6.js";import{R as F}from"./Rating-zu5lxo4_.js";import{u as I}from"./useIntersectionObserver-pKu6o-gD.js";const U=s.div`
   top: 0px;
   left: 0;
   min-height: 80vh;

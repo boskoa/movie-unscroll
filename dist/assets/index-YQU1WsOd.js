@@ -1,4 +1,4 @@
-import{u as r,c as w,s as $,o as A,g as D,j as t,p as _,q as N,F as h,t as U,v as W,r as d,b as C,h as R,w as b,a as y,L as X,x as B,y as F,z as V}from"./index-aB-pfHqH.js";import{T as P}from"./Title-il1DVEMI.js";var H={prefix:"far",iconName:"bookmark",icon:[384,512,[128278,61591],"f02e","M0 48C0 21.5 21.5 0 48 0l0 48V441.4l130.1-92.9c8.3-6 19.6-6 27.9 0L336 441.4V48H48V0H336c26.5 0 48 21.5 48 48V488c0 9-5 17.2-13 21.3s-17.6 3.4-24.9-1.8L192 397.5 37.9 507.5c-7.3 5.2-16.9 5.9-24.9 1.8S0 497 0 488V48z"]};const G=r.div`
+import{u as r,c as w,s as $,o as A,g as D,j as t,p as _,q as N,F as h,t as U,v as W,r as d,b as C,h as R,w as b,a as y,L as X,x as B,y as F,z as V}from"./index-2mqUjVf6.js";import{T as P}from"./Title-pNMAsOXe.js";var H={prefix:"far",iconName:"bookmark",icon:[384,512,[128278,61591],"f02e","M0 48C0 21.5 21.5 0 48 0l0 48V441.4l130.1-92.9c8.3-6 19.6-6 27.9 0L336 441.4V48H48V0H336c26.5 0 48 21.5 48 48V488c0 9-5 17.2-13 21.3s-17.6 3.4-24.9-1.8L192 397.5 37.9 507.5c-7.3 5.2-16.9 5.9-24.9 1.8S0 497 0 488V48z"]};const G=r.div`
   position: relative;
   padding: 30px 20px;
 `,q=r.img`

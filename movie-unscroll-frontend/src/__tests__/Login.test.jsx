@@ -24,10 +24,10 @@ describe("Testing Login component", () => {
 
     const login = screen.getByTestId("login");
     await user.click(login);
-    const modal = screen.getByText("Cancel");
+    const modal = screen.getByText("Close");
     expect(modal).toBeInTheDocument();
     await user.click(modal);
-    const modalAfter = screen.getByText("Cancel");
+    const modalAfter = screen.getByText("Close");
     await waitFor(() => expect(modalAfter).not.toBeInTheDocument());
   });
 });
