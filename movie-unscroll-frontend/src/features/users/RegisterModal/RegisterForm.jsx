@@ -88,7 +88,6 @@ function RegisterForm({ setRegister, setClapDown }) {
   function handleRegister(data) {
     dispatch(createUser(data));
     setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 600);
   }
 
   function handleCancel() {
@@ -101,6 +100,9 @@ function RegisterForm({ setRegister, setClapDown }) {
     if (submitted && !registerError && !registerLoading) {
       setTimeout(() => setRegister(false), 400);
       setClapDown(true);
+      setSubmitted(false);
+    } else if (submitted && registerError && !registerLoading) {
+      setSubmitted(false);
     }
   }, [submitted, setClapDown, setRegister, registerError, registerLoading]);
 
