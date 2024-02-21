@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Find movies to watch",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
     "test": "jest --verbose --runInBand ./tests",
     "start": "NODE_ENV=production node index.js",
